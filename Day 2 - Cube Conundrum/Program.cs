@@ -22,12 +22,20 @@ var bag = new CubeSet
 	}
 };
 
-var sum = File.ReadLines("input.txt")
-                .Select(ParseGame)
-                .Where(game => IsGamePossible(game, bag))
-                .Sum(game => game.Id);
+var cubeGames = File.ReadLines("input.txt")
+                                      .Select(ParseGame)
+                                      .ToArray();
+var sumOfIds = cubeGames
+               .Where(game => IsGamePossible(game, bag))
+               .Sum(game => game.Id);
+var sumOfPowers = cubeGames
+                  .Select(GetGamePower)
+                  .Sum();
+	
                 
-Console.WriteLine(sum);
+Console.WriteLine($"Part one: {sumOfIds}");
+Console.WriteLine($"Part two: {sumOfPowers}");
+
 
 CubeGame ParseGame(string line)
 {
@@ -80,4 +88,25 @@ bool IsGamePossible(CubeGame game, CubeSet bag)
 bool BagContainsSubSet(CubeSet bag, CubeSet subset)
 {
 	return subset.CubeGroups.All(setGroup => bag.CubeGroups.Any(bagGroup => bagGroup.Color == setGroup.Color && bagGroup.Size >= setGroup.Size));
+}
+
+int GetGamePower(CubeGame cubeGame)
+{
+	var minimumRed = GetMinimumForColor(cubeGame, CubeColor.Red);
+	var minimumGreen = GetMinimumForColor(cubeGame,CubeColor.Green);
+	var minimumBlue = GetMinimumForColor(cubeGame,CubeColor.Blue);
+	return minimumRed * minimumGreen * minimumBlue;
+}
+
+int GetMinimumForColor(CubeGame cubeGame, CubeColor cubeColor)
+{
+	return cubeGame.CubeSets.Max(set => GetSizeForColor(set, cubeColor));
+}
+
+int GetSizeForColor(CubeSet cubeSet, CubeColor cubeColor)
+{
+	return cubeSet.CubeGroups
+	               .Where(cubeGroup => cubeGroup.Color == cubeColor)
+	               .Select(cubeGroup => cubeGroup.Size)
+	               .SingleOrDefault(0);
 }
