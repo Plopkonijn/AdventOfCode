@@ -1,4 +1,4 @@
 class CubeSet
 {
-	public List<CubeGroup> CubeGroups { get; } = new();
+	public List<CubeGroup> CubeGroups { get; init; } = new();
 }
