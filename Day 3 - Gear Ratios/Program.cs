@@ -11,6 +11,7 @@
 //                  .664.598..
 //                  """;
 // string[] lines = example.Split('\n');
+
 string[] lines = File.ReadAllLines("input.txt");
 
 var engineSchematic = new EngineSchematic(lines);
