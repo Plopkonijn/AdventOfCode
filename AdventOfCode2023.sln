@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 3 - Gear Ratios", "Day 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratchcards", "Day 4 - Scratchcards\Day 4 - Scratchcards.csproj", "{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 5 - If You Give A Seed A Fertilizer", "Day 5 - If You Give A Seed A Fertilizer\Day 5 - If You Give A Seed A Fertilizer.csproj", "{2ED81ACD-F082-4018-90D5-AC947387762C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED81ACD-F082-4018-90D5-AC947387762C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED81ACD-F082-4018-90D5-AC947387762C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED81ACD-F082-4018-90D5-AC947387762C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED81ACD-F082-4018-90D5-AC947387762C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
