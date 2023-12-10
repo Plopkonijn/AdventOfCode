@@ -7,10 +7,33 @@
 //               Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 //               """;
 // var lines = example.Split('\n');
+
 var lines = File.ReadAllLines("input.txt");
 var scratchCards = lines.Select(ScratchCard.Parse)
                        .ToList();
 
 var totalNumberOfPoints = scratchCards.Sum(scratchCard => scratchCard.GetPoints());
-
 Console.WriteLine($"Part One: {totalNumberOfPoints}");
+
+var totalNumberOfScratchcards = GetTotalNumberOfScratchcards(scratchCards);
+Console.WriteLine($"Part Two: {totalNumberOfScratchcards}");
+
+
+int GetTotalNumberOfScratchcards(List<ScratchCard> list)
+{
+	var numberOfScratchCards = list.ToDictionary(card => card, _ => 1);
+	for (int i = 0; i < list.Count; i++)
+	{
+		var scratchCard = list[i];
+		var copies = numberOfScratchCards[scratchCard];
+		var matchingCount = scratchCard.GetMatchingNumberCount();
+		
+		for (int j = i+1; j <=Math.Min(i+matchingCount,list.Count) ; j++)
+		{
+			var copy = list[j];
+			numberOfScratchCards[copy] += copies;
+		}
+	}
+
+	return numberOfScratchCards.Values.Sum();
+}

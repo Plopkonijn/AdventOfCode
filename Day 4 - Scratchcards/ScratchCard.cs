@@ -6,9 +6,13 @@ class ScratchCard
 	public List<int> WinningNumbers { get; init; } = new();
 	public List<int> YourNumbers { get; init; } = new();
 
+	public int GetMatchingNumberCount()
+	{
+		return YourNumbers.Count(WinningNumbers.Contains);
+	}
 	public int GetPoints()
 	{
-		var count = YourNumbers.Count(WinningNumbers.Contains);
+		var count = GetMatchingNumberCount();
 		if (count == 0)
 			return 0;
 		return (int)Math.Pow(2, count - 1);
