@@ -1,5 +1,6 @@
 public enum CardValue
 {
+	Joker,
 	Two,
 	Three,
 	Four,

@@ -13,7 +13,7 @@ public record Entry(Hand Hand, int Bid) : IComparable<Entry>
 	{
 		MatchCollection matches = Regex.Matches(text, @"(?<hand>.{5}) (?<bid>\d+)");
 		IEnumerable<Hand> hands = matches.Select(match => match.Groups["hand"].Value)
-		                                 .Select(text => Hand.ParseHand(text));
+		                                 .Select(text => Hand.ParseHands(text));
 		IEnumerable<int> bids = matches.Select(match => match.Groups["bid"].Value)
 		                               .Select(int.Parse);
 		IEnumerable<Entry> entries = hands.Zip(bids)

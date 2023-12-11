@@ -7,8 +7,19 @@
               """;
 
 text = File.ReadAllText("input.txt");
-List<Entry> entries = Entry.ParseEntries(text).ToList();
-entries.Sort();
-int totalWinnings = entries.Select((entry, index) => (entry, index))
+List<Entry> entriesPartOne = Entry.ParseEntries(text).ToList();
+entriesPartOne.Sort();
+int totalWinningsPartOne = entriesPartOne.Select((entry, index) => (entry, index))
                            .Sum(t => (t.index + 1) * t.entry.Bid);
-Console.WriteLine(totalWinnings);
+Console.WriteLine(totalWinningsPartOne);
+
+var entriesPartTwo = entriesPartOne.Select(entry => entry with { Hand = Hand.ConvertToJokerHandType(entry.Hand) })
+       .ToList();
+entriesPartTwo.Sort();
+
+int totalWinningsPartTwo = entriesPartTwo.Select((entry, index) => (entry, index))
+                                         .Sum(t => (t.index + 1) * t.entry.Bid);
+var jokerkEntries = entriesPartTwo.Where(entry => entry.Hand.Text.Contains('J'))
+                                  .ToList();
+Console.WriteLine(totalWinningsPartTwo);
+Console.WriteLine();
