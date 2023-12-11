@@ -1,8 +1,8 @@
 using System.Text.RegularExpressions;
 
-static class Parser
+static class ParserOne
 {
-	public static List<Record> ParseRecords(string text)
+	public static IEnumerable<Record> ParseRecords(string text)
 	{
 		var times = ParseTimes(text);
 
@@ -12,8 +12,7 @@ static class Parser
 		            {
 			            (int time, int distance) = tuple;
 			            return new Record(time, distance);
-		            })
-		            .ToList();
+		            });
 	}
 
 	private static IEnumerable<int> ParseTimes(string text)

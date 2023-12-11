@@ -1,4 +1,4 @@
-record Record(int Time, int Distance)
+record Record(long Time, long Distance)
 {
 	public int GetNumberOfWaysToBeat()
 	{
@@ -9,7 +9,7 @@ record Record(int Time, int Distance)
 		 * t = (T +- Sqrt(T^2-4S)) / 2
 		 *
 		 */
-		int disciminant = Time * Time - 4 * Distance;
+		var disciminant = Time * Time - 4 * Distance;
 		if (disciminant < 0)
 			return 0;
 		var minimumHoldTime = (Time - Math.Sqrt(disciminant)) / 2;
