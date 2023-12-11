@@ -18,4 +18,15 @@ internal static class Parser
 			_ => throw new ArgumentOutOfRangeException()
 		};
 	}
+
+	public static Dictionary<string, Node> ParseNodes(string text)
+	{
+		return Regex.Matches(text, @"(?<name>\w+) = \((?<left>\w+), (?<right>\w+)\)")
+		            .Select(match => new Node(
+			            match.Groups["name"].Value,
+			            match.Groups["left"].Value,
+			            match.Groups["right"].Value
+		            ))
+		            .ToDictionary(node => node.Name, node => node);
+	}
 }
