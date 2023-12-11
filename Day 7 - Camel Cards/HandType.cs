@@ -6,5 +6,5 @@ public enum HandType
 	ThreeOfAKind,
 	FullHouse,
 	FourOfAKind,
-	FiveOfAKind,
+	FiveOfAKind
 }

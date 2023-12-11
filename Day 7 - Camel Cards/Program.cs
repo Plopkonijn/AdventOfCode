@@ -1,3 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿string text = """
+              32T3K 765
+              T55J5 684
+              KK677 28
+              KTJJT 220
+              QQQJA 483
+              """;
 
-Console.WriteLine("Hello, World!");
+text = File.ReadAllText("input.txt");
+List<Entry> entries = Entry.ParseEntries(text).ToList();
+entries.Sort();
+int totalWinnings = entries.Select((entry, index) => (entry, index))
+                           .Sum(t => (t.index + 1) * t.entry.Bid);
+Console.WriteLine(totalWinnings);
