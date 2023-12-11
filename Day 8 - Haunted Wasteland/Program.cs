@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿var text = """
+           LLR
 
-Console.WriteLine("Hello, World!");
+           AAA = (BBB, BBB)
+           BBB = (AAA, ZZZ)
+           ZZZ = (ZZZ, ZZZ)
+           """;
+//text = File.ReadAllText("input.txt");
+           
