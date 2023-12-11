@@ -1,0 +1,1 @@
+record Record(int Time, int Distance);

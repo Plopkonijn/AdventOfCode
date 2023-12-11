@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿var text = """
+           Time:      7  15   30
+           Distance:  9  40  200
+           """;
+// text = File.ReadAllText("input.txt");
 
-Console.WriteLine("Hello, World!");
+
+var records = Parser.ParseRecords(text);
+Console.WriteLine();
