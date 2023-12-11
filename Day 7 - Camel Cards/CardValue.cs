@@ -1,4 +1,4 @@
-public enum HandValue
+public enum CardValue
 {
 	Two,
 	Three,
