@@ -5,7 +5,7 @@
 text = File.ReadAllText("input.txt");
 
 
-var records = Parser.ParseRecords(text);
+var records = ParserOne.ParseRecords(text);
 
 
 
@@ -14,3 +14,8 @@ var results =  records.Select(record => record.GetNumberOfWaysToBeat())
 
 var multiple = results.Aggregate((x, y) => x * y);
 Console.WriteLine(multiple);
+
+var record = ParserTwo.ParseRecord(text);
+var result = record.GetNumberOfWaysToBeat();
+
+Console.WriteLine(result);
