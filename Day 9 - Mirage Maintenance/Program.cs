@@ -1,31 +1,20 @@
-﻿using System.Text.RegularExpressions;
-
-string text = """
+﻿string text = """
               0 3 6 9 12 15
               1 3 6 10 15 21
               10 13 16 21 30 45
               """;
-//text = File.ReadAllText("input.txt");
+text = File.ReadAllText("input.txt");
 
-List<Sequence> sequences = Sequence.ParseSequences(text).ToList();
-var answerPartOne = "NaN";
+List<Sequence> parsedSequences = Sequence.ParseSequences(text).ToList();
+
+List<long> extrapolatedLastValues = parsedSequences.Select(Solver.ExtrapolateLastValue)
+                                                   .ToList();
+
+long answerPartOne = extrapolatedLastValues.Sum();
 Console.WriteLine(answerPartOne);
 
-internal class Sequence
-{
-	private readonly int[] _values;
+List<long> extrapolatedFirstValues = parsedSequences.Select(Solver.ExtrapolateFirstValue)
+                                                    .ToList();
 
-	private Sequence(IEnumerable<int> values)
-	{
-		_values = values.ToArray();
-	}
-
-	public static IEnumerable<Sequence> ParseSequences(string text)
-	{
-		return Regex.Matches(text, @"((?<values>\d+)[ ]*)+")
-		            .Select(match => match.Groups["values"]
-		                                  .Captures
-		                                  .Select(capture => int.Parse(capture.Value)))
-		            .Select(values => new Sequence(values));
-	}
-}
+long answerPartTwo = extrapolatedFirstValues.Sum();
+Console.WriteLine(answerPartTwo);
