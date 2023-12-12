@@ -8,29 +8,17 @@
 text = File.ReadAllText("input.txt");
 
 List<Instruction> instructions = Parser.ParseInstructions(text).ToList();
-Dictionary<string, Node> nodes = Parser.ParseNodes(text);
+Dictionary<string, Node> nodeMap = Parser.ParseNodes(text);
 
-var stepsToFinish = GetStepsToFinish(instructions, nodes);
+int stepsToFinishPartOne = Solver.GetStepsToFinish(instructions, nodeMap, "AAA", s => s == "ZZZ");
 
-int GetStepsToFinish(List<Instruction> list, Dictionary<string, Node> dictionary)
-{
-	var currentNode = dictionary["AAA"];
-	int steps = 0;
-	while (currentNode.Name != "ZZZ")
-	{
-		steps += list.Count;
-		foreach (Instruction instruction in instructions)
-		{
-			currentNode = instruction switch
-			{
-				Instruction.Left => dictionary[currentNode.Left],
-				Instruction.Right => dictionary[currentNode.Right],
-				_ => throw new ArgumentOutOfRangeException(),
-			};
-		}
-	}
+Console.WriteLine(stepsToFinishPartOne);
 
-	return steps;
-}
+List<Node> startNodes = nodeMap
+                        .Values
+                        .Where(node => node.Name.EndsWith('A'))
+                        .ToList();
 
-Console.WriteLine(stepsToFinish);
+var stepsToFinishPartTwo = Solver.GetStepsToFinish(instructions, nodeMap, startNodes);
+Console.WriteLine(stepsToFinishPartTwo);
+Console.WriteLine();
