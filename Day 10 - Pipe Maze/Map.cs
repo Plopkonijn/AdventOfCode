@@ -24,6 +24,26 @@ internal class Map
 		throw new InvalidOperationException();
 	}
 
+	public bool IsInRange((int x, int y) tuple)
+	{
+		return IsInRange(tuple.x, tuple.y);
+	}
+
+	public bool IsInRange(int x, int y)
+	{
+		return IsInXRange(x) && IsInYRange(y);
+	}
+
+	public bool IsInXRange(int x)
+	{
+		return MinX <= x && x < MaxX;
+	}
+	
+	public bool IsInYRange(int y)
+	{
+		return MinY <= y && y < MaxY;
+	}
+
 	public char GetTile(int x, int y)
 	{
 		return _map[y][x];
