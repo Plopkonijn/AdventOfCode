@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿var fileName =
+	"example.txt";
+	//"input.txt";
+
+var text = File.ReadAllLines(fileName);
+
+var galaxy = new Galaxy(text);
