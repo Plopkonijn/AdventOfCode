@@ -73,7 +73,7 @@ internal class Cosmos
 		return stringBuilder;
 	}
 
-	private int[] GetEmptyColumnIndices()
+	public int[] GetEmptyColumnIndices()
 	{
 		return _cosmosText.Select(row => row.Select((c, i) => (c, i))
 		                                    .Where(t => Utilities.IsEmptySpace(t.c))
@@ -84,7 +84,7 @@ internal class Cosmos
 		                  .ToArray();
 	}
 
-	private int[] GetEmptyRowIndices()
+	public int[] GetEmptyRowIndices()
 	{
 		return _cosmosText.Select((row, i) => (row, i))
 		                  .Where(t => t.row.All(Utilities.IsEmptySpace))
