@@ -1,9 +1,11 @@
-﻿string fileName =
-	"example.txt";
-//"input.txt";
+﻿string fileName = "example.txt";
+fileName = "input.txt";
 
 string[] text = File.ReadAllLines(fileName);
 
-var galaxy = new Galaxy(text);
+var cosmos = new Cosmos(text);
 
-Galaxy expandedGalaxy = galaxy.Expand();
+Cosmos expandedCosmos = cosmos.Expand();
+
+int answerPartOne = expandedCosmos.SumOfGalaxyDistances();
+Console.WriteLine(answerPartOne);
