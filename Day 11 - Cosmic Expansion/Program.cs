@@ -1,7 +1,9 @@
-﻿var fileName =
+﻿string fileName =
 	"example.txt";
-	//"input.txt";
+//"input.txt";
 
-var text = File.ReadAllLines(fileName);
+string[] text = File.ReadAllLines(fileName);
 
 var galaxy = new Galaxy(text);
+
+Galaxy expandedGalaxy = galaxy.Expand();
