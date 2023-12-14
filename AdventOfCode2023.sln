@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratchcards", "Day
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 6 - Wait For It", "Day 6 - Wait For It\Day 6 - Wait For It.csproj", "{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 7 - Camel Cards", "Day 7 - Camel Cards\Day 7 - Camel Cards.csproj", "{97EDB6DC-37E0-462A-9723-8112E8844908}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 10 - Pipe Maze", "Day 10 - Pipe Maze\Day 10 - Pipe Maze.csproj", "{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}"
 EndProject
 Global
@@ -38,6 +40,10 @@ Global
 		{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97EDB6DC-37E0-462A-9723-8112E8844908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97EDB6DC-37E0-462A-9723-8112E8844908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97EDB6DC-37E0-462A-9723-8112E8844908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97EDB6DC-37E0-462A-9723-8112E8844908}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
