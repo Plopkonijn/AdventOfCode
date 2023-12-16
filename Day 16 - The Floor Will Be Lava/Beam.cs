@@ -1,22 +1,13 @@
 namespace TheFloorWillBeLava;
 
-internal record Beam
+internal record Beam(int PositionX, int PositionY, int DirectionX, int DirectionY)
 {
-	private readonly int _hashCode;
+	public Guid Id { get; init; } = Guid.NewGuid();
 
-	public Beam(int positionX, int positionY, int directionX, int directionY)
-	{
-		_hashCode = HashCode.Combine(positionX, positionY, directionX, directionY);
-		PositionX = positionX;
-		PositionY = positionY;
-		DirectionX = directionX;
-		DirectionY = directionY;
-	}
-
-	public int PositionX { get; private set; }
-	public int PositionY { get; private set; }
-	public int DirectionX { get; private set; }
-	public int DirectionY { get; private set; }
+	public int PositionX { get; private set; } = PositionX;
+	public int PositionY { get; private set; } = PositionY;
+	public int DirectionX { get; private set; } = DirectionX;
+	public int DirectionY { get; private set; } = DirectionY;
 
 	public void Move()
 	{
@@ -32,6 +23,11 @@ internal record Beam
 
 	public override int GetHashCode()
 	{
-		return _hashCode;
+		return Id.GetHashCode();
+	}
+
+	public virtual bool Equals(Beam? other)
+	{
+		return other?.Id == Id;
 	}
 }
