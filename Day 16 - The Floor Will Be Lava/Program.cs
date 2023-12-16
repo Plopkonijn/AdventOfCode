@@ -1,3 +1,2 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-Console.WriteLine("Hello, World!");
+﻿var text = File.ReadAllLines("example.txt");
+var contraption = new Contraption(text);
