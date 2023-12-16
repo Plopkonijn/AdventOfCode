@@ -16,15 +16,16 @@ internal class Contraption
 
 	public int CountEnergizedTiles(Beam startBeam)
 	{
-		var energizedTiles = new HashSet<(int x, int y,int dx, int dy)> { (startBeam.PositionX, startBeam.PositionY,startBeam.DirectionX,startBeam.DirectionY) };
+		var energizedTiles = new HashSet<(int x, int y, int dx, int dy)>
+			{ (startBeam.PositionX, startBeam.PositionY, startBeam.DirectionX, startBeam.DirectionY) };
 		var beams = new HashSet<Beam> { startBeam };
 		while (beams.Count > 0)
 		{
-			var newBeams = UpdateBeams(beams).ToArray();
+			Beam[] newBeams = UpdateBeams(beams).ToArray();
 			beams.UnionWith(newBeams);
 			int removedOutsideBounds = beams.RemoveWhere(IsOutsideBounds);
 			int removedDuplicate = beams.RemoveWhere(IsAlreadyEnergized(energizedTiles));
-			energizedTiles.UnionWith(beams.Select(beam => (beam.PositionX, beam.PositionY,beam.DirectionX,beam.DirectionY)));
+			energizedTiles.UnionWith(beams.Select(beam => (beam.PositionX, beam.PositionY, beam.DirectionX, beam.DirectionY)));
 		}
 
 		return energizedTiles.Select(tuple => (tuple.x, tuple.y)).Distinct().Count();
@@ -39,11 +40,9 @@ internal class Contraption
 	{
 		foreach (Beam beam in beams)
 		{
-			var splitBeam = UpdateBeam(beam);
+			Beam? splitBeam = UpdateBeam(beam);
 			if (splitBeam is not null)
-			{
 				yield return splitBeam;
-			}
 		}
 	}
 
@@ -62,7 +61,7 @@ internal class Contraption
 				break;
 			case '|' when beam.DirectionY is 0:
 				splitBeam = beam with { };
-				beam.ChangeDirection(0,-1);
+				beam.ChangeDirection(0, -1);
 				splitBeam.ChangeDirection(0, 1);
 				splitBeam.Move();
 				break;

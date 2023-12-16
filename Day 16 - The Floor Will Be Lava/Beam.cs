@@ -30,6 +30,8 @@ internal record Beam
 		DirectionY = directionY;
 	}
 
-	public override int GetHashCode() => _hashCode;
-
+	public override int GetHashCode()
+	{
+		return _hashCode;
+	}
 }
