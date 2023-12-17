@@ -12,12 +12,11 @@ internal class City(int[,] cityBlocks)
 		int[,] cityBlocks = new int[text[0].Length, text.Length];
 		for (int y = 0; y < text.Length; y++)
 		{
-			var line = text[y];
+			string line = text[y];
 			for (int x = 0; x < line.Length; x++)
-			{
 				cityBlocks[x, y] = int.Parse(line[x].ToString());
-			}
 		}
+
 		return new City(cityBlocks);
 	}
 

@@ -10,12 +10,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="example.txt"/>
-        <Content Include="example.txt">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
         <None Remove="input.txt"/>
         <Content Include="input.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="example1.txt"/>
+        <Content Include="example1.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="example2.txt"/>
+        <Content Include="example2.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
