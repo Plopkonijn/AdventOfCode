@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using LavaductLagoon;
 
-Console.WriteLine("Hello, World!");
+string[] fileNames = { "example.txt" };
+
+foreach (string fileName in fileNames)
+{
+	Console.WriteLine($"file name: {fileName}");
+	IEnumerable<string> text = File.ReadLines(fileName);
+	DigPlan digPlan = DigPlan.Parse(text);
+}
