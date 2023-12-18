@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 11 - Cosmic Expansion",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 16 - The Floor Will Be Lava", "Day 16 - The Floor Will Be Lava\Day 16 - The Floor Will Be Lava.csproj", "{C6C799A9-9ABE-43C6-A447-667524FC653D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 18 - Lavaduct Lagoon", "Day 18 - Lavaduct Lagoon\Day 18 - Lavaduct Lagoon\Day 18 - Lavaduct Lagoon.csproj", "{B4E17367-3EFD-4B6F-B780-516CBFB384FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{C6C799A9-9ABE-43C6-A447-667524FC653D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6C799A9-9ABE-43C6-A447-667524FC653D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6C799A9-9ABE-43C6-A447-667524FC653D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E17367-3EFD-4B6F-B780-516CBFB384FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E17367-3EFD-4B6F-B780-516CBFB384FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E17367-3EFD-4B6F-B780-516CBFB384FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E17367-3EFD-4B6F-B780-516CBFB384FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
