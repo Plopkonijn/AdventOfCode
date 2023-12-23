@@ -1,26 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 1 - Trebuchet", "2023\Day 1 - Trebuchet\Day 1 - Trebuchet.csproj", "{11C6D875-A09A-4A9C-B4E1-60F60ABE4B64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 1 - Trebuchet", "Year 2023\Day 1 - Trebuchet\Day 1 - Trebuchet.csproj", "{11C6D875-A09A-4A9C-B4E1-60F60ABE4B64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 2 - Cube Conundrum", "2023\Day 2 - Cube Conundrum\Day 2 - Cube Conundrum.csproj", "{51E7ED4B-1708-4016-91C0-89B60527D8B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 2 - Cube Conundrum", "Year 2023\Day 2 - Cube Conundrum\Day 2 - Cube Conundrum.csproj", "{51E7ED4B-1708-4016-91C0-89B60527D8B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 3 - Gear Ratios", "2023\Day 3 - Gear Ratios\Day 3 - Gear Ratios.csproj", "{1E50A180-BBBA-4746-9EEC-C1B281665F82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 3 - Gear Ratios", "Year 2023\Day 3 - Gear Ratios\Day 3 - Gear Ratios.csproj", "{1E50A180-BBBA-4746-9EEC-C1B281665F82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratchcards", "2023\Day 4 - Scratchcards\Day 4 - Scratchcards.csproj", "{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratchcards", "Year 2023\Day 4 - Scratchcards\Day 4 - Scratchcards.csproj", "{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 6 - Wait For It", "2023\Day 6 - Wait For It\Day 6 - Wait For It.csproj", "{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 6 - Wait For It", "Year 2023\Day 6 - Wait For It\Day 6 - Wait For It.csproj", "{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 9 - Mirage Maintenance", "2023\Day 9 - Mirage Maintenance\Day 9 - Mirage Maintenance.csproj", "{DB43CE05-6B08-4311-B3C6-9150CEA18267}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 9 - Mirage Maintenance", "Year 2023\Day 9 - Mirage Maintenance\Day 9 - Mirage Maintenance.csproj", "{DB43CE05-6B08-4311-B3C6-9150CEA18267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 7 - Camel Cards", "2023\Day 7 - Camel Cards\Day 7 - Camel Cards.csproj", "{97EDB6DC-37E0-462A-9723-8112E8844908}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 7 - Camel Cards", "Year 2023\Day 7 - Camel Cards\Day 7 - Camel Cards.csproj", "{97EDB6DC-37E0-462A-9723-8112E8844908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 10 - Pipe Maze", "2023\Day 10 - Pipe Maze\Day 10 - Pipe Maze.csproj", "{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 10 - Pipe Maze", "Year 2023\Day 10 - Pipe Maze\Day 10 - Pipe Maze.csproj", "{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 11 - Cosmic Expansion", "2023\Day 11 - Cosmic Expansion\Day 11 - Cosmic Expansion.csproj", "{7A5BBFDE-62BC-4031-8B1C-ADBDEFB5A916}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 11 - Cosmic Expansion", "Year 2023\Day 11 - Cosmic Expansion\Day 11 - Cosmic Expansion.csproj", "{7A5BBFDE-62BC-4031-8B1C-ADBDEFB5A916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 16 - The Floor Will Be Lava", "2023\Day 16 - The Floor Will Be Lava\Day 16 - The Floor Will Be Lava.csproj", "{C6C799A9-9ABE-43C6-A447-667524FC653D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 16 - The Floor Will Be Lava", "Year 2023\Day 16 - The Floor Will Be Lava\Day 16 - The Floor Will Be Lava.csproj", "{C6C799A9-9ABE-43C6-A447-667524FC653D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2023", "2023", "{608CEE40-AE1A-433B-8610-F1E14C418D2C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Year 2023", "Year 2023", "{608CEE40-AE1A-433B-8610-F1E14C418D2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
