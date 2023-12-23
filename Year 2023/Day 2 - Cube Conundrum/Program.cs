@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Year2023.CubeConundrum;
+using Year2023.Day2;
 
 var bag = new CubeSet
 {

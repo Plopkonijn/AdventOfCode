@@ -1,4 +1,4 @@
-namespace Year2023.CubeConundrum;
+namespace Year2023.Day2;
 
 internal class CubeGame
 {

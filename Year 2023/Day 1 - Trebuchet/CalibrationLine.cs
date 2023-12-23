@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Year2023.Trebuchet;
+namespace Year2023.Day1;
 
 internal partial record CalibrationLine(string Value)
 {

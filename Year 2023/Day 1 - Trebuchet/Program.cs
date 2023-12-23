@@ -1,4 +1,4 @@
-﻿using Year2023.Trebuchet;
+﻿using Year2023.Day1;
 
 List<CalibrationLine> calibrationLines = File.ReadLines("input.txt")
                                              .Select(line => new CalibrationLine(line))
