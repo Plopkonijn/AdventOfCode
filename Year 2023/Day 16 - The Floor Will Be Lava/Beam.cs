@@ -1,4 +1,4 @@
-namespace TheFloorWillBeLava;
+namespace Year2023.TheFloorWillBeLava;
 
 internal record Beam(int PositionX, int PositionY, int DirectionX, int DirectionY)
 {

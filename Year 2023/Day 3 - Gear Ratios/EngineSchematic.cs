@@ -1,3 +1,5 @@
+namespace Year2023.GearRatios;
+
 internal class EngineSchematic
 {
 	private readonly EngineSchematicEntry[,] _entries;

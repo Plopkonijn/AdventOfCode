@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Text;
 
+namespace Year2023.CosmicExpansion;
+
 internal class Cosmos
 {
 	private readonly string[] _cosmosText;

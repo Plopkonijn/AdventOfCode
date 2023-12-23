@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+namespace Year2023.Scratchcards;
+
 class ScratchCard
 {
 	public int Id { get; init; }

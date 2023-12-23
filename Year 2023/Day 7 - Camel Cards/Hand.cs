@@ -1,3 +1,5 @@
+namespace Year2023.CamelCards;
+
 public record class Hand(HandType HandType, CardValue[] CardValues, string Text) : IComparable<Hand>
 {
 	public int CompareTo(Hand? other)
@@ -106,23 +108,23 @@ public record class Hand(HandType HandType, CardValue[] CardValues, string Text)
 		return type;
 	}
 
-	private static global::CardValue ParseCard(char character)
+	private static global::Year2023.CamelCards.CardValue ParseCard(char character)
 	{
 		return character switch
 		{
-			'2' => global::CardValue.Two,
-			'3' => global::CardValue.Three,
-			'4' => global::CardValue.Four,
-			'5' => global::CardValue.Five,
-			'6' => global::CardValue.Six,
-			'7' => global::CardValue.Seven,
-			'8' => global::CardValue.Eight,
-			'9' => global::CardValue.Nine,
-			'T' => global::CardValue.Ten,
-			'J' => global::CardValue.Jack,
-			'Q' => global::CardValue.Queen,
-			'K' => global::CardValue.King,
-			'A' => global::CardValue.Ace,
+			'2' => global::Year2023.CamelCards.CardValue.Two,
+			'3' => global::Year2023.CamelCards.CardValue.Three,
+			'4' => global::Year2023.CamelCards.CardValue.Four,
+			'5' => global::Year2023.CamelCards.CardValue.Five,
+			'6' => global::Year2023.CamelCards.CardValue.Six,
+			'7' => global::Year2023.CamelCards.CardValue.Seven,
+			'8' => global::Year2023.CamelCards.CardValue.Eight,
+			'9' => global::Year2023.CamelCards.CardValue.Nine,
+			'T' => global::Year2023.CamelCards.CardValue.Ten,
+			'J' => global::Year2023.CamelCards.CardValue.Jack,
+			'Q' => global::Year2023.CamelCards.CardValue.Queen,
+			'K' => global::Year2023.CamelCards.CardValue.King,
+			'A' => global::Year2023.CamelCards.CardValue.Ace,
 			_ => throw new ArgumentException()
 		};
 	}

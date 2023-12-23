@@ -1,4 +1,4 @@
-using TheFloorWillBeLava;
+namespace Year2023.TheFloorWillBeLava;
 
 internal class Contraption
 {
@@ -55,7 +55,7 @@ internal class Contraption
 
 	private Beam? UpdateBeam(Beam beam)
 	{
-		Beam splitBeam = null;
+		Beam? splitBeam = null;
 		switch (_tiles[beam.PositionY][beam.PositionX])
 		{
 			case '.':

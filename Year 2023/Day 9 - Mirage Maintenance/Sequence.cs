@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+namespace Year2023.MirageMaintenance;
+
 internal class Sequence
 {
 	private Sequence(long[] values)

@@ -12,6 +12,8 @@
 //                  """;
 // string[] lines = example.Split('\n');
 
+using Year2023.GearRatios;
+
 string[] lines = File.ReadAllLines("input.txt");
 
 var engineSchematic = new EngineSchematic(lines);

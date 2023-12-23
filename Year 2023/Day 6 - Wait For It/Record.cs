@@ -1,3 +1,5 @@
+namespace Year2023.WaitForIt;
+
 record Record(long Time, long Distance)
 {
 	public int GetNumberOfWaysToBeat()

@@ -1,4 +1,6 @@
-﻿var text = """
+﻿using Year2023.WaitForIt;
+
+var text = """
            Time:      7  15   30
            Distance:  9  40  200
            """;

@@ -1,5 +1,6 @@
-using System.Collections;
 using System.Text.RegularExpressions;
+
+namespace Year2023.WaitForIt;
 
 static class ParserTwo
 {
@@ -12,18 +13,18 @@ static class ParserTwo
 	private static long ParseTime(string text)
 	{
 		var values = Regex.Match(text, @"(?<=Time:)(\s+(?<times>\d+))+")
-		     .Groups["times"]
-		     .Captures
-		     .Select(capture => capture.Value);
+		                  .Groups["times"]
+		                  .Captures
+		                  .Select(capture => capture.Value);
 		var value = string.Concat(values);
 		return long.Parse(value);
 	}
 	private static long ParseDistance(string text)
 	{
 		var values = Regex.Match(text, @"(?<=Distance:)(\s+(?<distances>\d+))+")
-		            .Groups["distances"]
-		            .Captures
-		            .Select(capture => capture.Value);
+		                  .Groups["distances"]
+		                  .Captures
+		                  .Select(capture => capture.Value);
 		var value = string.Concat(values);
 		return long.Parse(value);
 	}

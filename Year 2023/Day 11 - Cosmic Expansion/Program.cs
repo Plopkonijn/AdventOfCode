@@ -1,4 +1,6 @@
-﻿string fileName = "example.txt";
+﻿using Year2023.CosmicExpansion;
+
+string fileName = "example.txt";
  fileName = "input.txt";
 
 string[] text = File.ReadAllLines(fileName);

@@ -1,3 +1,5 @@
+namespace Year2023.PipeMaze;
+
 internal class Map
 {
 	private readonly string[] _map;

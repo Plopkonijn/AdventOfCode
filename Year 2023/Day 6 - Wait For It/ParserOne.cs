@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+namespace Year2023.WaitForIt;
+
 static class ParserOne
 {
 	public static IEnumerable<Record> ParseRecords(string text)

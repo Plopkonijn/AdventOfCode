@@ -1,3 +1,5 @@
+namespace Year2023.CamelCards;
+
 public enum CardValue
 {
 	Joker,

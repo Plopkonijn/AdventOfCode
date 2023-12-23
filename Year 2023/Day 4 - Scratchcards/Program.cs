@@ -8,6 +8,8 @@
 //               """;
 // var lines = example.Split('\n');
 
+using Year2023.Scratchcards;
+
 var lines = File.ReadAllLines("input.txt");
 var scratchCards = lines.Select(ScratchCard.Parse)
                        .ToList();

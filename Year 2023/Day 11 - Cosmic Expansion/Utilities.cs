@@ -1,3 +1,5 @@
+namespace Year2023.CosmicExpansion;
+
 internal static class Utilities
 {
 	private static IEnumerable<(int, int)> GetGalaxies(this Cosmos cosmos)

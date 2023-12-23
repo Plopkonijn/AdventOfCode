@@ -1,4 +1,6 @@
-﻿string[] text = """
+﻿using Year2023.PipeMaze;
+
+string[] text = """
                 ..F7.
                 .FJ|.
                 SJ.L7

@@ -1,3 +1,5 @@
+namespace Year2023.MirageMaintenance;
+
 internal static class Solver
 {
 	private static IEnumerable<Sequence> GenerateSequences(Sequence sequence)

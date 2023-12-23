@@ -1,5 +1,7 @@
 using System.Text.RegularExpressions;
 
+namespace Year2023.CamelCards;
+
 public record Entry(Hand Hand, int Bid) : IComparable<Entry>
 {
 	public int CompareTo(Entry? other)
