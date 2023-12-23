@@ -1,6 +1,6 @@
 namespace Year2023.Day7;
 
-public enum HandType
+internal enum HandType
 {
 	HighCard,
 	OnePair,

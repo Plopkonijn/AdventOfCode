@@ -13,10 +13,10 @@ internal class Contraption
 		_tiles = tiles;
 	}
 
-	public int Width => _tiles.FirstOrDefault(string.Empty)
-	                          .Length;
+	private int Width => _tiles.FirstOrDefault(string.Empty)
+	                           .Length;
 
-	public int Height => _tiles.Length;
+	private int Height => _tiles.Length;
 
 	public int CountEnergizedTiles(Beam startBeam)
 	{
@@ -30,8 +30,6 @@ internal class Contraption
 			Beam[] newBeams = UpdateBeams(beams)
 				.ToArray();
 			beams.UnionWith(newBeams);
-			int removedOutsideBounds = beams.RemoveWhere(IsOutsideBounds);
-			int removedDuplicate = beams.RemoveWhere(IsAlreadyEnergized(energizedTiles));
 			energizedTiles.UnionWith(beams.Select(beam => (beam.PositionX, beam.PositionY, beam.DirectionX, beam.DirectionY)));
 			List<Beam> outsideBounds = beams.Where(IsOutsideBounds)
 			                                .ToList();
@@ -44,19 +42,9 @@ internal class Contraption
 		                     .Count();
 	}
 
-	private static Predicate<Beam> IsAlreadyEnergized(HashSet<(int x, int y, int dx, int dy)> energizedTiles)
-	{
-		return beam => energizedTiles.Contains((beam.PositionX, beam.PositionY, beam.DirectionX, beam.DirectionY));
-	}
-
 	private IEnumerable<Beam> UpdateBeams(IEnumerable<Beam> beams)
 	{
-		foreach (Beam beam in beams)
-		{
-			Beam? splitBeam = UpdateBeam(beam);
-			if (splitBeam is not null)
-				yield return splitBeam;
-		}
+		return beams.Select(UpdateBeam).OfType<Beam>();
 	}
 
 	private Beam? UpdateBeam(Beam beam)

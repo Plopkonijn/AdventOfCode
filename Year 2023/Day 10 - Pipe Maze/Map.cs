@@ -4,9 +4,9 @@ internal class Map
 {
 	private readonly string[] _map;
 
-	public Map(string[] map)
+	public Map(string[] args)
 	{
-		_map = map;
+		_map = args;
 	}
 
 	public int MinX => 0;

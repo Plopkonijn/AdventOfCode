@@ -2,23 +2,25 @@ using System.Text.RegularExpressions;
 
 namespace Year2023.Day2;
 
-internal class CubeGame
+internal partial class CubeGame
 {
+	private readonly List<CubeSet> _cubeSets;
+
 	public CubeGame(string arg)
 	{
-		Match match = Regex.Match(arg, @"(?<id>(?=Game )\d+):(?<cubesets>.*(?=;?))");
+		Match match = GameRegex()
+			.Match(arg);
 		Id = int.Parse(match.Groups["id"].Value);
-		CubeSets = match.Groups["cubeset"]
-		                .Captures.Select(capture => new CubeSet(capture.Value))
-		                .ToList();
+		_cubeSets = match.Groups["sets"]
+		                 .Captures.Select(capture => new CubeSet(capture.Value))
+		                 .ToList();
 	}
 
-	public int Id { get; init; }
-	public List<CubeSet> CubeSets { get; init; }
+	public int Id { get; }
 
 	public bool IsPossible(CubeSet cubeSet)
 	{
-		return CubeSets.All(cubeSet.ContainsSubSet);
+		return _cubeSets.All(cubeSet.ContainsSubSet);
 	}
 
 	public int GetPower()
@@ -31,6 +33,9 @@ internal class CubeGame
 
 	private int GetMinimumForColor(CubeColor cubeColor)
 	{
-		return CubeSets.Max(set => set.GetSizeForColor(cubeColor));
+		return _cubeSets.Max(set => set.GetSizeForColor(cubeColor));
 	}
+
+	[GeneratedRegex(@"(?<id>(?=Game )\d+):(?<sets>.*(?=;?))")]
+	private static partial Regex GameRegex();
 }

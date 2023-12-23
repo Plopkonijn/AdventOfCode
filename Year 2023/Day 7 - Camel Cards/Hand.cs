@@ -1,6 +1,6 @@
 namespace Year2023.Day7;
 
-public record class Hand(HandType HandType, CardValue[] CardValues, string Text) : IComparable<Hand>
+internal record Hand(HandType HandType, CardValue[] CardValues, string Text) : IComparable<Hand>
 {
 	public int CompareTo(Hand? other)
 	{
@@ -33,63 +33,57 @@ public record class Hand(HandType HandType, CardValue[] CardValues, string Text)
 		                             .Select(cardValue => cardValue == CardValue.Jack ? CardValue.Joker : cardValue)
 		                             .ToArray();
 		int jokers = cardValues.Count(cardValue => cardValue == CardValue.Joker);
-		switch (jokers)
+		return jokers switch
 		{
-			case 0 or 5:
-				return hand with
+			0 or 5 => hand with
+			{
+				CardValues = cardValues
+			},
+			1 => hand with
+			{
+				CardValues = cardValues,
+				HandType = hand.HandType switch
 				{
-					CardValues = cardValues
-				};
-			case 1:
-				return hand with
+					HandType.HighCard => HandType.OnePair,
+					HandType.OnePair => HandType.ThreeOfAKind,
+					HandType.TwoPair => HandType.FullHouse,
+					HandType.ThreeOfAKind => HandType.FourOfAKind,
+					HandType.FourOfAKind => HandType.FiveOfAKind,
+					_ => throw new ArgumentOutOfRangeException()
+				}
+			},
+			2 => hand with
+			{
+				CardValues = cardValues,
+				HandType = hand.HandType switch
 				{
-					CardValues = cardValues,
-					HandType = hand.HandType switch
-					{
-						HandType.HighCard => HandType.OnePair,
-						HandType.OnePair => HandType.ThreeOfAKind,
-						HandType.TwoPair => HandType.FullHouse,
-						HandType.ThreeOfAKind => HandType.FourOfAKind,
-						HandType.FourOfAKind => HandType.FiveOfAKind,
-						_ => throw new ArgumentOutOfRangeException()
-					}
-				};
-			case 2:
-				return hand with
+					HandType.OnePair => HandType.ThreeOfAKind,
+					HandType.TwoPair => HandType.FourOfAKind,
+					HandType.FullHouse => HandType.FiveOfAKind,
+					_ => throw new ArgumentOutOfRangeException()
+				}
+			},
+			3 => hand with
+			{
+				CardValues = cardValues,
+				HandType = hand.HandType switch
 				{
-					CardValues = cardValues,
-					HandType = hand.HandType switch
-					{
-						HandType.OnePair => HandType.ThreeOfAKind,
-						HandType.TwoPair => HandType.FourOfAKind,
-						HandType.FullHouse => HandType.FiveOfAKind,
-						_ => throw new ArgumentOutOfRangeException()
-					}
-				};
-			case 3:
-				return hand with
+					HandType.ThreeOfAKind => HandType.FourOfAKind,
+					HandType.FullHouse => HandType.FiveOfAKind,
+					_ => throw new ArgumentOutOfRangeException()
+				}
+			},
+			4 => hand with
+			{
+				CardValues = cardValues,
+				HandType = hand.HandType switch
 				{
-					CardValues = cardValues,
-					HandType = hand.HandType switch
-					{
-						HandType.ThreeOfAKind => HandType.FourOfAKind,
-						HandType.FullHouse => HandType.FiveOfAKind,
-						_ => throw new ArgumentOutOfRangeException()
-					}
-				};
-			case 4:
-				return hand with
-				{
-					CardValues = cardValues,
-					HandType = hand.HandType switch
-					{
-						HandType.FourOfAKind => HandType.FiveOfAKind,
-						_ => throw new ArgumentOutOfRangeException()
-					}
-				};
-			default:
-				throw new InvalidOperationException();
-		}
+					HandType.FourOfAKind => HandType.FiveOfAKind,
+					_ => throw new ArgumentOutOfRangeException()
+				}
+			},
+			_ => throw new InvalidOperationException()
+		};
 	}
 
 	private static HandType GetHandType(int[] cardGroups)

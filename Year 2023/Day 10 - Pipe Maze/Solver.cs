@@ -44,8 +44,6 @@ internal class Solver
 		}
 	}
 
-	public ICollection<(int x, int y)> MainLoop => _distances.Keys;
-
 	public long GertFurthestDistance()
 	{
 		while (_queue.TryDequeue(out (int x, int y) position))

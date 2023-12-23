@@ -6,17 +6,17 @@ internal class Sequence
 {
 	private Sequence(long[] values)
 	{
-		Values = values;
+		_values = values;
 	}
 
-	public long[] Values { get; }
-	public bool IsNilSequence => Values.All(i => i == 0);
+	private readonly long[] _values;
+	private bool IsNilSequence() => _values.All(i => i == 0);
 
-	public Sequence CreateDifferenceSequence()
+	private Sequence CreateDifferenceSequence()
 	{
-		long[] values = new long[Values.Length - 1];
+		long[] values = new long[_values.Length - 1];
 		for (int i = 0; i < values.Length; i++)
-			values[i] = Values[i + 1] - Values[i];
+			values[i] = _values[i + 1] - _values[i];
 
 		return new Sequence(values);
 	}
@@ -33,20 +33,20 @@ internal class Sequence
 
 	private IEnumerable<Sequence> GenerateSequences()
 	{
-		for (Sequence s = this; !s.IsNilSequence; s = s.CreateDifferenceSequence())
+		for (Sequence s = this; !s.IsNilSequence(); s = s.CreateDifferenceSequence())
 			yield return s;
 	}
 
 	public long ExtrapolateLastValue()
 	{
 		return GenerateSequences()
-			.Sum(s => s.Values.Last());
+			.Sum(s => s._values.Last());
 	}
 
 	public long ExtrapolateFirstValue()
 	{
 		return GenerateSequences()
-		       .Select(s => s.Values.First())
+		       .Select(s => s._values.First())
 		       .Reverse()
 		       .Aggregate(0L, (accumulator, value) => value - accumulator);
 	}

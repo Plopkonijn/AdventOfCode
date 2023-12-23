@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Year2023.Day6;
 
-internal static class ParserTwo
+internal static partial class ParserTwo
 {
 	public static Record ParseRecord(string[] text)
 	{
@@ -13,8 +13,8 @@ internal static class ParserTwo
 
 	private static long ParseTime(string text)
 	{
-		IEnumerable<string> values = Regex.Match(text, @"(?<=Time:)(\s+(?<times>\d+))+")
-		                                  .Groups["times"]
+		IEnumerable<string> values = TimesRegex().Match(text)
+                                          .Groups["times"]
 		                                  .Captures
 		                                  .Select(capture => capture.Value);
 		string value = string.Concat(values);
@@ -23,11 +23,16 @@ internal static class ParserTwo
 
 	private static long ParseDistance(string text)
 	{
-		IEnumerable<string> values = Regex.Match(text, @"(?<=Distance:)(\s+(?<distances>\d+))+")
-		                                  .Groups["distances"]
+		IEnumerable<string> values = DistancesRegex().Match(text)
+                                          .Groups["distances"]
 		                                  .Captures
 		                                  .Select(capture => capture.Value);
 		string value = string.Concat(values);
 		return long.Parse(value);
 	}
+
+    [GeneratedRegex(@"(?<=Time:)(\s+(?<times>\d+))+")]
+    private static partial Regex TimesRegex();
+    [GeneratedRegex(@"(?<=Distance:)(\s+(?<distances>\d+))+")]
+    private static partial Regex DistancesRegex();
 }

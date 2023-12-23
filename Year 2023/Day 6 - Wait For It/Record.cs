@@ -11,11 +11,11 @@ internal record Record(long Time, long Distance)
 		 * t = (T +- Sqrt(T^2-4S)) / 2
 		 *
 		 */
-		long disciminant = Time * Time - 4 * Distance;
-		if (disciminant < 0)
+		long discriminant = Time * Time - 4 * Distance;
+		if (discriminant < 0)
 			return 0;
-		double minimumHoldTime = (Time - Math.Sqrt(disciminant)) / 2;
-		double maximumHoldTime = (Time + Math.Sqrt(disciminant)) / 2;
+		double minimumHoldTime = (Time - Math.Sqrt(discriminant)) / 2;
+		double maximumHoldTime = (Time + Math.Sqrt(discriminant)) / 2;
 
 		if (maximumHoldTime < minimumHoldTime)
 			return 0;

@@ -1,5 +1,6 @@
 ﻿using Application;
-using Year2023.Day10;
+
+namespace Year2023.Day10;
 
 public sealed class PipeMazeSolver : ISolver
 {

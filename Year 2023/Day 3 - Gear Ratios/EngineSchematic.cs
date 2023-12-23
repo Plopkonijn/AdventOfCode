@@ -6,21 +6,21 @@ internal class EngineSchematic
 	private readonly int _height;
 	private readonly int _width;
 
-	public EngineSchematic(string[] lines)
+	public EngineSchematic(IReadOnlyList<string> lines)
 	{
 		_width = lines.Max(s => s.Length);
-		_height = lines.Length;
+		_height = lines.Count;
 		_entries = new EngineSchematicEntry[_height, _width];
 		ParseRows(lines);
 	}
 
-	private void ParseRows(string[] lines)
+	private void ParseRows(IReadOnlyList<string> lines)
 	{
-		for (int i = 0; i < lines.Length; i++)
+		for (int i = 0; i < lines.Count; i++)
 			ParseColumns(lines, i);
 	}
 
-	private void ParseColumns(string[] lines, int i)
+	private void ParseColumns(IReadOnlyList<string> lines, int i)
 	{
 		string line = lines[i];
 		for (int j = 0; j < line.Length; j++)
@@ -33,10 +33,7 @@ internal class EngineSchematic
 		if (symbol == '.')
 			return new Empty();
 
-		if (char.IsNumber(symbol))
-			return ParseNumber(symbol, i, j);
-
-		return ParseSymbol(symbol, i, j);
+		return char.IsNumber(symbol) ? ParseNumber(symbol, i, j) : ParseSymbol(symbol);
 	}
 
 	public IEnumerable<int> GetPartNumbers()
@@ -78,7 +75,7 @@ internal class EngineSchematic
 		for (int i = 0; i < _width; i++)
 		for (int j = 0; j < _height; j++)
 		{
-			if (_entries[j, i] is not Gear gear)
+			if (_entries[j, i] is not Gear)
 				continue;
 
 			IReadOnlyCollection<Number> numbers = GetNumbers(i, j);
@@ -89,7 +86,7 @@ internal class EngineSchematic
 		}
 	}
 
-	private IReadOnlyCollection<Number> GetNumbers(int x, int y)
+	private HashSet<Number> GetNumbers(int x, int y)
 	{
 		var numbers = new HashSet<Number>();
 		for (int i = x - 1; i <= x + 1; i++)
@@ -108,7 +105,7 @@ internal class EngineSchematic
 		return numbers;
 	}
 
-	private EngineSchematicEntry ParseNumber(char symbol, int i, int j)
+	private Number ParseNumber(char symbol, int i, int j)
 	{
 		int value = int.Parse(symbol.ToString());
 		if (j > 0 && _entries[i, j - 1] is Number number)
@@ -127,14 +124,8 @@ internal class EngineSchematic
 		return number;
 	}
 
-	private EngineSchematicEntry ParseSymbol(char symbol, int i, int j)
+	private static EngineSchematicEntry ParseSymbol(char symbol)
 	{
-		if (symbol == '*')
-			return new Gear();
-
-		return new Symbol
-		{
-			Value = symbol
-		};
+		return symbol == '*' ? new Gear() : new Symbol();
 	}
 }

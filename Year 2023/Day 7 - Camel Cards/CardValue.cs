@@ -1,6 +1,6 @@
 namespace Year2023.Day7;
 
-public enum CardValue
+internal enum CardValue
 {
 	Joker,
 	Two,

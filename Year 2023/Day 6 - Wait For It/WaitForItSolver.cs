@@ -1,5 +1,6 @@
 ﻿using Application;
-using Year2023.Day6;
+
+namespace Year2023.Day6;
 
 public sealed class WaitForItSolver : ISolver
 {

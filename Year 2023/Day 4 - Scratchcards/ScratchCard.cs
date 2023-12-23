@@ -5,8 +5,8 @@ namespace Year2023.Day4;
 internal partial class ScratchCard
 {
 	public int Id { get; init; }
-	public List<int> WinningNumbers { get; init; } = new();
-	public List<int> YourNumbers { get; init; } = new();
+	private List<int> WinningNumbers { get; init; } = [];
+	private List<int> YourNumbers { get; init; } = [];
 
 	public int GetMatchingNumberCount()
 	{

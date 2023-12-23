@@ -1,5 +1,6 @@
 ﻿using Application;
-using Year2023.Day7;
+
+namespace Year2023.Day7;
 
 public sealed class CamelCardsSolver : ISolver
 {
