@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿var text = File.ReadAllLines("input.txt");
 
-Console.WriteLine("Hello, World!");
+var platform = new Platform(text);
+Console.WriteLine(platform.ToString());
+platform.RollNorth();
+Console.WriteLine();
+Console.WriteLine(platform.ToString());
+
+int answerPartOne = platform.GetLoadNorthBeams();
+Console.WriteLine(answerPartOne);

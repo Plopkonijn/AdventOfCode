@@ -1,0 +1,1 @@
+record struct Location(int X, int Y);
