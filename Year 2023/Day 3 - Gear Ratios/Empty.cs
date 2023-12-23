@@ -1,5 +1,3 @@
-namespace Year2023.GearRatios;
+namespace Year2023.Day3;
 
-internal class Empty : EngineSchematicEntry
-{
-}
+internal class Empty : EngineSchematicEntry;

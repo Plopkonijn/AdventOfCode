@@ -1,12 +1,12 @@
-namespace Year2023.PipeMaze;
+namespace Year2023.Day10;
 
 internal class Map
 {
 	private readonly string[] _map;
 
-	public Map(string[] map)
+	public Map(string[] args)
 	{
-		_map = map;
+		_map = args;
 	}
 
 	public int MinX => 0;
@@ -18,7 +18,8 @@ internal class Map
 	{
 		for (int y = 0; y < _map.Length; y++)
 		{
-			int x = _map[y].IndexOf('S');
+			int x = _map[y]
+				.IndexOf('S');
 			if (x != -1)
 				return (x, y);
 		}
@@ -40,7 +41,7 @@ internal class Map
 	{
 		return MinX <= x && x < MaxX;
 	}
-	
+
 	public bool IsInYRange(int y)
 	{
 		return MinY <= y && y < MaxY;

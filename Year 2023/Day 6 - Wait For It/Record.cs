@@ -1,6 +1,6 @@
-namespace Year2023.WaitForIt;
+namespace Year2023.Day6;
 
-record Record(long Time, long Distance)
+internal record Record(long Time, long Distance)
 {
 	public int GetNumberOfWaysToBeat()
 	{
@@ -11,32 +11,25 @@ record Record(long Time, long Distance)
 		 * t = (T +- Sqrt(T^2-4S)) / 2
 		 *
 		 */
-		var disciminant = Time * Time - 4 * Distance;
-		if (disciminant < 0)
+		long discriminant = Time * Time - 4 * Distance;
+		if (discriminant < 0)
 			return 0;
-		var minimumHoldTime = (Time - Math.Sqrt(disciminant)) / 2;
-		var maximumHoldTime = (Time + Math.Sqrt(disciminant)) / 2;
+		double minimumHoldTime = (Time - Math.Sqrt(discriminant)) / 2;
+		double maximumHoldTime = (Time + Math.Sqrt(discriminant)) / 2;
 
 		if (maximumHoldTime < minimumHoldTime)
-		{
 			return 0;
-		}
 
-		var minimumHoldTimeCeiling = Math.Ceiling(minimumHoldTime);
-		var maximumHoldTimeFloor = Math.Floor(maximumHoldTime);
-		
-		var numberOfWaysToBeat = maximumHoldTimeFloor - minimumHoldTimeCeiling + 1;
+		double minimumHoldTimeCeiling = Math.Ceiling(minimumHoldTime);
+		double maximumHoldTimeFloor = Math.Floor(maximumHoldTime);
+
+		double numberOfWaysToBeat = maximumHoldTimeFloor - minimumHoldTimeCeiling + 1;
 		if (minimumHoldTime == minimumHoldTimeCeiling)
-		{
 			numberOfWaysToBeat--;
-		}
 
 		if (maximumHoldTime == maximumHoldTimeFloor)
-		{
 			numberOfWaysToBeat--;
-		}
-		
-		
-		return (int) numberOfWaysToBeat;
+
+		return (int)numberOfWaysToBeat;
 	}
 }

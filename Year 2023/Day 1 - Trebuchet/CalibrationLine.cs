@@ -4,17 +4,25 @@ namespace Year2023.Day1;
 
 internal partial record CalibrationLine(string Value)
 {
+	private const string DIGIT_PATTERN = @"(\d|one|two|three|four|five|six|seven|eight|nine)";
+
 	public int GetCalibrationValue()
 	{
-		int firstDigit = int.Parse(Value.First(char.IsNumber).ToString());
-		int lastDigit = int.Parse(Value.Last(char.IsNumber).ToString());
+		int firstDigit = int.Parse(Value.First(char.IsNumber)
+		                                .ToString());
+		int lastDigit = int.Parse(Value.Last(char.IsNumber)
+		                               .ToString());
 		return CombineDigits(firstDigit, lastDigit);
 	}
 
 	public int GetSpelledCalibrationValue()
 	{
-		int firstDigit = ParseDigit(MatchFirstDigit().Match(Value).Value);
-		int lastDigit = ParseDigit(MatchLastDigit().Match(Value).Value);
+		int firstDigit = ParseDigit(MatchFirstDigit()
+		                            .Match(Value)
+		                            .Value);
+		int lastDigit = ParseDigit(MatchLastDigit()
+		                           .Match(Value)
+		                           .Value);
 		return CombineDigits(firstDigit, lastDigit);
 	}
 
@@ -40,7 +48,6 @@ internal partial record CalibrationLine(string Value)
 		};
 	}
 
-	private const string DIGIT_PATTERN = @"(\d|one|two|three|four|five|six|seven|eight|nine)";
 	[GeneratedRegex(DIGIT_PATTERN)]
 	private static partial Regex MatchFirstDigit();
 

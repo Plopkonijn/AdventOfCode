@@ -1,33 +1,53 @@
 using System.Text.RegularExpressions;
 
-namespace Year2023.MirageMaintenance;
+namespace Year2023.Day9;
 
 internal class Sequence
 {
 	private Sequence(long[] values)
 	{
-		Values = values;
+		_values = values;
 	}
 
-	public long[] Values { get; }
-	public bool IsNilSequence => Values.All(i => i == 0);
+	private readonly long[] _values;
+	private bool IsNilSequence() => _values.All(i => i == 0);
 
-	public static IEnumerable<Sequence> ParseSequences(string text)
+	private Sequence CreateDifferenceSequence()
 	{
-		return Regex.Matches(text, @"((?<values>-?\d+)[ ]*)+")
-		            .Select(match => match.Groups["values"]
-		                                  .Captures
-		                                  .Select(capture => long.Parse(capture.Value))
-		                                  .ToArray())
-		            .Select(values => new Sequence(values));
-	}
-
-	public Sequence CreateDifferenceSequence()
-	{
-		long[] values = new long[Values.Length - 1];
+		long[] values = new long[_values.Length - 1];
 		for (int i = 0; i < values.Length; i++)
-			values[i] = Values[i + 1] - Values[i];
+			values[i] = _values[i + 1] - _values[i];
 
 		return new Sequence(values);
+	}
+
+	public static Sequence Parse(string arg)
+	{
+		long[] values = Regex.Match(arg, @"((?<values>-?\d+)\s*)+")
+		                     .Groups["values"]
+		                     .Captures
+		                     .Select(capture => long.Parse(capture.Value))
+		                     .ToArray();
+		return new Sequence(values);
+	}
+
+	private IEnumerable<Sequence> GenerateSequences()
+	{
+		for (Sequence s = this; !s.IsNilSequence(); s = s.CreateDifferenceSequence())
+			yield return s;
+	}
+
+	public long ExtrapolateLastValue()
+	{
+		return GenerateSequences()
+			.Sum(s => s._values.Last());
+	}
+
+	public long ExtrapolateFirstValue()
+	{
+		return GenerateSequences()
+		       .Select(s => s._values.First())
+		       .Reverse()
+		       .Aggregate(0L, (accumulator, value) => value - accumulator);
 	}
 }
