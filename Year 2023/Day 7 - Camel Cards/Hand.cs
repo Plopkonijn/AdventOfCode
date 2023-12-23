@@ -1,4 +1,4 @@
-namespace Year2023.CamelCards;
+namespace Year2023.Day7;
 
 public record class Hand(HandType HandType, CardValue[] CardValues, string Text) : IComparable<Hand>
 {
@@ -16,7 +16,7 @@ public record class Hand(HandType HandType, CardValue[] CardValues, string Text)
 		                 .FirstOrDefault(c => c != 0, 0);
 	}
 
-	public static Hand ParseHands(string text)
+	public static Hand Parse(string text)
 	{
 		CardValue[] cardValues = text.Select(ParseCard)
 		                             .ToArray();
@@ -29,10 +29,10 @@ public record class Hand(HandType HandType, CardValue[] CardValues, string Text)
 
 	public static Hand ConvertToJokerHandType(Hand hand)
 	{
-		var cardValues = hand.CardValues
-		                     .Select(cardValue => cardValue == CardValue.Jack ? CardValue.Joker : cardValue)
-		                     .ToArray();
-		var jokers = cardValues.Count(cardValue => cardValue == CardValue.Joker);
+		CardValue[] cardValues = hand.CardValues
+		                             .Select(cardValue => cardValue == CardValue.Jack ? CardValue.Joker : cardValue)
+		                             .ToArray();
+		int jokers = cardValues.Count(cardValue => cardValue == CardValue.Joker);
 		switch (jokers)
 		{
 			case 0 or 5:
@@ -108,23 +108,23 @@ public record class Hand(HandType HandType, CardValue[] CardValues, string Text)
 		return type;
 	}
 
-	private static global::Year2023.CamelCards.CardValue ParseCard(char character)
+	private static CardValue ParseCard(char character)
 	{
 		return character switch
 		{
-			'2' => global::Year2023.CamelCards.CardValue.Two,
-			'3' => global::Year2023.CamelCards.CardValue.Three,
-			'4' => global::Year2023.CamelCards.CardValue.Four,
-			'5' => global::Year2023.CamelCards.CardValue.Five,
-			'6' => global::Year2023.CamelCards.CardValue.Six,
-			'7' => global::Year2023.CamelCards.CardValue.Seven,
-			'8' => global::Year2023.CamelCards.CardValue.Eight,
-			'9' => global::Year2023.CamelCards.CardValue.Nine,
-			'T' => global::Year2023.CamelCards.CardValue.Ten,
-			'J' => global::Year2023.CamelCards.CardValue.Jack,
-			'Q' => global::Year2023.CamelCards.CardValue.Queen,
-			'K' => global::Year2023.CamelCards.CardValue.King,
-			'A' => global::Year2023.CamelCards.CardValue.Ace,
+			'2' => CardValue.Two,
+			'3' => CardValue.Three,
+			'4' => CardValue.Four,
+			'5' => CardValue.Five,
+			'6' => CardValue.Six,
+			'7' => CardValue.Seven,
+			'8' => CardValue.Eight,
+			'9' => CardValue.Nine,
+			'T' => CardValue.Ten,
+			'J' => CardValue.Jack,
+			'Q' => CardValue.Queen,
+			'K' => CardValue.King,
+			'A' => CardValue.Ace,
 			_ => throw new ArgumentException()
 		};
 	}

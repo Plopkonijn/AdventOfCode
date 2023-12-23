@@ -1,18 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>Year2023.Scratchcards</RootNamespace>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <RootNamespace>Year2023.Day4</RootNamespace>
+        <AssemblyName>Year2023.Day4</AssemblyName>
     </PropertyGroup>
-
-    <ItemGroup>
-        <None Include="input.txt">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
 
 </Project>

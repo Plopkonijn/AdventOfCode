@@ -1,6 +1,6 @@
 namespace Year2023.Day2;
 
-public enum CubeColor
+internal enum CubeColor
 {
 	Red,
 	Green,

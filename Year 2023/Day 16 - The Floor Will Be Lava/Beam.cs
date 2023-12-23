@@ -1,4 +1,4 @@
-namespace Year2023.TheFloorWillBeLava;
+namespace Year2023.Day16;
 
 internal record Beam(int PositionX, int PositionY, int DirectionX, int DirectionY)
 {
@@ -8,6 +8,11 @@ internal record Beam(int PositionX, int PositionY, int DirectionX, int Direction
 	public int PositionY { get; private set; } = PositionY;
 	public int DirectionX { get; private set; } = DirectionX;
 	public int DirectionY { get; private set; } = DirectionY;
+
+	public virtual bool Equals(Beam? other)
+	{
+		return other?.Id == Id;
+	}
 
 	public void Move()
 	{
@@ -24,10 +29,5 @@ internal record Beam(int PositionX, int PositionY, int DirectionX, int Direction
 	public override int GetHashCode()
 	{
 		return Id.GetHashCode();
-	}
-
-	public virtual bool Equals(Beam? other)
-	{
-		return other?.Id == Id;
 	}
 }

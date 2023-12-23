@@ -1,4 +1,4 @@
-namespace Year2023.TheFloorWillBeLava;
+namespace Year2023.Day16;
 
 internal class Contraption
 {
@@ -6,12 +6,16 @@ internal class Contraption
 
 	public Contraption(string[] tiles)
 	{
-		if (tiles.Select(row => row.Length).Distinct().Count() > 1)
+		if (tiles.Select(row => row.Length)
+		         .Distinct()
+		         .Count() > 1)
 			throw new ArgumentException();
 		_tiles = tiles;
 	}
 
-	public int Width => _tiles.FirstOrDefault(string.Empty).Length;
+	public int Width => _tiles.FirstOrDefault(string.Empty)
+	                          .Length;
+
 	public int Height => _tiles.Length;
 
 	public int CountEnergizedTiles(Beam startBeam)
@@ -23,19 +27,21 @@ internal class Contraption
 		var beams = new HashSet<Beam> { startBeam };
 		while (beams.Count > 0)
 		{
-			Beam[] newBeams = UpdateBeams(beams).ToArray();
+			Beam[] newBeams = UpdateBeams(beams)
+				.ToArray();
 			beams.UnionWith(newBeams);
 			int removedOutsideBounds = beams.RemoveWhere(IsOutsideBounds);
 			int removedDuplicate = beams.RemoveWhere(IsAlreadyEnergized(energizedTiles));
 			energizedTiles.UnionWith(beams.Select(beam => (beam.PositionX, beam.PositionY, beam.DirectionX, beam.DirectionY)));
-			var outsideBounds = beams.Where(IsOutsideBounds).ToList();
+			List<Beam> outsideBounds = beams.Where(IsOutsideBounds)
+			                                .ToList();
 			if (outsideBounds.Count > 0)
-			{
 				throw new InvalidOperationException();
-			}
 		}
 
-		return energizedTiles.Select(tuple => (tuple.x, tuple.y)).Distinct().Count();
+		return energizedTiles.Select(tuple => (tuple.x, tuple.y))
+		                     .Distinct()
+		                     .Count();
 	}
 
 	private static Predicate<Beam> IsAlreadyEnergized(HashSet<(int x, int y, int dx, int dy)> energizedTiles)
@@ -67,13 +73,13 @@ internal class Contraption
 				beam.ChangeDirection(-beam.DirectionY, -beam.DirectionX);
 				break;
 			case '|' when beam.DirectionY is 0:
-				splitBeam = beam with { Id = Guid.NewGuid()};
+				splitBeam = beam with { Id = Guid.NewGuid() };
 				beam.ChangeDirection(0, -1);
 				splitBeam.ChangeDirection(0, 1);
 				splitBeam.Move();
 				break;
 			case '-' when beam.DirectionX is 0:
-				splitBeam = beam with {Id = Guid.NewGuid()};
+				splitBeam = beam with { Id = Guid.NewGuid() };
 				beam.ChangeDirection(-1, 0);
 				splitBeam.ChangeDirection(1, 0);
 				splitBeam.Move();
@@ -92,7 +98,9 @@ internal class Contraption
 
 	public int CountMaximumEnergizedTiles()
 	{
-		return GetPossibleBeams().Select(CountEnergizedTiles).Max();
+		return GetPossibleBeams()
+		       .Select(CountEnergizedTiles)
+		       .Max();
 	}
 
 	private IEnumerable<Beam> GetPossibleBeams()

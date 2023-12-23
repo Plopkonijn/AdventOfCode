@@ -1,11 +1,24 @@
-﻿using Year2023.TheFloorWillBeLava;
+﻿using Application;
 
-string[] text = File.ReadAllLines("input.txt");
-var contraption = new Contraption(text);
-var beam = new Beam(0, 0, 1, 0);
+namespace Year2023.Day16;
 
-int answerPartOne = contraption.CountEnergizedTiles(beam);
-Console.WriteLine(answerPartOne);
+public sealed class TheFloorWilBeLavaSolver : ISolver
+{
+	private readonly Contraption _contraption;
 
-int answerPartTwo = contraption.CountMaximumEnergizedTiles();
-Console.WriteLine(answerPartTwo);
+	public TheFloorWilBeLavaSolver(string[] args)
+	{
+		_contraption = new Contraption(args);
+	}
+
+	public long PartOne()
+	{
+		var beam = new Beam(0, 0, 1, 0);
+		return _contraption.CountEnergizedTiles(beam);
+	}
+
+	public long PartTwo()
+	{
+		return _contraption.CountMaximumEnergizedTiles();
+	}
+}

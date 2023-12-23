@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Year2023.MirageMaintenance;
+namespace Year2023.Day9;
 
 internal class Sequence
 {
@@ -12,16 +12,6 @@ internal class Sequence
 	public long[] Values { get; }
 	public bool IsNilSequence => Values.All(i => i == 0);
 
-	public static IEnumerable<Sequence> ParseSequences(string text)
-	{
-		return Regex.Matches(text, @"((?<values>-?\d+)[ ]*)+")
-		            .Select(match => match.Groups["values"]
-		                                  .Captures
-		                                  .Select(capture => long.Parse(capture.Value))
-		                                  .ToArray())
-		            .Select(values => new Sequence(values));
-	}
-
 	public Sequence CreateDifferenceSequence()
 	{
 		long[] values = new long[Values.Length - 1];
@@ -29,5 +19,35 @@ internal class Sequence
 			values[i] = Values[i + 1] - Values[i];
 
 		return new Sequence(values);
+	}
+
+	public static Sequence Parse(string arg)
+	{
+		long[] values = Regex.Match(arg, @"((?<values>-?\d+)\s*)+")
+		                     .Groups["values"]
+		                     .Captures
+		                     .Select(capture => long.Parse(capture.Value))
+		                     .ToArray();
+		return new Sequence(values);
+	}
+
+	private IEnumerable<Sequence> GenerateSequences()
+	{
+		for (Sequence s = this; !s.IsNilSequence; s = s.CreateDifferenceSequence())
+			yield return s;
+	}
+
+	public long ExtrapolateLastValue()
+	{
+		return GenerateSequences()
+			.Sum(s => s.Values.Last());
+	}
+
+	public long ExtrapolateFirstValue()
+	{
+		return GenerateSequences()
+		       .Select(s => s.Values.First())
+		       .Reverse()
+		       .Aggregate(0L, (accumulator, value) => value - accumulator);
 	}
 }

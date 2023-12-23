@@ -1,14 +1,14 @@
 using System.Text.RegularExpressions;
 
-namespace Year2023.WaitForIt;
+namespace Year2023.Day6;
 
-static class ParserOne
+internal static partial class ParserOne
 {
-	public static IEnumerable<Record> ParseRecords(string text)
+	public static IEnumerable<Record> ParseRecords(string[] text)
 	{
-		var times = ParseTimes(text);
+		IEnumerable<int> times = ParseTimes(text[0]);
+		IEnumerable<int> distances = ParseDistances(text[1]);
 
-		var distances = ParseDistances(text);
 		return times.Zip(distances)
 		            .Select(tuple =>
 		            {
@@ -19,19 +19,25 @@ static class ParserOne
 
 	private static IEnumerable<int> ParseTimes(string text)
 	{
-		return Regex.Match(text, @"(?<=Time:)(\s+(?<times>\d+))+")
-		            .Groups["times"]
-		            .Captures
-		            .Select(capture => int.Parse(capture.Value));
+		return TimesRegex()
+		       .Match(text)
+		       .Groups["times"]
+		       .Captures
+		       .Select(capture => int.Parse(capture.Value));
 	}
 
 	private static IEnumerable<int> ParseDistances(string text)
 	{
-		return Regex.Match(text, @"(?<=Distance:)(\s+(?<distances>\d+))+")
-		            .Groups["distances"]
-		            .Captures
-		            .Select(capture => int.Parse(capture.Value));
+		return DistancesRegex()
+		       .Match(text)
+		       .Groups["distances"]
+		       .Captures
+		       .Select(capture => int.Parse(capture.Value));
 	}
 
-	
+	[GeneratedRegex(@"(?<=Time:)(\s+(?<times>\d+))+")]
+	private static partial Regex TimesRegex();
+
+	[GeneratedRegex(@"(?<=Distance:)(\s+(?<distances>\d+))+")]
+	private static partial Regex DistancesRegex();
 }

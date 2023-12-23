@@ -1,4 +1,4 @@
-namespace Year2023.CamelCards;
+namespace Year2023.Day7;
 
 public enum HandType
 {

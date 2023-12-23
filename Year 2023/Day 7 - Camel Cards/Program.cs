@@ -1,27 +1,28 @@
-﻿using Year2023.CamelCards;
+﻿using Application;
+using Year2023.Day7;
 
-string text = """
-              32T3K 765
-              T55J5 684
-              KK677 28
-              KTJJT 220
-              QQQJA 483
-              """;
+public sealed class CamelCardsSolver : ISolver
+{
+	private readonly List<Entry> _entries;
 
-text = File.ReadAllText("input.txt");
-List<Entry> entriesPartOne = Entry.ParseEntries(text).ToList();
-entriesPartOne.Sort();
-int totalWinningsPartOne = entriesPartOne.Select((entry, index) => (entry, index))
-                           .Sum(t => (t.index + 1) * t.entry.Bid);
-Console.WriteLine(totalWinningsPartOne);
+	public CamelCardsSolver(string[] text)
+	{
+		_entries = text.Select(Entry.Parse)
+		               .ToList();
+	}
 
-var entriesPartTwo = entriesPartOne.Select(entry => entry with { Hand = Hand.ConvertToJokerHandType(entry.Hand) })
-       .ToList();
-entriesPartTwo.Sort();
+	public long PartOne()
+	{
+		return _entries.Order()
+		               .Select((entry, index) => (index + 1) * entry.Bid)
+		               .Sum();
+	}
 
-int totalWinningsPartTwo = entriesPartTwo.Select((entry, index) => (entry, index))
-                                         .Sum(t => (t.index + 1) * t.entry.Bid);
-var jokerkEntries = entriesPartTwo.Where(entry => entry.Hand.Text.Contains('J'))
-                                  .ToList();
-Console.WriteLine(totalWinningsPartTwo);
-Console.WriteLine();
+	public long PartTwo()
+	{
+		return _entries.Select(entry => entry with { Hand = Hand.ConvertToJokerHandType(entry.Hand) })
+		               .Order()
+		               .Select((entry, index) => (index + 1) * entry.Bid)
+		               .Sum();
+	}
+}

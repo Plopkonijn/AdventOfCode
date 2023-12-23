@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace Year2023.CosmicExpansion;
+namespace Year2023.Day11;
 
 internal class Cosmos
 {
@@ -30,7 +30,9 @@ internal class Cosmos
 		int[] emptyRows = GetEmptyRowIndices();
 		int[] emptyColumns = GetEmptyColumnIndices();
 		string[] newCosmosText = CreateExpandedRows(emptyColumns, emptyRows);
-		Debug.Assert(newCosmosText.Select(s => s.Length).Distinct().Count() == 1);
+		Debug.Assert(newCosmosText.Select(s => s.Length)
+		                          .Distinct()
+		                          .Count() == 1);
 		return newCosmosText;
 	}
 

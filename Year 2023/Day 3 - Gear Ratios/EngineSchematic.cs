@@ -1,4 +1,4 @@
-namespace Year2023.GearRatios;
+namespace Year2023.Day3;
 
 internal class EngineSchematic
 {
@@ -83,7 +83,9 @@ internal class EngineSchematic
 
 			IReadOnlyCollection<Number> numbers = GetNumbers(i, j);
 			if (numbers.Count == 2)
-				yield return numbers.First().Value * numbers.Last().Value;
+				yield return numbers.First()
+				                    .Value * numbers.Last()
+				                                    .Value;
 		}
 	}
 
