@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\*\*\*.csproj"/>
+        <ProjectReference Include="..\Application\Application.csproj" />
     </ItemGroup>
 
 </Project>
