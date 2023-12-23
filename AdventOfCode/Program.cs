@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using Year2023.Day2;
 
 namespace AdventOfCode;
 
-class Program
+internal class Program
 {
-	static void Main(string[] args)
+	private static void Main(string[] args)
 	{
-		if (!TrySelectProblem(out var problemSelection))
+		if (!TrySelectProblem(out ProblemSelection? problemSelection))
 			return;
 		Console.WriteLine($"You've selected : {problemSelection}");
 	}
@@ -17,22 +15,16 @@ class Program
 	{
 		problemSelection = null;
 		Console.Write("Year: ");
-		if (!int.TryParse(Console.ReadLine(), out var year))
-		{
+		if (!int.TryParse(Console.ReadLine(), out int year))
 			return false;
-		}
 
 		Console.Write("Day: ");
-		if (!int.TryParse(Console.ReadLine(), out var day))
-		{
+		if (!int.TryParse(Console.ReadLine(), out int day))
 			return false;
-		}
 
 		Console.Write("Part: ");
-		if (!int.TryParse(Console.ReadLine(), out var part))
-		{
+		if (!int.TryParse(Console.ReadLine(), out int part))
 			return false;
-		}
 
 		problemSelection = new ProblemSelection(year, day, part);
 		return true;
