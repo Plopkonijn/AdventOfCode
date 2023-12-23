@@ -21,8 +21,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 16 - The Floor Will Be Lava", "Year 2023\Day 16 - The Floor Will Be Lava\Day 16 - The Floor Will Be Lava.csproj", "{C6C799A9-9ABE-43C6-A447-667524FC653D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Year 2023", "Year 2023", "{608CEE40-AE1A-433B-8610-F1E14C418D2C}"
+	ProjectSection(SolutionItems) = preProject
+		Year 2023\Directory.Build.props = Year 2023\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode", "AdventOfCode\AdventOfCode.csproj", "{F33FB26D-527D-43B2-877E-A9DFE7E19D86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{9E369FCA-D803-4574-8528-2B11DDEA02D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +79,10 @@ Global
 		{F33FB26D-527D-43B2-877E-A9DFE7E19D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F33FB26D-527D-43B2-877E-A9DFE7E19D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F33FB26D-527D-43B2-877E-A9DFE7E19D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E369FCA-D803-4574-8528-2B11DDEA02D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E369FCA-D803-4574-8528-2B11DDEA02D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E369FCA-D803-4574-8528-2B11DDEA02D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E369FCA-D803-4574-8528-2B11DDEA02D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11C6D875-A09A-4A9C-B4E1-60F60ABE4B64} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
