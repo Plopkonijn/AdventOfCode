@@ -1,19 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>Year2023.Day4</RootNamespace>
-        <AssemblyName>Year2023.Day4</AssemblyName>
+        <RootNamespace>Year2023.Day5</RootNamespace>
+        <AssemblyName>Year2023.Day5</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="example.txt" />
-      <Content Include="example.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <None Remove="input.txt" />
-      <Content Include="input.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+        <ProjectReference Include="..\..\Common\Common.csproj"/>
     </ItemGroup>
 
 </Project>

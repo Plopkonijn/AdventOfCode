@@ -1,9 +1,9 @@
-internal class MapEntry
-{
-	public long DestinationRangeStart { get; init; }
-	public long SourceRangeStart { get; init; }
-	public long RangeLength { get; init; }
+using Common;
 
+namespace Year2023.Day5;
+
+internal record MapEntry(ValueRangeSplitBy SourceRangeSplitBy, long DestinationRangeStart)
+{
 	public bool TryMapNumber(long value, out long mappedValue)
 	{
 		if (!IsValueInRange(value))
@@ -12,12 +12,12 @@ internal class MapEntry
 			return false;
 		}
 
-		mappedValue = value - SourceRangeStart + DestinationRangeStart;
+		mappedValue = value - SourceRangeSplitBy.Start + DestinationRangeStart;
 		return true;
 	}
 
 	private bool IsValueInRange(long value)
 	{
-		return SourceRangeStart <= value && value < SourceRangeStart + RangeLength;
+		return SourceRangeSplitBy.Start <= value && value < SourceRangeSplitBy.Start + SourceRangeSplitBy.Length;
 	}
 }
