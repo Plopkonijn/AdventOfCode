@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Year2023.Day4</RootNamespace>
+        <AssemblyName>Year2023.Day4</AssemblyName>
+    </PropertyGroup>
+
+</Project>
