@@ -1,1 +1,1 @@
-internal record Node(string Name, string Left, string Right);
+public record Node(string Name, string Left, string Right);
