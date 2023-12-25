@@ -1,24 +1,38 @@
 ﻿using Application;
 
+namespace Year2023.Day12;
+
 public sealed class HotSpringsSolver : ISolver
 {
-	private readonly List<SpringRecord> _springRecords;
+	private readonly List<SpringRecord> _springRecordsFolded;
+	private readonly IEnumerable<SpringRecord> _springRecordsUnfolded;
 
 	public HotSpringsSolver(string[] args)
 	{
-		_springRecords = args.Select(SpringRecord.Parse)
+		_springRecordsFolded = args.Select(SpringRecord.Parse)
 		                     .ToList();
+
+		_springRecordsUnfolded = _springRecordsFolded.Select(record =>
+		{
+			var damagedRecord = string.Join('?', Enumerable.Repeat(record.DamagedRecord, 5));
+			int[] springGroups = Enumerable.Repeat(record.SpringGroups, 5)
+			                               .SelectMany(o => o)
+			                               .ToArray();
+			return new SpringRecord(damagedRecord, springGroups);
+		});
+
 	}
 
 	public long PartOne()
 	{
-		return _springRecords.Select(record => record.CountPossibleArrangements())
+		return _springRecordsFolded.Select(record => record.CountPossibleArrangements())
 		                     .Sum();
 	}
 
 	public long PartTwo()
 	{
-		throw new NotImplementedException();
+		return _springRecordsUnfolded.Select(record => record.CountPossibleArrangements())
+		                             .Sum();
 	}
 }
 
