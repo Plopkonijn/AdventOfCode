@@ -39,14 +39,14 @@ public sealed class HauntedWastelandSolver : ISolver
 		List<(List<Node> line, List<Node> cycle)> cycles = startNodes.Select(n => FindCycle(n, cachedNodes))
 		                                                             .ToList();
 
-		var combinedCycleLength = LeastCommonMultiple(cycles.Select(t => (long)t.cycle.Count)
-		                                                    .ToArray());
+		long combinedCycleLength = LeastCommonMultiple(cycles.Select(t => (long)t.cycle.Count)
+		                                                     .ToArray());
 		return combinedCycleLength * _instructions.Count;
 	}
 
 	public long LeastCommonMultiple(long[] values)
 	{
-		List<long> divisors = new List<long>();
+		var divisors = new List<long>();
 		long[] dividents = values.ToArray();
 		long divisor = 2;
 		while (dividents.Any(i => i != 1))
@@ -63,13 +63,9 @@ public sealed class HauntedWastelandSolver : ISolver
 			}
 
 			if (!updated)
-			{
 				divisor++;
-			}
 			else
-			{
 				divisors.Add(divisor);
-			}
 		}
 
 		return divisors.Aggregate((a, b) => a * b);

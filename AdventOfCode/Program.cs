@@ -1,6 +1,6 @@
-﻿using Application;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Application;
 
 namespace AdventOfCode;
 
@@ -19,7 +19,7 @@ internal class Program
 	private static long SolveProblem(ProblemSelection problemSelection)
 	{
 		string[] inputArgs = GetInputArguments(problemSelection);
-		var solver = GetSolver(problemSelection, inputArgs);
+		ISolver solver = GetSolver(problemSelection, inputArgs);
 		return problemSelection.Part switch
 		{
 			1 => solver.PartOne(),
@@ -30,10 +30,10 @@ internal class Program
 
 	private static ISolver GetSolver(ProblemSelection problemSelection, string[] inputArgs)
 	{
-		var solverInterface = typeof(ISolver);
-		var assembly = Assembly.Load($"Year{problemSelection.Year}.Day{problemSelection.Day}");
-		var solverType = assembly.GetTypes()
-		                         .Single(type => type.IsAssignableTo(solverInterface));
+		Type solverInterface = typeof(ISolver);
+		Assembly assembly = Assembly.Load($"Year{problemSelection.Year}.Day{problemSelection.Day}");
+		Type solverType = assembly.GetTypes()
+		                          .Single(type => type.IsAssignableTo(solverInterface));
 		return (ISolver)solverType.GetConstructors()
 		                          .First()
 		                          .Invoke(new[] { inputArgs });
@@ -41,7 +41,7 @@ internal class Program
 
 	private static string[] GetInputArguments(ProblemSelection problemSelection)
 	{
-		var inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\input.txt");
+		string[] inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\input.txt");
 		return inputArgs;
 	}
 

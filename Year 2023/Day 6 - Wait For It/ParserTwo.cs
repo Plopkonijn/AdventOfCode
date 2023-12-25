@@ -13,26 +13,29 @@ internal static partial class ParserTwo
 
 	private static long ParseTime(string text)
 	{
-		IEnumerable<string> values = TimesRegex().Match(text)
-                                          .Groups["times"]
-		                                  .Captures
-		                                  .Select(capture => capture.Value);
+		IEnumerable<string> values = TimesRegex()
+		                             .Match(text)
+		                             .Groups["times"]
+		                             .Captures
+		                             .Select(capture => capture.Value);
 		string value = string.Concat(values);
 		return long.Parse(value);
 	}
 
 	private static long ParseDistance(string text)
 	{
-		IEnumerable<string> values = DistancesRegex().Match(text)
-                                          .Groups["distances"]
-		                                  .Captures
-		                                  .Select(capture => capture.Value);
+		IEnumerable<string> values = DistancesRegex()
+		                             .Match(text)
+		                             .Groups["distances"]
+		                             .Captures
+		                             .Select(capture => capture.Value);
 		string value = string.Concat(values);
 		return long.Parse(value);
 	}
 
-    [GeneratedRegex(@"(?<=Time:)(\s+(?<times>\d+))+")]
-    private static partial Regex TimesRegex();
-    [GeneratedRegex(@"(?<=Distance:)(\s+(?<distances>\d+))+")]
-    private static partial Regex DistancesRegex();
+	[GeneratedRegex(@"(?<=Time:)(\s+(?<times>\d+))+")]
+	private static partial Regex TimesRegex();
+
+	[GeneratedRegex(@"(?<=Distance:)(\s+(?<distances>\d+))+")]
+	private static partial Regex DistancesRegex();
 }

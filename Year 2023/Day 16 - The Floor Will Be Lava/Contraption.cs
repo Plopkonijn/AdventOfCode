@@ -44,7 +44,8 @@ internal class Contraption
 
 	private IEnumerable<Beam> UpdateBeams(IEnumerable<Beam> beams)
 	{
-		return beams.Select(UpdateBeam).OfType<Beam>();
+		return beams.Select(UpdateBeam)
+		            .OfType<Beam>();
 	}
 
 	private Beam? UpdateBeam(Beam beam)

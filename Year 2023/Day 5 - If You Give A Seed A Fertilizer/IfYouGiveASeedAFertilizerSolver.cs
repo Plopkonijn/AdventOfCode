@@ -94,15 +94,15 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 	private long GetLocationNumber(ValueRangeSplitBy seedRangeSplitBy)
 	{
 		List<ValueRangeSplitBy> valueRanges = Enumerable.Repeat(seedRangeSplitBy, 1)
-		                                         .ToList();
+		                                                .ToList();
 		string valueType = "seed";
 		foreach (Map map in _maps)
 		{
 			if (map.SourceName != valueType)
 				throw new InvalidOperationException();
 			List<ValueRangeSplitBy> newValueRanges = valueRanges.SelectMany(map.MapRange)
-			                                             .Distinct()
-			                                             .ToList();
+			                                                    .Distinct()
+			                                                    .ToList();
 			valueType = map.DestinationName;
 			valueRanges = newValueRanges;
 		}

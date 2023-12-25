@@ -8,15 +8,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 3 - Gear Ratios", "Year
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratchcards", "Year 2023\Day 4 - Scratchcards\Day 4 - Scratchcards.csproj", "{296881C9-23C0-4BE0-B3C5-589D49B2B7BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 5 - If You Give A Seed A Fertilizer", "Year 2023\Day 5 - If You Give A Seed A Fertilizer\Day 5 - If You Give A Seed A Fertilizer.csproj", "{8F2F36F5-832B-4416-B6D2-78E6067A48F2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 6 - Wait For It", "Year 2023\Day 6 - Wait For It\Day 6 - Wait For It.csproj", "{564E1FCA-A0A6-4AD4-8885-DB0853AA8709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 9 - Mirage Maintenance", "Year 2023\Day 9 - Mirage Maintenance\Day 9 - Mirage Maintenance.csproj", "{DB43CE05-6B08-4311-B3C6-9150CEA18267}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 7 - Camel Cards", "Year 2023\Day 7 - Camel Cards\Day 7 - Camel Cards.csproj", "{97EDB6DC-37E0-462A-9723-8112E8844908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 8 - Haunted Wasteland", "Year 2023\Day 8 - Haunted Wasteland\Day 8 - Haunted Wasteland.csproj", "{CC5BFC40-46AF-41CD-9E9F-E588EF80A373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 9 - Mirage Maintenance", "Year 2023\Day 9 - Mirage Maintenance\Day 9 - Mirage Maintenance.csproj", "{DB43CE05-6B08-4311-B3C6-9150CEA18267}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 10 - Pipe Maze", "Year 2023\Day 10 - Pipe Maze\Day 10 - Pipe Maze.csproj", "{37E3D9CC-7B80-4790-A3BE-F8892A3F4BFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 11 - Cosmic Expansion", "Year 2023\Day 11 - Cosmic Expansion\Day 11 - Cosmic Expansion.csproj", "{7A5BBFDE-62BC-4031-8B1C-ADBDEFB5A916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 12 - Hot Springs", "Year 2023\Day 12 - Hot Springs\Day 12 - Hot Springs.csproj", "{D6C6CECF-4363-478A-A48F-58ABA8B17CA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 16 - The Floor Will Be Lava", "Year 2023\Day 16 - The Floor Will Be Lava\Day 16 - The Floor Will Be Lava.csproj", "{C6C799A9-9ABE-43C6-A447-667524FC653D}"
 EndProject
@@ -29,13 +35,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode", "AdventOfCod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{9E369FCA-D803-4574-8528-2B11DDEA02D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 5 - If You Give A Seed A Fertilizer", "Year 2023\Day 5 - If You Give A Seed A Fertilizer\Day 5 - If You Give A Seed A Fertilizer.csproj", "{8F2F36F5-832B-4416-B6D2-78E6067A48F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3F9C5D18-AE2E-4867-9E70-BAFF0504513E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Tests", "Common.Tests\Common.Tests.csproj", "{FB7BE45F-FCDA-4CF0-9DF0-7B0949D9EE4F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 8 - Haunted Wasteland", "Year 2023\Day 8 - Haunted Wasteland\Day 8 - Haunted Wasteland.csproj", "{CC5BFC40-46AF-41CD-9E9F-E588EF80A373}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{CC5BFC40-46AF-41CD-9E9F-E588EF80A373}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC5BFC40-46AF-41CD-9E9F-E588EF80A373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC5BFC40-46AF-41CD-9E9F-E588EF80A373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6C6CECF-4363-478A-A48F-58ABA8B17CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C6CECF-4363-478A-A48F-58ABA8B17CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C6CECF-4363-478A-A48F-58ABA8B17CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C6CECF-4363-478A-A48F-58ABA8B17CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11C6D875-A09A-4A9C-B4E1-60F60ABE4B64} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
@@ -121,5 +127,6 @@ Global
 		{C6C799A9-9ABE-43C6-A447-667524FC653D} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
 		{8F2F36F5-832B-4416-B6D2-78E6067A48F2} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
 		{CC5BFC40-46AF-41CD-9E9F-E588EF80A373} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
+		{D6C6CECF-4363-478A-A48F-58ABA8B17CA4} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
 	EndGlobalSection
 EndGlobal

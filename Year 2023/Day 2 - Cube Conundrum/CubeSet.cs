@@ -6,9 +6,10 @@ internal partial class CubeSet
 {
 	public CubeSet(string arg)
 	{
-		CubeGroups = SetRegex().Split(arg)
-                          .Select(group => new CubeGroup(group))
-		                  .ToList();
+		CubeGroups = SetRegex()
+		             .Split(arg)
+		             .Select(group => new CubeGroup(group))
+		             .ToList();
 	}
 
 	public CubeSet()
@@ -16,7 +17,7 @@ internal partial class CubeSet
 		CubeGroups = new List<CubeGroup>();
 	}
 
-	public List<CubeGroup> CubeGroups { get; } 
+	public List<CubeGroup> CubeGroups { get; }
 
 	public bool ContainsSubSet(CubeSet set)
 	{
@@ -31,6 +32,6 @@ internal partial class CubeSet
 		       .SingleOrDefault(0);
 	}
 
-    [GeneratedRegex(",")]
-    private static partial Regex SetRegex();
+	[GeneratedRegex(",")]
+	private static partial Regex SetRegex();
 }
