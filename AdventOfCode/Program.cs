@@ -41,7 +41,7 @@ internal class Program
 
 	private static string[] GetInputArguments(ProblemSelection problemSelection)
 	{
-		string[] inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\input.txt");
+		string[] inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\example.txt");
 		return inputArgs;
 	}
 
