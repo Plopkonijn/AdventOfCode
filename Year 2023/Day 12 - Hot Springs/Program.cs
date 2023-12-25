@@ -1,17 +1,27 @@
-﻿using System.Diagnostics;
+﻿using Application;
 
-List<SpringRecord> springRecords = File.ReadLines("input.txt")
-                                       .Select(SpringRecord.Parse)
-                                       .ToList();
+public sealed class HotSpringsSolver : ISolver
+{
+	private readonly List<SpringRecord> _springRecords;
 
-var timeStamp = Stopwatch.GetTimestamp();
-int answerPartOne = springRecords.Select(record => record.CountPossibleArrangements()).Sum();
-var elapsedTime = Stopwatch.GetElapsedTime(timeStamp);
-Console.WriteLine($"Answer to part one: {answerPartOne}, in {elapsedTime.Milliseconds} ms");
+	public HotSpringsSolver(string[] args)
+	{
+		_springRecords = args.Select(SpringRecord.Parse)
+		                     .ToList();
+	}
 
+	public long PartOne()
+	{
+		return _springRecords.Select(record => record.CountPossibleArrangements())
+		                     .Sum();
+	}
 
+	public long PartTwo()
+	{
+		throw new NotImplementedException();
+	}
+}
 
-Console.WriteLine();
 /*   string length 	: 14
  *   minimum size  	: (1+1+3) + (3 - 1) = 7
  *   wiggle room	: 14 - 7 + 1 = 8
