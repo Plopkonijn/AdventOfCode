@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Year2023.Day13</RootNamespace>
+        <AssemblyName>Year2023.Day13</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Common.csproj"/>
+    </ItemGroup>
+
+</Project>
