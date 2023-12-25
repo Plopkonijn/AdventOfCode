@@ -20,21 +20,21 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 
 		if (!IsRemainingEnough(stringRange, groupRange))
 		{
-			cachedArrangements.Add((stringRange,groupRange),possibleArrangements);
+			cachedArrangements.Add((stringRange, groupRange), possibleArrangements);
 			return possibleArrangements;
 		}
 
 		if (groupRange.Start.Value == groupRange.End.Value)
 		{
 			possibleArrangements = HasRemainingSprings(stringRange) ? 0L : 1L;
-			cachedArrangements.Add((stringRange,groupRange),possibleArrangements);
+			cachedArrangements.Add((stringRange, groupRange), possibleArrangements);
 			return possibleArrangements;
 		}
 
-		var currentString = DamagedRecord[stringRange];
-		var currentGroup = SpringGroups[groupRange.Start];
-		var window = currentString[0..currentGroup];
-		
+		string currentString = DamagedRecord[stringRange];
+		int currentGroup = SpringGroups[groupRange.Start];
+		string window = currentString[..currentGroup];
+
 		char? prefix = stringRange.Start.Value - 1 >= 0 ? DamagedRecord[stringRange.Start.Value - 1] : null;
 		char? suffix = stringRange.Start.Value + currentGroup < DamagedRecord.Length ? DamagedRecord[stringRange.Start.Value + currentGroup] : null;
 		if (Ismatch(stringRange, groupRange.Start))
@@ -56,10 +56,10 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 
 	private bool IsRemainingEnough(Range stringRange, Range groupRange)
 	{
-		var stringLength = stringRange.End.Value - stringRange.Start.Value;
-		var groupLength = SpringGroups[groupRange]
+		int stringLength = stringRange.End.Value - stringRange.Start.Value;
+		int groupLength = SpringGroups[groupRange]
 			.Sum(i => i + 1) - 1;
-		return groupLength<=stringLength;
+		return groupLength <= stringLength;
 	}
 
 	private bool HasRemainingSprings(Range stringRange)
@@ -71,7 +71,7 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 
 	private bool Ismatch(Range stringRange, Index groupIndex)
 	{
-		if (!IsPrefixMatch(stringRange.Start.Value - 1) || !IsSuffixMatch(stringRange.Start.Value +SpringGroups[groupIndex]))
+		if (!IsPrefixMatch(stringRange.Start.Value - 1) || !IsSuffixMatch(stringRange.Start.Value + SpringGroups[groupIndex]))
 			return false;
 		ReadOnlySpan<char> currentString = DamagedRecord.AsSpan(stringRange);
 		if (SpringGroups[groupIndex] > currentString.Length)
@@ -101,22 +101,3 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 		return result;
 	}
 }
-
-/*
- *	string length	= 7
- *  match length	= 7
- *	shifting space	= 7 - 7 + 1 = 1
- *		?	?	?	.	#	#	#
- * 1	[1]
- * 1			[1]
- * 3					[1]
- *
- *	string length	= 14
- *  match length	= 7
- *  shifting space	= 14 - 7 + 1 = 8
- *		.	?	?	.	.	?	?	.	.	.	?	#	#	.
- * 1	[0	1	1	0	0	1	1	0]
- * 1			[0	0	0	2	2	0	0	0]
- * 3					[0	0	0	0	0	0	4	0]
- *
- */

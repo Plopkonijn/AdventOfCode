@@ -4,13 +4,17 @@ namespace Year2023.Day9;
 
 internal class Sequence
 {
+	private readonly long[] _values;
+
 	private Sequence(long[] values)
 	{
 		_values = values;
 	}
 
-	private readonly long[] _values;
-	private bool IsNilSequence() => _values.All(i => i == 0);
+	private bool IsNilSequence()
+	{
+		return _values.All(i => i == 0);
+	}
 
 	private Sequence CreateDifferenceSequence()
 	{
