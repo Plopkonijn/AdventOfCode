@@ -2,7 +2,7 @@ using Common;
 
 namespace Year2023.Day5;
 
-internal record MapEntry(ValueRangeSplitBy SourceRangeSplitBy, long DestinationRangeStart)
+internal record MapEntry(ValueRange SourceRange, long DestinationRangeStart)
 {
 	public bool TryMapNumber(long value, out long mappedValue)
 	{
@@ -12,12 +12,12 @@ internal record MapEntry(ValueRangeSplitBy SourceRangeSplitBy, long DestinationR
 			return false;
 		}
 
-		mappedValue = value - SourceRangeSplitBy.Start + DestinationRangeStart;
+		mappedValue = value - SourceRange.Start + DestinationRangeStart;
 		return true;
 	}
 
 	private bool IsValueInRange(long value)
 	{
-		return SourceRangeSplitBy.Start <= value && value < SourceRangeSplitBy.Start + SourceRangeSplitBy.Length;
+		return SourceRange.Start <= value && value < SourceRange.Start + SourceRange.Length;
 	}
 }
