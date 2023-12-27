@@ -15,21 +15,21 @@ internal class Map
 		return value;
 	}
 
-	public IEnumerable<ValueRangeSplitBy> MapRange(ValueRangeSplitBy valueRangeSplitBy)
+	public IEnumerable<ValueRange> MapRange(ValueRange valueRangeSplitBy)
 	{
 		foreach (MapEntry entry in Entries)
 		{
-			if (valueRangeSplitBy.End <= entry.SourceRangeSplitBy.Start)
+			if (valueRangeSplitBy.End <= entry.SourceRange.Start)
 				break;
 
-			(ValueRangeSplitBy left, ValueRangeSplitBy middle, ValueRangeSplitBy right) = valueRangeSplitBy.SplitBy(entry.SourceRangeSplitBy);
+			(ValueRange left, ValueRange middle, ValueRange right) = valueRangeSplitBy.SplitBy(entry.SourceRange);
 			if (!left.IsEmpty)
 				yield return left;
 
 			if (!middle.IsEmpty)
 				yield return middle with
 				{
-					Start = entry.DestinationRangeStart + (middle.Start - entry.SourceRangeSplitBy.Start)
+					Start = entry.DestinationRangeStart + (middle.Start - entry.SourceRange.Start)
 				};
 
 			valueRangeSplitBy = right;
