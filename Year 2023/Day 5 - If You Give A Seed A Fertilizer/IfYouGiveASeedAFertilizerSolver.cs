@@ -6,7 +6,7 @@ using Year2023.Day5;
 public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 {
 	private readonly List<Map> _maps;
-	private readonly List<ValueRangeSplitBy> _seedRanges;
+	private readonly List<ValueRange> _seedRanges;
 	private readonly List<long> _seeds;
 
 	public IfYouGiveASeedAFertilizerSolver(string[] args)
@@ -28,15 +28,15 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 		                  .Min();
 	}
 
-	private List<ValueRangeSplitBy> ParseSeedRanges()
+	private List<ValueRange> ParseSeedRanges()
 	{
-		var seedRanges = new List<ValueRangeSplitBy>();
+		var seedRanges = new List<ValueRange>();
 		int i = 0;
 		while (i < _seeds.Count)
 		{
 			long start = _seeds[i++];
 			long length = _seeds[i++];
-			seedRanges.Add(new ValueRangeSplitBy(start, length));
+			seedRanges.Add(new ValueRange(start, length));
 		}
 
 		return seedRanges;
@@ -60,7 +60,7 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 			string sourceName = mapTitleMatch.Groups["source"].Value;
 			string destinationName = mapTitleMatch.Groups["destination"].Value;
 			List<MapEntry> entries = ParseMapEntries(args, ref i);
-			entries.Sort((a, b) => a.SourceRangeSplitBy.Start.CompareTo(b.SourceRangeSplitBy.Start));
+			entries.Sort((a, b) => a.SourceRange.Start.CompareTo(b.SourceRange.Start));
 			maps.Add(new Map
 			{
 				SourceName = sourceName,
@@ -81,7 +81,7 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 				.Match(args[i]);
 			if (!match.Success)
 				break;
-			entries.Add(new MapEntry(new ValueRangeSplitBy
+			entries.Add(new MapEntry(new ValueRange
 			{
 				Start = long.Parse(match.Groups["source"].Value),
 				Length = long.Parse(match.Groups["length"].Value)
@@ -91,18 +91,18 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 		return entries;
 	}
 
-	private long GetLocationNumber(ValueRangeSplitBy seedRangeSplitBy)
+	private long GetLocationNumber(ValueRange seedRange)
 	{
-		List<ValueRangeSplitBy> valueRanges = Enumerable.Repeat(seedRangeSplitBy, 1)
-		                                                .ToList();
+		List<ValueRange> valueRanges = Enumerable.Repeat(seedRange, 1)
+		                                         .ToList();
 		string valueType = "seed";
 		foreach (Map map in _maps)
 		{
 			if (map.SourceName != valueType)
 				throw new InvalidOperationException();
-			List<ValueRangeSplitBy> newValueRanges = valueRanges.SelectMany(map.MapRange)
-			                                                    .Distinct()
-			                                                    .ToList();
+			List<ValueRange> newValueRanges = valueRanges.SelectMany(map.MapRange)
+			                                             .Distinct()
+			                                             .ToList();
 			valueType = map.DestinationName;
 			valueRanges = newValueRanges;
 		}
