@@ -1,4 +1,6 @@
-namespace Year2023.Day13;
+using System.Text;
+
+namespace Common;
 
 public class Grid
 {
@@ -41,5 +43,19 @@ public class Grid
 			transpose[y, x] = this[x, y];
 
 		return transpose;
+	}
+
+	public override string ToString()
+	{
+		var stringBuilder = new StringBuilder();
+		for (int y = 0; y < Height; y++)
+		{
+			for (int x = 0; x < Width; x++)
+				stringBuilder.Append(_values[x, y]);
+
+			stringBuilder.AppendLine();
+		}
+
+		return stringBuilder.ToString();
 	}
 }
