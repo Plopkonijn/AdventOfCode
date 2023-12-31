@@ -1,6 +1,6 @@
 namespace AdventOfCode;
 
-internal record ProblemSelection(int Year, int Day, int Part)
+internal record ProblemSelection(int Year, int Day, int Part, string FileName)
 {
 	public override string ToString()
 	{
