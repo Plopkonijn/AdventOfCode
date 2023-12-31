@@ -8,12 +8,49 @@ internal class Program
 {
 	private static void Main(string[] args)
 	{
-		if (!TrySelectProblem(out ProblemSelection? problemSelection))
-			return;
+		if (!TryParseArguments(args, out ProblemSelection? problemSelection))
+			if (!TrySelectProblem(args, out problemSelection))
+				return;
+
 		Console.WriteLine($"You've selected : {problemSelection}");
 
 		long answer = SolveProblem(problemSelection);
 		Console.WriteLine(answer);
+	}
+
+	private static bool TryParseArguments(string[] arguments, [NotNullWhen(true)] out ProblemSelection? problemSelection)
+	{
+		problemSelection = null;
+		try
+		{
+			int? year = default, day = default, part = default;
+			string? fileName = default;
+			for (int i = 0; i < arguments.Length; i += 2)
+				switch (arguments[i])
+				{
+					case "-y":
+						year = int.Parse(arguments[i + 1]);
+						break;
+					case "-d":
+						day = int.Parse(arguments[i + 1]);
+						break;
+					case "-p":
+						part = int.Parse(arguments[i + 1]);
+						break;
+					case "-f":
+						fileName = arguments[i + 1];
+						break;
+				}
+
+			if (year is not { } y || day is not { } d || part is not { } p || fileName is not { } f)
+				return false;
+			problemSelection = new ProblemSelection(y, d, p, f);
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
 	}
 
 	private static long SolveProblem(ProblemSelection problemSelection)
@@ -36,16 +73,16 @@ internal class Program
 		                          .Single(type => type.IsAssignableTo(solverInterface));
 		return (ISolver)solverType.GetConstructors()
 		                          .First()
-		                          .Invoke(new[] { inputArgs });
+		                          .Invoke([inputArgs]);
 	}
 
 	private static string[] GetInputArguments(ProblemSelection problemSelection)
 	{
-		string[] inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\input.txt");
+		string[] inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\{problemSelection.FileName}");
 		return inputArgs;
 	}
 
-	private static bool TrySelectProblem([NotNullWhen(true)] out ProblemSelection? problemSelection)
+	private static bool TrySelectProblem(string[] args, [NotNullWhen(true)] out ProblemSelection? problemSelection)
 	{
 		problemSelection = null;
 		Console.Write("Year: ");
@@ -60,7 +97,17 @@ internal class Program
 		if (!int.TryParse(Console.ReadLine(), out int part))
 			return false;
 
-		problemSelection = new ProblemSelection(year, day, part);
+		Console.WriteLine("File: ");
+		string directory = Path.Combine(Directory.GetCurrentDirectory(), $"Year{year}.Day{day}");
+		string[]? files = Directory.GetFiles(directory);
+		for (int i = 0; i < files.Length; i++)
+			Console.WriteLine($"{i}\t:{files[i]}");
+
+		string? selectedFile = Console.ReadLine();
+		if (!files.Contains(selectedFile))
+			return false;
+
+		problemSelection = new ProblemSelection(year, day, part, selectedFile);
 		return true;
 	}
 }
