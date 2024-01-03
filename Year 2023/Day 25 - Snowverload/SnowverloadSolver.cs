@@ -107,13 +107,20 @@ public sealed class SnowverloadSolver : ISolver
 	private static List<Link> MinimumCutPhase(Graph graph)
 	{
 		string? sNode = null;
-		string tNode = graph.Nodes.First();
+		string? tNode = graph.Nodes.First();
+
 		var visited = new HashSet<string> { tNode };
+		var queue = new PriorityQueue<string, int>(GetNeighboursWithConnectednessToVisited(tNode, graph, visited));
+		
+
 		while (visited.Count < graph.Size)
 		{
+			string node = queue.Dequeue();
+			if (!visited.Add(node))
+				continue;
 			sNode = tNode;
-			tNode = GetMostConnectedToVisitedNode(graph, visited);
-			visited.Add(tNode);
+			tNode = node;
+			queue.EnqueueRange(GetNeighboursWithConnectednessToVisited(node,graph,visited));
 		}
 
 		if (sNode is null || tNode is null)
@@ -123,6 +130,21 @@ public sealed class SnowverloadSolver : ISolver
 		                      .ToList();
 		graph.JoinNodes(sNode, tNode);
 		return cut;
+	}
+
+	private static IEnumerable<(string node, int negativeConnectedness)> GetNeighboursWithConnectednessToVisited
+		(string node, Graph graph, HashSet<string> visited)
+	{
+		return graph.GetNeighbours(node)
+		            .Where(n => !visited.Contains(n))
+		            .Select(n => (n, -GetConnectednessToVisited(n, graph, visited)));
+	}
+
+	private static int GetConnectednessToVisited(string node, Graph graph, HashSet<string> visited)
+	{
+		return graph.GetLinks(node)
+		            .Where(link => visited.Contains(link.Opposite(node)))
+		            .Sum(link => link.Weight);
 	}
 
 	private static string GetMostConnectedToVisitedNode(Graph graph, HashSet<string> visited)

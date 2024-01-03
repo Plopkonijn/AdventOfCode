@@ -23,6 +23,12 @@ internal class Graph
 			.AsReadOnly();
 	}
 
+	public IEnumerable<string> GetNeighbours(string node)
+	{
+		return GetLinks(node)
+			.Select(link => link.Opposite(node));
+	}
+
 	public bool AddNode(string node)
 	{
 		return _links.TryAdd(node, new List<Link>());
