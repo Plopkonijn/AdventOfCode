@@ -1,6 +1,6 @@
 namespace Year2023.Day25;
 
-internal readonly struct Link 
+internal readonly struct Link
 {
 	public string Source { get; init; }
 	public string Target { get; init; }

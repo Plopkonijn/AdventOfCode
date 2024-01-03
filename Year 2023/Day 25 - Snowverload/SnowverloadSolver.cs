@@ -34,42 +34,37 @@ public sealed class SnowverloadSolver : ISolver
 		List<Link> minimumCut = MinimumCut(_graph);
 		HashSet<string> sGroup = GetSTGroups(minimumCut, out HashSet<string> tGroup);
 		GrowGroup(sGroup, tGroup);
-		GrowGroup(tGroup,sGroup);
+		GrowGroup(tGroup, sGroup);
 		return sGroup.Count * tGroup.Count;
+	}
+
+	public long PartTwo()
+	{
+		throw new NotImplementedException();
 	}
 
 	private static HashSet<string> GetSTGroups(List<Link> minimumCut, out HashSet<string> tGroup)
 	{
-		var sGroup = minimumCut[0]
-		             .Source.Split(';')
-		             .ToHashSet();
+		HashSet<string> sGroup = minimumCut[0]
+		                         .Source.Split(';')
+		                         .ToHashSet();
 		tGroup = minimumCut[0]
 		         .Target.Split(';')
 		         .ToHashSet();
-		foreach (var link in minimumCut.Skip(1))
+		foreach (Link link in minimumCut.Skip(1))
 		{
-			var sNodes = link.Source.Split(';');
-			var tNodes = link.Target.Split(';');
+			string[] sNodes = link.Source.Split(';');
+			string[] tNodes = link.Target.Split(';');
 			if (sGroup.SetEquals(sNodes))
-			{
 				tGroup.UnionWith(tNodes);
-			}
 			else if (sGroup.SetEquals(tNodes))
-			{
 				tGroup.UnionWith(sNodes);
-			}
 			else if (tGroup.SetEquals(tNodes))
-			{
 				sGroup.UnionWith(sNodes);
-			}
 			else if (tGroup.SetEquals(sNodes))
-			{
 				sGroup.UnionWith(tNodes);
-			}
 			else
-			{
 				throw new InvalidOperationException();
-			}
 		}
 
 		return sGroup;
@@ -78,22 +73,15 @@ public sealed class SnowverloadSolver : ISolver
 	private void GrowGroup(HashSet<string> sGroup, HashSet<string> tGroup)
 	{
 		var queue = new Queue<string>(sGroup);
-		while (queue.TryDequeue(out var node))
-		{
+		while (queue.TryDequeue(out string? node))
 			foreach (Link link in _graph.GetLinks(node))
 			{
-				var opposite = link.Opposite(node);
-				if(sGroup.Contains(opposite) || tGroup.Contains(opposite))
+				string opposite = link.Opposite(node);
+				if (sGroup.Contains(opposite) || tGroup.Contains(opposite))
 					continue;
 				sGroup.Add(opposite);
 				queue.Enqueue(opposite);
 			}
-		}
-	}
-
-	public long PartTwo()
-	{
-		throw new NotImplementedException();
 	}
 
 	private static List<Link> MinimumCut(Graph graph)
@@ -119,7 +107,7 @@ public sealed class SnowverloadSolver : ISolver
 	private static List<Link> MinimumCutPhase(Graph graph)
 	{
 		string? sNode = null;
-		string tNode  = graph.Nodes.First();
+		string tNode = graph.Nodes.First();
 		var visited = new HashSet<string> { tNode };
 		while (visited.Count < graph.Size)
 		{
@@ -127,14 +115,12 @@ public sealed class SnowverloadSolver : ISolver
 			tNode = GetMostConnectedToVisitedNode(graph, visited);
 			visited.Add(tNode);
 		}
-		
-		if (sNode is null || tNode is null)
-		{
-			throw new InvalidOperationException();
-		}
 
-		var cut = graph.GetLinks(tNode)
-		               .ToList();
+		if (sNode is null || tNode is null)
+			throw new InvalidOperationException();
+
+		List<Link> cut = graph.GetLinks(tNode)
+		                      .ToList();
 		graph.JoinNodes(sNode, tNode);
 		return cut;
 	}
@@ -143,14 +129,14 @@ public sealed class SnowverloadSolver : ISolver
 	{
 		string? nextNode = graph.Nodes
 		                        .Except(visited)
-		                        .MaxBy(node => GetConnectednessToVisited(graph,node, visited));
+		                        .MaxBy(node => GetConnectednessToVisited(graph, node, visited));
 		return nextNode ?? throw new InvalidOperationException();
 	}
 
 	private static int GetConnectednessToVisited(Graph graph, string node, HashSet<string> visited)
 	{
 		return graph.GetLinks(node)
-		             .Where(link => visited.Contains(link.Opposite(node)))
-		             .Sum(link => link.Weight);
+		            .Where(link => visited.Contains(link.Opposite(node)))
+		            .Sum(link => link.Weight);
 	}
 }
