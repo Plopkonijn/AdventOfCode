@@ -4,11 +4,11 @@ using Common;
 
 namespace Year2023.Day18;
 
-internal record DigInstruction(DigDirection Direction, int Distance, Color Color)
+internal record DigInstruction(DigDirection Direction, int Distance)
 {
-	public static DigInstruction Parse(string text)
+	public static DigInstruction ParseOne(string text)
 	{
-		var match = Regex.Match(text, @"(?<direction>[UDLR]) (?<distance>\d+) \((?<color>\#\w+)\)");
+		var match = Regex.Match(text, @"(?<direction>[UDLR]) (?<distance>\d+)");
 		var direction = match.Groups["direction"].Value switch
 		{
 			"U" => DigDirection.Up,
@@ -18,8 +18,22 @@ internal record DigInstruction(DigDirection Direction, int Distance, Color Color
 			_ => throw new ArgumentOutOfRangeException()
 		};
 		var distance = int.Parse(match.Groups["distance"].Value);
-		var color = ColorTranslator.FromHtml(match.Groups["color"].Value);
-		return new DigInstruction(direction, distance, color);
+		return new DigInstruction(direction, distance);
+	}
+
+	public static DigInstruction ParseTwo(string text)
+	{
+		var match = Regex.Match(text, @"#(?<distance>\w{5})(?<direction>\w)");
+		var direction = match.Groups["direction"].Value switch
+		{
+			"0" => DigDirection.Right,
+			"1" => DigDirection.Down,
+			"2" => DigDirection.Left,
+			"3" => DigDirection.Up,
+			_ => throw new ArgumentOutOfRangeException()
+		};
+		var distance = Convert.ToInt32($"0x{match.Groups["distance"].Value}",16);
+		return new DigInstruction(direction, distance);
 	}
 
 	public Trench DigTrenches(Position start)

@@ -4,9 +4,15 @@ namespace Year2023.Day18;
 
 internal record DigPlan(List<DigInstruction> DigInstructions)
 {
-	public static DigPlan Parse(IEnumerable<string> text)
+	public static DigPlan ParseOne(IEnumerable<string> text)
 	{
-		var digInstructions = text.Select(DigInstruction.Parse)
+		var digInstructions = text.Select(DigInstruction.ParseOne)
+		                          .ToList();
+		return new DigPlan(digInstructions);
+	}
+	public static DigPlan ParseTwo(IEnumerable<string> text)
+	{
+		var digInstructions = text.Select(DigInstruction.ParseTwo)
 		                          .ToList();
 		return new DigPlan(digInstructions);
 	}
