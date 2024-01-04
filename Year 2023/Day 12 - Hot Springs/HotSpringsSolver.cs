@@ -14,10 +14,10 @@ public sealed class HotSpringsSolver : ISolver
 
 		_springRecordsUnfolded = _springRecordsFolded.Select(record =>
 		{
-			string damagedRecord = string.Join('?', Enumerable.Repeat(record.DamagedRecord, 5));
-			int[] springGroups = Enumerable.Repeat(record.SpringGroups, 5)
-			                               .SelectMany(o => o)
-			                               .ToArray();
+			var damagedRecord = string.Join('?', Enumerable.Repeat(record.DamagedRecord, 5));
+			var springGroups = Enumerable.Repeat(record.SpringGroups, 5)
+			                             .SelectMany(o => o)
+			                             .ToArray();
 			return new SpringRecord(damagedRecord, springGroups);
 		});
 	}

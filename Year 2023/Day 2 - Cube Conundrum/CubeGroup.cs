@@ -6,7 +6,7 @@ internal partial class CubeGroup
 {
 	public CubeGroup(string group)
 	{
-		Match match = CubeGroupMatch()
+		var match = CubeGroupMatch()
 			.Match(group);
 		Size = int.Parse(match.Groups["size"].Value);
 		Color = match.Groups["color"].Value switch

@@ -11,7 +11,7 @@ public class GridTests
 		//Arrange
 
 		//Act
-		Func<Grid> initialize = () => new Grid(-1, 0);
+		var initialize = () => new Grid<char>(-1, 0);
 
 		//Assert
 		initialize.Should()
@@ -24,7 +24,7 @@ public class GridTests
 		//Arrange
 
 		//Act
-		Func<Grid> initialize = () => new Grid(0, -1);
+		var initialize = () => new Grid<char>(0, -1);
 
 		//Assert
 		initialize.Should()
@@ -35,11 +35,11 @@ public class GridTests
 	public void Constructor_GivenDimensions_InitializeDimensions()
 	{
 		//Arrange
-		int width = 1;
-		int height = 2;
+		var width = 1;
+		var height = 2;
 
 		//Act
-		var grid = new Grid(width, height);
+		var grid = new Grid<char>(width, height);
 
 		//Assert
 		grid.Width.Should()
@@ -52,10 +52,16 @@ public class GridTests
 	public void Constructor_GivenValidText_InitializesGrid()
 	{
 		//Arrange
-		string[] text = { "ab", "cd" };
+		string[] text = ["ab", "cd"];
 
 		//Act
-		var grid = new Grid(text);
+		var grid = new Grid<char>(2, 2)
+		{
+			[0, 0] = 'a',
+			[1, 0] = 'b',
+			[0, 1] = 'c',
+			[1, 1] = 'd'
+		};
 
 		//Assert
 		using var scope = new AssertionScope();
@@ -72,28 +78,19 @@ public class GridTests
 	}
 
 	[Fact]
-	public void Constructor_GivenInvalidText_ThrowsArgumentOutOfRangeException()
-	{
-		//Arrange
-		string[] text = { "ab", "c" };
-
-		//Act
-		Func<Grid> initialize = () => new Grid(text);
-
-		//Assert
-		initialize.Should()
-		          .Throw<ArgumentOutOfRangeException>();
-	}
-
-	[Fact]
 	public void Indexer_SetValue_ShouldChangeValue()
 	{
 		//Arrange
-		string[] originalText = { "ab", "cd" };
-		string[] changedText = { "ab", "ce" };
+		string[] changedText = ["ab", "ce"];
+		var grid = new Grid<char>(2, 2)
+		{
+			[0, 0] = 'a',
+			[1, 0] = 'b',
+			[0, 1] = 'c',
+			[1, 1] = 'd'
+		};
 
 		//Act
-		var grid = new Grid(originalText);
 		grid[1, 1] = 'e';
 
 		//Assert
@@ -114,11 +111,16 @@ public class GridTests
 	public void Transpose_ShouldCorrectlyTransposeGrid()
 	{
 		//Arrange
-		string[] text = { "ab", "cd" };
-		var grid = new Grid(text);
+		var grid = new Grid<char>(2, 2)
+		{
+			[0, 0] = 'a',
+			[1, 0] = 'b',
+			[0, 1] = 'c',
+			[1, 1] = 'd'
+		};
 
 		//Act
-		Grid transpose = grid.Transpose();
+		var transpose = grid.Transpose();
 
 		//Assert
 		using var scope = new AssertionScope();

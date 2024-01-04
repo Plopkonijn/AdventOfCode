@@ -9,7 +9,10 @@ internal class Contraption
 		if (tiles.Select(row => row.Length)
 		         .Distinct()
 		         .Count() > 1)
+		{
 			throw new ArgumentException();
+		}
+
 		_tiles = tiles;
 	}
 
@@ -21,20 +24,25 @@ internal class Contraption
 	public int CountEnergizedTiles(Beam startBeam)
 	{
 		if (IsOutsideBounds(startBeam))
+		{
 			throw new ArgumentException();
+		}
+
 		var energizedTiles = new HashSet<(int x, int y, int dx, int dy)>
 			{ (startBeam.PositionX, startBeam.PositionY, startBeam.DirectionX, startBeam.DirectionY) };
 		var beams = new HashSet<Beam> { startBeam };
 		while (beams.Count > 0)
 		{
-			Beam[] newBeams = UpdateBeams(beams)
+			var newBeams = UpdateBeams(beams)
 				.ToArray();
 			beams.UnionWith(newBeams);
 			energizedTiles.UnionWith(beams.Select(beam => (beam.PositionX, beam.PositionY, beam.DirectionX, beam.DirectionY)));
-			List<Beam> outsideBounds = beams.Where(IsOutsideBounds)
-			                                .ToList();
+			var outsideBounds = beams.Where(IsOutsideBounds)
+			                         .ToList();
 			if (outsideBounds.Count > 0)
+			{
 				throw new InvalidOperationException();
+			}
 		}
 
 		return energizedTiles.Select(tuple => (tuple.x, tuple.y))
@@ -94,13 +102,13 @@ internal class Contraption
 
 	private IEnumerable<Beam> GetPossibleBeams()
 	{
-		for (int i = 0; i < Width; i++)
+		for (var i = 0; i < Width; i++)
 		{
 			yield return new Beam(i, 0, 0, 1);
 			yield return new Beam(i, Height - 1, 0, -1);
 		}
 
-		for (int i = 0; i < Height; i++)
+		for (var i = 0; i < Height; i++)
 		{
 			yield return new Beam(0, i, 1, 0);
 			yield return new Beam(Width - 1, i, -1, 0);

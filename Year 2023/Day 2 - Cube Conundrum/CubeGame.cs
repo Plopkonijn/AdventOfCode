@@ -8,7 +8,7 @@ internal partial class CubeGame
 
 	public CubeGame(string arg)
 	{
-		Match match = GameRegex()
+		var match = GameRegex()
 			.Match(arg);
 		Id = int.Parse(match.Groups["id"].Value);
 		_cubeSets = match.Groups["sets"]
@@ -25,9 +25,9 @@ internal partial class CubeGame
 
 	public int GetPower()
 	{
-		int minimumRed = GetMinimumForColor(CubeColor.Red);
-		int minimumGreen = GetMinimumForColor(CubeColor.Green);
-		int minimumBlue = GetMinimumForColor(CubeColor.Blue);
+		var minimumRed = GetMinimumForColor(CubeColor.Red);
+		var minimumGreen = GetMinimumForColor(CubeColor.Green);
+		var minimumBlue = GetMinimumForColor(CubeColor.Blue);
 		return minimumRed * minimumGreen * minimumBlue;
 	}
 

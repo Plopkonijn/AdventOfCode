@@ -9,7 +9,7 @@ internal class Solver
 	public Solver(Map map)
 	{
 		_map = map;
-		(int x, int y) startPosition = map.GetStartPosition();
+		var startPosition = map.GetStartPosition();
 		_queue = new Queue<(int x, int y)>();
 		_distances = new Dictionary<(int x, int y), long>
 		{
@@ -46,11 +46,11 @@ internal class Solver
 
 	public long GertFurthestDistance()
 	{
-		while (_queue.TryDequeue(out (int x, int y) position))
+		while (_queue.TryDequeue(out var position))
 		{
-			(int x, int y) = position;
-			long newDistance = _distances[position] + 1;
-			char tile = _map.GetTile(position);
+			(var x, var y) = position;
+			var newDistance = _distances[position] + 1;
+			var tile = _map.GetTile(position);
 			DiscoverNeighbourPositions(tile, x, y, newDistance);
 		}
 
@@ -93,62 +93,80 @@ internal class Solver
 	private void DiscoverPosition((int x, int) position, long newDistance)
 	{
 		if (_distances.TryAdd(position, newDistance))
+		{
 			_queue.Enqueue(position);
+		}
 	}
 
 	public ICollection<(int x, int y)> GetNumberOfEnclosedTiles()
 	{
-		(int x, int y)[] orderedPositions = _distances.Keys.OrderBy(position => position.x)
-		                                              .ThenBy(position => position.y)
-		                                              .Take(2)
-		                                              .ToArray();
+		var orderedPositions = _distances.Keys.OrderBy(position => position.x)
+		                                 .ThenBy(position => position.y)
+		                                 .Take(2)
+		                                 .ToArray();
 
-		(int x, int y) startPosition = orderedPositions.First();
-		(int x, int y) previousPosition = startPosition;
-		(int x, int y) currentPosition = orderedPositions.Last();
+		var startPosition = orderedPositions.First();
+		var previousPosition = startPosition;
+		var currentPosition = orderedPositions.Last();
 		var innerPositions = new HashSet<(int x, int y)>();
 
 		while (currentPosition != startPosition)
 		{
 			// (int x, int y) innerPosition = GetInnerPosition(previousPosition, currentPosition);
-			IEnumerable<(int x, int y)> foundInnerPositions = GetInnerPositions(previousPosition, currentPosition);
-			foreach ((int x, int y) innerPosition in foundInnerPositions)
+			var foundInnerPositions = GetInnerPositions(previousPosition, currentPosition);
+			foreach (var innerPosition in foundInnerPositions)
+			{
 				if (!_distances.ContainsKey(innerPosition))
+				{
 					innerPositions.Add(innerPosition);
+				}
+			}
 
-			(int x, int y) nextPosition = GetNextPosition(previousPosition, currentPosition);
+			var nextPosition = GetNextPosition(previousPosition, currentPosition);
 			previousPosition = currentPosition;
 			currentPosition = nextPosition;
 		}
 
-		(int x, int y) lastInnerPosition = GetInnerPosition(previousPosition, currentPosition);
+		var lastInnerPosition = GetInnerPosition(previousPosition, currentPosition);
 		if (!_distances.ContainsKey(lastInnerPosition))
+		{
 			innerPositions.Add(lastInnerPosition);
+		}
 
 		var queue = new Queue<(int x, int y)>(innerPositions);
-		while (queue.TryDequeue(out (int x, int y) position))
-			for (int x = position.x - 1; x <= position.x + 1; x++)
+		while (queue.TryDequeue(out var position))
+		{
+			for (var x = position.x - 1; x <= position.x + 1; x++)
 			{
 				if (!_map.IsInXRange(x))
+				{
 					continue;
-				for (int y = position.y - 1; y <= position.y + 1; y++)
+				}
+
+				for (var y = position.y - 1; y <= position.y + 1; y++)
 				{
 					if (!_map.IsInYRange(y))
+					{
 						continue;
-					(int x, int y) neighbourPosition = (x, y);
+					}
+
+					var neighbourPosition = (x, y);
 					if (!_distances.ContainsKey(neighbourPosition) && _map.IsInRange(neighbourPosition) && innerPositions.Add(neighbourPosition))
+					{
 						queue.Enqueue(neighbourPosition);
+					}
 				}
 			}
+		}
 
 		return innerPositions;
 	}
 
 	private IEnumerable<(int x, int y)> GetInnerPositions((int x, int y) previousPosition, (int x, int y) currentPosition)
 	{
-		(int x, int y) = GetInnerPosition(previousPosition, currentPosition);
-		char tile = _map.GetTile(currentPosition);
-		(int dx, int dy) = GetDirection(previousPosition, currentPosition);
+		(var x, var y) = GetInnerPosition(previousPosition, currentPosition);
+		var tile = _map.GetTile(currentPosition);
+		(var dx, var dy) = GetDirection(previousPosition, currentPosition);
 		switch (tile, (dx, dy))
 		{
 			case ('-', _):
@@ -179,21 +197,21 @@ internal class Solver
 
 	private (int x, int y) GetInnerPosition((int x, int y) previousPosition, (int x, int y) currentPosition)
 	{
-		(int dx, int dy) = GetDirection(previousPosition, currentPosition);
+		(var dx, var dy) = GetDirection(previousPosition, currentPosition);
 		return (currentPosition.x + dy, currentPosition.y - dx);
 	}
 
 	private static (int x, int y) GetDirection((int x, int y) previousPosition, (int x, int y) currentPosition)
 	{
-		int dx = currentPosition.x - previousPosition.x;
-		int dy = currentPosition.y - previousPosition.y;
+		var dx = currentPosition.x - previousPosition.x;
+		var dy = currentPosition.y - previousPosition.y;
 		return (dx, dy);
 	}
 
 	private (int x, int y) GetNextPosition((int x, int y) previousPosition, (int x, int y) currentPosition)
 	{
-		char tile = _map.GetTile(currentPosition);
-		(int x, int y) direction = GetDirection(previousPosition, currentPosition);
+		var tile = _map.GetTile(currentPosition);
+		var direction = GetDirection(previousPosition, currentPosition);
 		switch (tile, direction)
 		{
 			case ('-', _):
@@ -218,22 +236,22 @@ internal class Solver
 
 	private (int x, int y) MoveStraight((int x, int y) position, (int x, int y) direction)
 	{
-		(int x, int y) = position;
-		(int dx, int dy) = direction;
+		(var x, var y) = position;
+		(var dx, var dy) = direction;
 		return (x + dx, y + dy);
 	}
 
 	private (int x, int y) MoveLeft((int x, int y) position, (int x, int y) direction)
 	{
-		(int x, int y) = position;
-		(int dx, int dy) = direction;
+		(var x, var y) = position;
+		(var dx, var dy) = direction;
 		return (x + dy, y - dx);
 	}
 
 	private (int x, int y) MoveRight((int x, int y) position, (int x, int y) direction)
 	{
-		(int x, int y) = position;
-		(int dx, int dy) = direction;
+		(var x, var y) = position;
+		(var dx, var dy) = direction;
 		return (x - dy, y + dx);
 	}
 }

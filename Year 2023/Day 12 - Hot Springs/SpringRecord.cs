@@ -4,19 +4,21 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 {
 	public static SpringRecord Parse(string text)
 	{
-		string damagedRecord = Regex.Match(text, "[.#?]+")
-		                            .Value;
-		int[] springGroups = Regex.Matches(text, @"\d+")
-		                          .Select(match => int.Parse(match.Value))
-		                          .ToArray();
+		var damagedRecord = Regex.Match(text, "[.#?]+")
+		                         .Value;
+		var springGroups = Regex.Matches(text, @"\d+")
+		                        .Select(match => int.Parse(match.Value))
+		                        .ToArray();
 		return new SpringRecord(damagedRecord, springGroups);
 	}
 
 	private long CountPossibleArrangements(Range stringRange, Range groupRange,
 		Dictionary<(Range stringRange, Range groupRange), long> cachedArrangements)
 	{
-		if (cachedArrangements.TryGetValue((stringRange, groupRange), out long possibleArrangements))
+		if (cachedArrangements.TryGetValue((stringRange, groupRange), out var possibleArrangements))
+		{
 			return possibleArrangements;
+		}
 
 		if (!IsRemainingEnough(stringRange, groupRange))
 		{
@@ -31,9 +33,9 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 			return possibleArrangements;
 		}
 
-		string currentString = DamagedRecord[stringRange];
-		int currentGroup = SpringGroups[groupRange.Start];
-		string window = currentString[..currentGroup];
+		var currentString = DamagedRecord[stringRange];
+		var currentGroup = SpringGroups[groupRange.Start];
+		var window = currentString[..currentGroup];
 
 		char? prefix = stringRange.Start.Value - 1 >= 0 ? DamagedRecord[stringRange.Start.Value - 1] : null;
 		char? suffix = stringRange.Start.Value + currentGroup < DamagedRecord.Length ? DamagedRecord[stringRange.Start.Value + currentGroup] : null;
@@ -56,8 +58,8 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 
 	private bool IsRemainingEnough(Range stringRange, Range groupRange)
 	{
-		int stringLength = stringRange.End.Value - stringRange.Start.Value;
-		int groupLength = SpringGroups[groupRange]
+		var stringLength = stringRange.End.Value - stringRange.Start.Value;
+		var groupLength = SpringGroups[groupRange]
 			.Sum(i => i + 1) - 1;
 		return groupLength <= stringLength;
 	}
@@ -72,14 +74,24 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 	private bool Ismatch(Range stringRange, Index groupIndex)
 	{
 		if (!IsPrefixMatch(stringRange.Start.Value - 1) || !IsSuffixMatch(stringRange.Start.Value + SpringGroups[groupIndex]))
+		{
 			return false;
-		ReadOnlySpan<char> currentString = DamagedRecord.AsSpan(stringRange);
+		}
+
+		var currentString = DamagedRecord.AsSpan(stringRange);
 		if (SpringGroups[groupIndex] > currentString.Length)
+		{
 			return false;
-		ReadOnlySpan<char> currentWindow = currentString.Slice(0, SpringGroups[groupIndex]);
-		foreach (char c in currentWindow)
+		}
+
+		var currentWindow = currentString.Slice(0, SpringGroups[groupIndex]);
+		foreach (var c in currentWindow)
+		{
 			if (c is not ('#' or '?'))
+			{
 				return false;
+			}
+		}
 
 		return true;
 	}
@@ -96,7 +108,7 @@ public record SpringRecord(string DamagedRecord, int[] SpringGroups)
 
 	public long CountPossibleArrangements()
 	{
-		long result = CountPossibleArrangements(..DamagedRecord.Length, ..SpringGroups.Length,
+		var result = CountPossibleArrangements(..DamagedRecord.Length, ..SpringGroups.Length,
 			new Dictionary<(Range stringRange, Range groupRange), long>());
 		return result;
 	}

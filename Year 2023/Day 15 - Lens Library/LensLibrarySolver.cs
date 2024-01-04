@@ -21,9 +21,9 @@ public class LensLibrarySolver : ISolver
 
 	public long PartTwo()
 	{
-		List<(string label, int focalLength)>[] boxes = Enumerable.Range(0, 256)
-		                                                          .Select(_ => new List<(string label, int focalLength)>())
-		                                                          .ToArray();
+		var boxes = Enumerable.Range(0, 256)
+		                      .Select(_ => new List<(string label, int focalLength)>())
+		                      .ToArray();
 		PerformInitializationSteps(boxes);
 		return CalculateFocusingPower(boxes);
 	}
@@ -38,19 +38,21 @@ public class LensLibrarySolver : ISolver
 
 	private void PerformInitializationSteps(List<(string label, int focalLength)>[] boxes)
 	{
-		foreach (string initializationStep in _initializationSequence)
+		foreach (var initializationStep in _initializationSequence)
 		{
-			Match match = Regex.Match(initializationStep, @"(?<label>\w+)(-|(=(?<focalLength>\d+)))");
-			string label = match.Groups["label"].Value;
-			long hash = Hash(label);
-			List<(string label, int focalLength)> box = boxes[hash];
-			int index = box
+			var match = Regex.Match(initializationStep, @"(?<label>\w+)(-|(=(?<focalLength>\d+)))");
+			var label = match.Groups["label"].Value;
+			var hash = Hash(label);
+			var box = boxes[hash];
+			var index = box
 				.FindIndex(lens => lens.label == label);
 
-			if (!int.TryParse(match.Groups["focalLength"].Value, out int focalLength))
+			if (!int.TryParse(match.Groups["focalLength"].Value, out var focalLength))
 			{
 				if (index != -1)
+				{
 					box.RemoveAt(index);
+				}
 			}
 			else if (index == -1)
 			{
@@ -65,9 +67,9 @@ public class LensLibrarySolver : ISolver
 
 	private long Hash(string initializationStep)
 	{
-		long hash = 0L;
+		var hash = 0L;
 
-		foreach (char c in initializationStep)
+		foreach (var c in initializationStep)
 		{
 			hash += c;
 			hash *= 17;

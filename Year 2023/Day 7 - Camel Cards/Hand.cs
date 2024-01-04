@@ -5,11 +5,15 @@ internal record Hand(HandType HandType, CardValue[] CardValues, string Text) : I
 	public int CompareTo(Hand? other)
 	{
 		if (other is null)
+		{
 			return Comparer<object>.Default.Compare(this, other);
+		}
 
-		int typeComparison = HandType.CompareTo(other.HandType);
+		var typeComparison = HandType.CompareTo(other.HandType);
 		if (typeComparison != 0)
+		{
 			return typeComparison;
+		}
 
 		return CardValues.Zip(other.CardValues)
 		                 .Select(t => t.First.CompareTo(t.Second))
@@ -18,21 +22,21 @@ internal record Hand(HandType HandType, CardValue[] CardValues, string Text) : I
 
 	public static Hand Parse(string text)
 	{
-		CardValue[] cardValues = text.Select(ParseCard)
-		                             .ToArray();
-		int[] cardGroups = cardValues.GroupBy(card => card, (_, values) => values.Count())
-		                             .OrderDescending()
-		                             .ToArray();
-		HandType type = GetHandType(cardGroups);
+		var cardValues = text.Select(ParseCard)
+		                     .ToArray();
+		var cardGroups = cardValues.GroupBy(card => card, (_, values) => values.Count())
+		                           .OrderDescending()
+		                           .ToArray();
+		var type = GetHandType(cardGroups);
 		return new Hand(type, cardValues, text);
 	}
 
 	public static Hand ConvertToJokerHandType(Hand hand)
 	{
-		CardValue[] cardValues = hand.CardValues
-		                             .Select(cardValue => cardValue == CardValue.Jack ? CardValue.Joker : cardValue)
-		                             .ToArray();
-		int jokers = cardValues.Count(cardValue => cardValue == CardValue.Joker);
+		var cardValues = hand.CardValues
+		                     .Select(cardValue => cardValue == CardValue.Jack ? CardValue.Joker : cardValue)
+		                     .ToArray();
+		var jokers = cardValues.Count(cardValue => cardValue == CardValue.Joker);
 		return jokers switch
 		{
 			0 or 5 => hand with
@@ -88,7 +92,7 @@ internal record Hand(HandType HandType, CardValue[] CardValues, string Text) : I
 
 	private static HandType GetHandType(int[] cardGroups)
 	{
-		HandType type = cardGroups switch
+		var type = cardGroups switch
 		{
 			[5] => HandType.FiveOfAKind,
 			[4, 1] => HandType.FourOfAKind,

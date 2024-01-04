@@ -6,13 +6,13 @@ internal static partial class ParserOne
 {
 	public static IEnumerable<Record> ParseRecords(string[] text)
 	{
-		IEnumerable<int> times = ParseTimes(text[0]);
-		IEnumerable<int> distances = ParseDistances(text[1]);
+		var times = ParseTimes(text[0]);
+		var distances = ParseDistances(text[1]);
 
 		return times.Zip(distances)
 		            .Select(tuple =>
 		            {
-			            (int time, int distance) = tuple;
+			            (var time, var distance) = tuple;
 			            return new Record(time, distance);
 		            });
 	}
