@@ -13,14 +13,14 @@ public sealed class WaitForItSolver : ISolver
 
 	public long PartOne()
 	{
-		IEnumerable<Record> records = ParserOne.ParseRecords(_args);
+		var records = ParserOne.ParseRecords(_args);
 		return records.Select(record => record.GetNumberOfWaysToBeat())
 		              .Aggregate((x, y) => x * y);
 	}
 
 	public long PartTwo()
 	{
-		Record record = ParserTwo.ParseRecord(_args);
+		var record = ParserTwo.ParseRecord(_args);
 		return record.GetNumberOfWaysToBeat();
 	}
 }

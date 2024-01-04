@@ -16,12 +16,14 @@ internal class Map
 
 	public (int x, int y) GetStartPosition()
 	{
-		for (int y = 0; y < _map.Length; y++)
+		for (var y = 0; y < _map.Length; y++)
 		{
-			int x = _map[y]
+			var x = _map[y]
 				.IndexOf('S');
 			if (x != -1)
+			{
 				return (x, y);
+			}
 		}
 
 		throw new InvalidOperationException();

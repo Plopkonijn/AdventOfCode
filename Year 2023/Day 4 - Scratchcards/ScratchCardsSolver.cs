@@ -19,16 +19,16 @@ public sealed class ScratchCardsSolver : ISolver
 
 	public long PartTwo()
 	{
-		Dictionary<ScratchCard, int> numberOfScratchCards = _scratchCards.ToDictionary(card => card, _ => 1);
-		for (int i = 0; i < _scratchCards.Count; i++)
+		var numberOfScratchCards = _scratchCards.ToDictionary(card => card, _ => 1);
+		for (var i = 0; i < _scratchCards.Count; i++)
 		{
-			ScratchCard scratchCard = _scratchCards[i];
-			int copies = numberOfScratchCards[scratchCard];
-			int matchingCount = scratchCard.GetMatchingNumberCount();
+			var scratchCard = _scratchCards[i];
+			var copies = numberOfScratchCards[scratchCard];
+			var matchingCount = scratchCard.GetMatchingNumberCount();
 
-			for (int j = i + 1; j <= Math.Min(i + matchingCount, _scratchCards.Count); j++)
+			for (var j = i + 1; j <= Math.Min(i + matchingCount, _scratchCards.Count); j++)
 			{
-				ScratchCard copy = _scratchCards[j];
+				var copy = _scratchCards[j];
 				numberOfScratchCards[copy] += copies;
 			}
 		}

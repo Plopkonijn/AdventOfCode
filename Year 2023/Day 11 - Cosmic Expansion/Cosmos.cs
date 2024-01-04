@@ -21,15 +21,15 @@ internal class Cosmos
 
 	public Cosmos Expand()
 	{
-		string[] newCosmosText = CreateExpandedCosmosText();
+		var newCosmosText = CreateExpandedCosmosText();
 		return new Cosmos(newCosmosText);
 	}
 
 	private string[] CreateExpandedCosmosText()
 	{
-		int[] emptyRows = GetEmptyRowIndices();
-		int[] emptyColumns = GetEmptyColumnIndices();
-		string[] newCosmosText = CreateExpandedRows(emptyColumns, emptyRows);
+		var emptyRows = GetEmptyRowIndices();
+		var emptyColumns = GetEmptyColumnIndices();
+		var newCosmosText = CreateExpandedRows(emptyColumns, emptyRows);
 		Debug.Assert(newCosmosText.Select(s => s.Length)
 		                          .Distinct()
 		                          .Count() == 1);
@@ -38,10 +38,10 @@ internal class Cosmos
 
 	private string[] CreateExpandedRows(int[] emptyColumns, int[] emptyRows)
 	{
-		string[] newCosmosText = new string[Height + emptyRows.Length];
-		string emptyRow = string.Concat(Enumerable.Repeat('.', Width + emptyColumns.Length));
-		int rowOffset = 0;
-		for (int i = 0; i < Height; i++)
+		var newCosmosText = new string[Height + emptyRows.Length];
+		var emptyRow = string.Concat(Enumerable.Repeat('.', Width + emptyColumns.Length));
+		var rowOffset = 0;
+		for (var i = 0; i < Height; i++)
 		{
 			if (rowOffset < emptyRows.Length && emptyRows[rowOffset] == i)
 			{
@@ -51,7 +51,7 @@ internal class Cosmos
 				continue;
 			}
 
-			StringBuilder stringBuilder = CreateExpandedRow(emptyColumns, i);
+			var stringBuilder = CreateExpandedRow(emptyColumns, i);
 
 			newCosmosText[i + rowOffset] = stringBuilder.ToString();
 		}
@@ -62,8 +62,8 @@ internal class Cosmos
 	private StringBuilder CreateExpandedRow(int[] emptyColumns, int i)
 	{
 		var stringBuilder = new StringBuilder(Width + emptyColumns.Length);
-		int columnOffset = 0;
-		for (int j = 0; j < Width; j++)
+		var columnOffset = 0;
+		for (var j = 0; j < Width; j++)
 		{
 			if (columnOffset < emptyColumns.Length && emptyColumns[columnOffset] == j)
 			{

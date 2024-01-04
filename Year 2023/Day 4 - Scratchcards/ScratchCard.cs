@@ -15,9 +15,12 @@ internal partial class ScratchCard
 
 	public int GetPoints()
 	{
-		int count = GetMatchingNumberCount();
+		var count = GetMatchingNumberCount();
 		if (count == 0)
+		{
 			return 0;
+		}
+
 		return (int)Math.Pow(2, count - 1);
 	}
 
@@ -35,7 +38,7 @@ internal partial class ScratchCard
 
 	private static int ParseId(string line)
 	{
-		Match match = Regex.Match(line, @"\d+(?=:)");
+		var match = Regex.Match(line, @"\d+(?=:)");
 		return int.Parse(match.Value);
 	}
 

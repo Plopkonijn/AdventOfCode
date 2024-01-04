@@ -11,10 +11,10 @@ internal partial record Entry(Hand Hand, int Bid) : IComparable<Entry>
 
 	public static Entry Parse(string text)
 	{
-		Match match = EntryRegex()
+		var match = EntryRegex()
 			.Match(text);
-		Hand hand = Hand.Parse(match.Groups["hand"].Value);
-		int bid = int.Parse(match.Groups["bid"].Value);
+		var hand = Hand.Parse(match.Groups["hand"].Value);
+		var bid = int.Parse(match.Groups["bid"].Value);
 		return new Entry(hand, bid);
 	}
 

@@ -8,13 +8,17 @@ internal class Program
 {
 	private static void Main(string[] args)
 	{
-		if (!TryParseArguments(args, out ProblemSelection? problemSelection))
+		if (!TryParseArguments(args, out var problemSelection))
+		{
 			if (!TrySelectProblem(args, out problemSelection))
+			{
 				return;
+			}
+		}
 
 		Console.WriteLine($"You've selected : {problemSelection}");
 
-		long answer = SolveProblem(problemSelection);
+		var answer = SolveProblem(problemSelection);
 		Console.WriteLine(answer);
 	}
 
@@ -25,7 +29,8 @@ internal class Program
 		{
 			int? year = default, day = default, part = default;
 			string? fileName = default;
-			for (int i = 0; i < arguments.Length; i += 2)
+			for (var i = 0; i < arguments.Length; i += 2)
+			{
 				switch (arguments[i])
 				{
 					case "-y":
@@ -41,9 +46,13 @@ internal class Program
 						fileName = arguments[i + 1];
 						break;
 				}
+			}
 
 			if (year is not { } y || day is not { } d || part is not { } p || fileName is not { } f)
+			{
 				return false;
+			}
+
 			problemSelection = new ProblemSelection(y, d, p, f);
 			return true;
 		}
@@ -55,8 +64,8 @@ internal class Program
 
 	private static long SolveProblem(ProblemSelection problemSelection)
 	{
-		string[] inputArgs = GetInputArguments(problemSelection);
-		ISolver solver = GetSolver(problemSelection, inputArgs);
+		var inputArgs = GetInputArguments(problemSelection);
+		var solver = GetSolver(problemSelection, inputArgs);
 		return problemSelection.Part switch
 		{
 			1 => solver.PartOne(),
@@ -67,10 +76,10 @@ internal class Program
 
 	private static ISolver GetSolver(ProblemSelection problemSelection, string[] inputArgs)
 	{
-		Type solverInterface = typeof(ISolver);
-		Assembly assembly = Assembly.Load($"Year{problemSelection.Year}.Day{problemSelection.Day}");
-		Type solverType = assembly.GetTypes()
-		                          .Single(type => type.IsAssignableTo(solverInterface));
+		var solverInterface = typeof(ISolver);
+		var assembly = Assembly.Load($"Year{problemSelection.Year}.Day{problemSelection.Day}");
+		var solverType = assembly.GetTypes()
+		                         .Single(type => type.IsAssignableTo(solverInterface));
 		return (ISolver)solverType.GetConstructors()
 		                          .First()
 		                          .Invoke([inputArgs]);
@@ -78,7 +87,7 @@ internal class Program
 
 	private static string[] GetInputArguments(ProblemSelection problemSelection)
 	{
-		string[] inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\{problemSelection.FileName}");
+		var inputArgs = File.ReadAllLines($"Year{problemSelection.Year}.Day{problemSelection.Day}\\{problemSelection.FileName}");
 		return inputArgs;
 	}
 
@@ -86,26 +95,36 @@ internal class Program
 	{
 		problemSelection = null;
 		Console.Write("Year: ");
-		if (!int.TryParse(Console.ReadLine(), out int year))
+		if (!int.TryParse(Console.ReadLine(), out var year))
+		{
 			return false;
+		}
 
 		Console.Write("Day: ");
-		if (!int.TryParse(Console.ReadLine(), out int day))
+		if (!int.TryParse(Console.ReadLine(), out var day))
+		{
 			return false;
+		}
 
 		Console.Write("Part: ");
-		if (!int.TryParse(Console.ReadLine(), out int part))
+		if (!int.TryParse(Console.ReadLine(), out var part))
+		{
 			return false;
+		}
 
 		Console.WriteLine("File: ");
-		string directory = Path.Combine(Directory.GetCurrentDirectory(), $"Year{year}.Day{day}");
-		string[]? files = Directory.GetFiles(directory);
-		for (int i = 0; i < files.Length; i++)
+		var directory = Path.Combine(Directory.GetCurrentDirectory(), $"Year{year}.Day{day}");
+		var files = Directory.GetFiles(directory);
+		for (var i = 0; i < files.Length; i++)
+		{
 			Console.WriteLine($"{i}\t:{files[i]}");
+		}
 
-		string? selectedFile = Console.ReadLine();
+		var selectedFile = Console.ReadLine();
 		if (!files.Contains(selectedFile))
+		{
 			return false;
+		}
 
 		problemSelection = new ProblemSelection(year, day, part, selectedFile);
 		return true;

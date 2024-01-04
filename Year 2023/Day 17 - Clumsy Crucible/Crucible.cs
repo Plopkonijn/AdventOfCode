@@ -1,3 +1,5 @@
+using Common;
+
 namespace Year2023.Day17;
 
 internal readonly struct Crucible : ICrucible<Crucible>
@@ -35,7 +37,7 @@ internal readonly struct Crucible : ICrucible<Crucible>
 			yield return new Crucible(position, Direction, StepsInCurrentDirection + 1);
 		}
 
-		Direction direction = Direction.TurnLeft();
+		var direction = Direction.TurnLeft();
 		position = Position.Move(direction);
 		yield return new Crucible(position, direction);
 

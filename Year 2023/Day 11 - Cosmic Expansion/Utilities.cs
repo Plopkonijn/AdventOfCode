@@ -4,30 +4,32 @@ internal static class Utilities
 {
 	private static IEnumerable<(int, int)> GetGalaxies(this Cosmos cosmos)
 	{
-		for (int x = 0; x < cosmos.Width; x++)
-		for (int y = 0; y < cosmos.Height; y++)
+		for (var x = 0; x < cosmos.Width; x++)
+		for (var y = 0; y < cosmos.Height; y++)
 		{
-			char tile = cosmos[x, y];
+			var tile = cosmos[x, y];
 			if (IsGalaxy(tile))
+			{
 				yield return (x, y);
+			}
 		}
 	}
 
 	public static long SumOfGalaxyDistances(this Cosmos cosmos, int expansion)
 	{
-		int[] emptyRows = cosmos.GetEmptyRowIndices();
-		int[] emptyColumns = cosmos.GetEmptyColumnIndices();
-		List<(int, int)> galaxyPositions = cosmos.GetSortedGalaxyPositions();
+		var emptyRows = cosmos.GetEmptyRowIndices();
+		var emptyColumns = cosmos.GetEmptyColumnIndices();
+		var galaxyPositions = cosmos.GetSortedGalaxyPositions();
 		long total = 0;
 		foreach ((int x, int y) position1 in galaxyPositions)
 		foreach ((int x, int y) position2 in galaxyPositions.TakeWhile(p => p != position1))
 		{
-			long columnOffset = GetOffset(emptyColumns, position1.x, position2.x);
-			long rowOffset = GetOffset(emptyRows, position1.y, position2.y);
+			var columnOffset = GetOffset(emptyColumns, position1.x, position2.x);
+			var rowOffset = GetOffset(emptyRows, position1.y, position2.y);
 			long dx = Math.Abs(position2.x - position1.x);
 			long dy = Math.Abs(position2.y - position1.y);
-			long distance = dx + dy;
-			long expansionDistance = (columnOffset + rowOffset) * (expansion - 1);
+			var distance = dx + dy;
+			var expansionDistance = (columnOffset + rowOffset) * (expansion - 1);
 			total += distance + expansionDistance;
 		}
 
@@ -36,8 +38,8 @@ internal static class Utilities
 
 	private static long GetOffset(int[] indices, int i1, int i2)
 	{
-		int iMin = Math.Min(i1, i2);
-		int iMax = Math.Max(i1, i2);
+		var iMin = Math.Min(i1, i2);
+		var iMax = Math.Max(i1, i2);
 
 		return indices.LongCount(i => iMin < i && i < iMax);
 	}

@@ -31,11 +31,11 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 	private List<ValueRange> ParseSeedRanges()
 	{
 		var seedRanges = new List<ValueRange>();
-		int i = 0;
+		var i = 0;
 		while (i < _seeds.Count)
 		{
-			long start = _seeds[i++];
-			long length = _seeds[i++];
+			var start = _seeds[i++];
+			var length = _seeds[i++];
 			seedRanges.Add(new ValueRange(start, length));
 		}
 
@@ -53,13 +53,13 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 	private List<Map> ParseMaps(string[] args)
 	{
 		var maps = new List<Map>();
-		for (int i = 2; i < args.Length; i++)
+		for (var i = 2; i < args.Length; i++)
 		{
-			Match mapTitleMatch = MapTitleRegex()
+			var mapTitleMatch = MapTitleRegex()
 				.Match(args[i]);
-			string sourceName = mapTitleMatch.Groups["source"].Value;
-			string destinationName = mapTitleMatch.Groups["destination"].Value;
-			List<MapEntry> entries = ParseMapEntries(args, ref i);
+			var sourceName = mapTitleMatch.Groups["source"].Value;
+			var destinationName = mapTitleMatch.Groups["destination"].Value;
+			var entries = ParseMapEntries(args, ref i);
 			entries.Sort((a, b) => a.SourceRange.Start.CompareTo(b.SourceRange.Start));
 			maps.Add(new Map
 			{
@@ -77,10 +77,13 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 		var entries = new List<MapEntry>();
 		for (i++; i < args.Length; i++)
 		{
-			Match match = MapEntryRegex()
+			var match = MapEntryRegex()
 				.Match(args[i]);
 			if (!match.Success)
+			{
 				break;
+			}
+
 			entries.Add(new MapEntry(new ValueRange
 			{
 				Start = long.Parse(match.Groups["source"].Value),
@@ -93,16 +96,19 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 
 	private long GetLocationNumber(ValueRange seedRange)
 	{
-		List<ValueRange> valueRanges = Enumerable.Repeat(seedRange, 1)
-		                                         .ToList();
-		string valueType = "seed";
-		foreach (Map map in _maps)
+		var valueRanges = Enumerable.Repeat(seedRange, 1)
+		                            .ToList();
+		var valueType = "seed";
+		foreach (var map in _maps)
 		{
 			if (map.SourceName != valueType)
+			{
 				throw new InvalidOperationException();
-			List<ValueRange> newValueRanges = valueRanges.SelectMany(map.MapRange)
-			                                             .Distinct()
-			                                             .ToList();
+			}
+
+			var newValueRanges = valueRanges.SelectMany(map.MapRange)
+			                                .Distinct()
+			                                .ToList();
 			valueType = map.DestinationName;
 			valueRanges = newValueRanges;
 		}
@@ -112,12 +118,15 @@ public sealed partial class IfYouGiveASeedAFertilizerSolver : ISolver
 
 	private long GetLocationNumber(long seed)
 	{
-		long value = seed;
-		string valueType = "seed";
-		foreach (Map map in _maps)
+		var value = seed;
+		var valueType = "seed";
+		foreach (var map in _maps)
 		{
 			if (map.SourceName != valueType)
+			{
 				throw new InvalidOperationException();
+			}
+
 			value = map.MapNumber(value);
 			valueType = map.DestinationName;
 		}

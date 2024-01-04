@@ -1,3 +1,5 @@
+using Common;
+
 namespace Year2023.Day17;
 
 internal interface ICrucible<out TCrucible>

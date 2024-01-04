@@ -11,24 +11,33 @@ internal record Record(long Time, long Distance)
 		 * t = (T +- Sqrt(T^2-4S)) / 2
 		 *
 		 */
-		long discriminant = Time * Time - 4 * Distance;
+		var discriminant = Time * Time - 4 * Distance;
 		if (discriminant < 0)
+		{
 			return 0;
-		double minimumHoldTime = (Time - Math.Sqrt(discriminant)) / 2;
-		double maximumHoldTime = (Time + Math.Sqrt(discriminant)) / 2;
+		}
+
+		var minimumHoldTime = (Time - Math.Sqrt(discriminant)) / 2;
+		var maximumHoldTime = (Time + Math.Sqrt(discriminant)) / 2;
 
 		if (maximumHoldTime < minimumHoldTime)
+		{
 			return 0;
+		}
 
-		double minimumHoldTimeCeiling = Math.Ceiling(minimumHoldTime);
-		double maximumHoldTimeFloor = Math.Floor(maximumHoldTime);
+		var minimumHoldTimeCeiling = Math.Ceiling(minimumHoldTime);
+		var maximumHoldTimeFloor = Math.Floor(maximumHoldTime);
 
-		double numberOfWaysToBeat = maximumHoldTimeFloor - minimumHoldTimeCeiling + 1;
+		var numberOfWaysToBeat = maximumHoldTimeFloor - minimumHoldTimeCeiling + 1;
 		if (minimumHoldTime == minimumHoldTimeCeiling)
+		{
 			numberOfWaysToBeat--;
+		}
 
 		if (maximumHoldTime == maximumHoldTimeFloor)
+		{
 			numberOfWaysToBeat--;
+		}
 
 		return (int)numberOfWaysToBeat;
 	}

@@ -1,4 +1,4 @@
-record struct Location(int X, int Y)
+internal record struct Location(int X, int Y)
 {
 	public Location Move(Direction direction)
 	{
@@ -6,4 +6,4 @@ record struct Location(int X, int Y)
 	}
 }
 
-record struct Direction(int X, int Y);
+internal record struct Direction(int X, int Y);

@@ -12,7 +12,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(0, 1);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -32,7 +32,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(0, 2);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -52,7 +52,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(0, 1);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -71,7 +71,7 @@ public class ValueRangeSplitByTests
 		var range = new ValueRange(0, 1);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(range);
+		(var left, var middle, var right) = range.SplitBy(range);
 
 		//Assert
 
@@ -91,7 +91,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(1, 1);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -111,7 +111,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(0, 3);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -131,7 +131,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(1, 1);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -151,7 +151,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(1, 2);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 
@@ -171,7 +171,7 @@ public class ValueRangeSplitByTests
 		var split = new ValueRange(1, 1);
 
 		//Act
-		(ValueRange left, ValueRange middle, ValueRange right) = range.SplitBy(split);
+		(var left, var middle, var right) = range.SplitBy(split);
 
 		//Assert
 

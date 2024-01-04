@@ -1,3 +1,5 @@
+using Common;
+
 namespace Year2023.Day17;
 
 internal readonly struct UltraCrucible : ICrucible<UltraCrucible>
@@ -36,8 +38,11 @@ internal readonly struct UltraCrucible : ICrucible<UltraCrucible>
 		}
 
 		if (StepsInCurrentDirection < 4)
+		{
 			yield break;
-		Direction direction = Direction.TurnLeft();
+		}
+
+		var direction = Direction.TurnLeft();
 		position = Position.Move(direction);
 		yield return new UltraCrucible(position, direction);
 
