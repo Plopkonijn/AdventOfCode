@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using Application;
+﻿using Application;
 
 namespace Year2023.Day18;
 
@@ -23,11 +22,6 @@ public sealed class LavaductLagoonSolver : ISolver
 		return area;
 	}
 
-	private static long CalculateInteriorArea(IEnumerable<Trench> trenches)
-	{
-		return Math.Abs(trenches.Sum(trench =>(long)trench.Start.X * (long)trench.End.Y - (long)trench.End.X * (long)trench.Start.Y)) / 2L;
-	}
-
 	public long PartTwo()
 	{
 		var trenches = _digPlanTwo.DigTrenches();
@@ -35,5 +29,10 @@ public sealed class LavaductLagoonSolver : ISolver
 		var interiorArea = CalculateInteriorArea(trenches);
 		var area = interiorArea + trenchLength / 2 + 1;
 		return area;
+	}
+
+	private static long CalculateInteriorArea(IEnumerable<Trench> trenches)
+	{
+		return Math.Abs(trenches.Sum(trench => trench.Start.X * (long)trench.End.Y - trench.End.X * (long)trench.Start.Y)) / 2L;
 	}
 }

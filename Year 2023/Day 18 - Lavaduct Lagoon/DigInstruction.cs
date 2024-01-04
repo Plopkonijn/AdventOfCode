@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Text.RegularExpressions;
 using Common;
 
@@ -32,7 +31,7 @@ internal record DigInstruction(DigDirection Direction, int Distance)
 			"3" => DigDirection.Up,
 			_ => throw new ArgumentOutOfRangeException()
 		};
-		var distance = Convert.ToInt32($"0x{match.Groups["distance"].Value}",16);
+		var distance = Convert.ToInt32($"0x{match.Groups["distance"].Value}", 16);
 		return new DigInstruction(direction, distance);
 	}
 

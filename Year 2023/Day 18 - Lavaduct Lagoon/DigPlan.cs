@@ -10,6 +10,7 @@ internal record DigPlan(List<DigInstruction> DigInstructions)
 		                          .ToList();
 		return new DigPlan(digInstructions);
 	}
+
 	public static DigPlan ParseTwo(IEnumerable<string> text)
 	{
 		var digInstructions = text.Select(DigInstruction.ParseTwo)
