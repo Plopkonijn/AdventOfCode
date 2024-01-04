@@ -16,14 +16,14 @@ public sealed class ClumsyCrucibleSolver : ISolver
 	{
 		var startPosition = new Position(0, 0);
 		var endPosition = new Position(_city.Width - 1, _city.Height - 1);
-		return MinimizeHeatLoss(startPosition, endPosition, (p, d) => new Crucible(p, d));
+		return MinimizeHeatLoss(startPosition, endPosition, 0, 3);
 	}
 
 	public long PartTwo()
 	{
 		var startPosition = new Position(0, 0);
 		var endPosition = new Position(_city.Width - 1, _city.Height - 1);
-		return MinimizeHeatLoss(startPosition, endPosition, (p, d) => new UltraCrucible(p, d));
+		return MinimizeHeatLoss(startPosition, endPosition, 4, 10);
 	}
 
 	private int MinimizeHeatLoss(Position startPosition, Position endPosition, int minimumSteps, int maximumSteps)
@@ -39,12 +39,17 @@ public sealed class ClumsyCrucibleSolver : ISolver
 
 		while (queue.TryDequeue(out var crucible, out var heatLoss))
 		{
+			if (heatLosses.TryGetValue(crucible, out var currentHeatLoss) && currentHeatLoss < heatLoss)
+			{
+				continue;
+			}
+
 			if (crucible.position.Equals(endPosition))
 			{
 				return heatLoss;
 			}
 
-			var leftDirection = TurnLeft(crucible.direction);
+			var leftDirection = crucible.direction.TurnLeft();
 			foreach (var (newPosition, newHeatLoss) in GetNewPositions(crucible.position, leftDirection, minimumSteps, maximumSteps))
 			{
 				var alternativeHeatLoss = heatLoss + newHeatLoss;
@@ -57,7 +62,7 @@ public sealed class ClumsyCrucibleSolver : ISolver
 				queue.Enqueue((newPosition, leftDirection), alternativeHeatLoss);
 			}
 
-			var rightDirection = TurnRight(crucible.direction);
+			var rightDirection = crucible.direction.TurnRight();
 			foreach (var (newPosition, newHeatLoss) in GetNewPositions(crucible.position, rightDirection, minimumSteps, maximumSteps))
 			{
 				var alternativeHeatLoss = heatLoss + newHeatLoss;
@@ -79,72 +84,14 @@ public sealed class ClumsyCrucibleSolver : ISolver
 		var heatLoss = 0;
 		for (var steps = 1; steps <= maximumSteps; steps++)
 		{
-			position = new Position(position.X + direction.X, position.Y + direction.Y);
-			if (position.X < 0 || position.X >= _city.Width || position.Y < 0 || position.Y >= _city.Height)
-			{
+			position = position.Move(direction);
+			if (!_city.IsInBounds(position))
 				yield break;
-			}
-
 			heatLoss += _city[position];
 			if (steps >= minimumSteps)
 			{
 				yield return (position, heatLoss);
 			}
 		}
-	}
-
-	private Direction TurnLeft(Direction direction)
-	{
-		return new Direction(direction.Y, direction.X);
-	}
-
-	private Direction TurnRight(Direction direction)
-	{
-		return new Direction(-direction.Y, -direction.X);
-	}
-
-	private int MinimizeHeatLoss<TCrucible>(Position startPosition, Position endPosition, Func<Position, Direction, TCrucible> createCrucible)
-		where TCrucible : ICrucible<TCrucible>, new()
-	{
-		var right = createCrucible(startPosition, new Direction(1, 0));
-		var down = createCrucible(startPosition, new Direction(0, 1));
-
-		var visited = new HashSet<TCrucible> { right, down };
-		var heatLosses = new Dictionary<TCrucible, int>
-		{
-			{ right, 0 },
-			{ down, 0 }
-		};
-		var queue = new PriorityQueue<TCrucible, int>();
-		queue.Enqueue(right, 0);
-		queue.Enqueue(down, 0);
-		var iterations = 0;
-		while (queue.TryDequeue(out var crucible, out var heatLoss))
-		{
-			iterations++;
-			if (crucible.ReachedEnd(endPosition))
-			{
-				return heatLoss;
-			}
-
-			foreach (var neighbour in crucible.GetNeighbours())
-			{
-				if (!_city.IsInBounds(neighbour.Position) || visited.Contains(neighbour))
-				{
-					continue;
-				}
-
-				var alternateHeatLoss = heatLoss + _city[neighbour.Position];
-				if (!heatLosses.TryGetValue(neighbour, out var currentHeatLoss) || alternateHeatLoss < currentHeatLoss)
-				{
-					heatLosses[neighbour] = alternateHeatLoss;
-					queue.Enqueue(neighbour, alternateHeatLoss);
-				}
-			}
-
-			visited.Add(crucible);
-		}
-
-		throw new InvalidOperationException();
 	}
 }
