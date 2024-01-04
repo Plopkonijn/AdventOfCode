@@ -4,6 +4,8 @@ namespace Year2023.Day19;
 
 internal record PartRating(int X, int M, int A, int S)
 {
+	public long Total => X + M + A + S;
+
 	public static PartRating Parse(string text)
 	{
 		var match = Regex.Match(text, @"{x=(?<x>\d+),m=(?<m>\d+),a=(?<a>\d+),s=(?<s>\d+)}");
@@ -13,6 +15,4 @@ internal record PartRating(int X, int M, int A, int S)
 		var s = int.Parse(match.Groups["s"].Value);
 		return new PartRating(x, m, a, s);
 	}
-
-	public long Total => X + M + A + S;
 }

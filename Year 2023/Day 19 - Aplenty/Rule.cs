@@ -114,7 +114,7 @@ internal class Rule
 				}
 
 				success = new ValueRange(Value + 1, valueRange.End - Value - 1);
-				failed = new ValueRange(valueRange.Start, Value+1-valueRange.Start);
+				failed = new ValueRange(valueRange.Start, Value + 1 - valueRange.Start);
 				return (success, failed);
 			default:
 				throw new ArgumentOutOfRangeException(nameof(Comparer));
