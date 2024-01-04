@@ -5,4 +5,8 @@
         <AssemblyName>Year2023.Day19</AssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Common.csproj"/>
+    </ItemGroup>
+
 </Project>
