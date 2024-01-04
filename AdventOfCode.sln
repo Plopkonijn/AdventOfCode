@@ -24,7 +24,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 11 - Cosmic Expansion",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 12 - Hot Springs", "Year 2023\Day 12 - Hot Springs\Day 12 - Hot Springs.csproj", "{D6C6CECF-4363-478A-A48F-58ABA8B17CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 13 - Point of Incidence", "Year 2023\Day 13 - Point of Incidence\Day 13 - Point of Incidence.csproj", "{27E8EA39-6C80-486A-936F-3E64F07C70FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 14 - Parabolic Reflector Dish", "Year 2023\Day 14 - Parabolic Reflector Dish\Day 14 - Parabolic Reflector Dish.csproj", "{C6913143-94B8-4100-AA9C-D6EE6E18C751}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 15 - Lens Library", "Year 2023\Day 15 - Lens Library\Day 15 - Lens Library.csproj", "{01061008-49BE-4824-9D2C-2DD5B61447B5}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 16 - The Floor Will Be Lava", "Year 2023\Day 16 - The Floor Will Be Lava\Day 16 - The Floor Will Be Lava.csproj", "{C6C799A9-9ABE-43C6-A447-667524FC653D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 17 - Clumsy Crucible", "Year 2023\Day 17 - Clumsy Crucible\Day 17 - Clumsy Crucible.csproj", "{205251EE-503A-42B5-A094-30467DB24A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 18 - Lavaduct Lagoon", "Year 2023\Day 18 - Lavaduct Lagoon\Day 18 - Lavaduct Lagoon.csproj", "{18EE50FC-F67D-4365-B34D-3990F3CD972B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Year 2023", "Year 2023", "{608CEE40-AE1A-433B-8610-F1E14C418D2C}"
 	ProjectSection(SolutionItems) = preProject
@@ -38,14 +48,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3F9C5D18-AE2E-4867-9E70-BAFF0504513E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Tests", "Common.Tests\Common.Tests.csproj", "{FB7BE45F-FCDA-4CF0-9DF0-7B0949D9EE4F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 13 - Point of Incidence", "Year 2023\Day 13 - Point of Incidence\Day 13 - Point of Incidence.csproj", "{27E8EA39-6C80-486A-936F-3E64F07C70FA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 14 - Parabolic Reflector Dish", "Year 2023\Day 14 - Parabolic Reflector Dish\Day 14 - Parabolic Reflector Dish.csproj", "{C6913143-94B8-4100-AA9C-D6EE6E18C751}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 15 - Lens Library", "Year 2023\Day 15 - Lens Library\Day 15 - Lens Library.csproj", "{01061008-49BE-4824-9D2C-2DD5B61447B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 17 - Clumsy Crucible", "Year 2023\Day 17 - Clumsy Crucible\Day 17 - Clumsy Crucible.csproj", "{205251EE-503A-42B5-A094-30467DB24A00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +139,10 @@ Global
 		{205251EE-503A-42B5-A094-30467DB24A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{205251EE-503A-42B5-A094-30467DB24A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{205251EE-503A-42B5-A094-30467DB24A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18EE50FC-F67D-4365-B34D-3990F3CD972B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18EE50FC-F67D-4365-B34D-3990F3CD972B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18EE50FC-F67D-4365-B34D-3990F3CD972B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18EE50FC-F67D-4365-B34D-3990F3CD972B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11C6D875-A09A-4A9C-B4E1-60F60ABE4B64} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
@@ -156,5 +162,6 @@ Global
 		{C6913143-94B8-4100-AA9C-D6EE6E18C751} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
 		{01061008-49BE-4824-9D2C-2DD5B61447B5} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
 		{205251EE-503A-42B5-A094-30467DB24A00} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
+		{18EE50FC-F67D-4365-B34D-3990F3CD972B} = {608CEE40-AE1A-433B-8610-F1E14C418D2C}
 	EndGlobalSection
 EndGlobal
