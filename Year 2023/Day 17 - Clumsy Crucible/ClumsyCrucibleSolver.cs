@@ -86,7 +86,10 @@ public sealed class ClumsyCrucibleSolver : ISolver
 		{
 			position = position.Move(direction);
 			if (!_city.IsInBounds(position))
+			{
 				yield break;
+			}
+
 			heatLoss += _city[position];
 			if (steps >= minimumSteps)
 			{
