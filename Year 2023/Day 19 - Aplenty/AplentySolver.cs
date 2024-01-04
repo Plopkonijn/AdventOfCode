@@ -33,11 +33,11 @@ public class AplentySolver : ISolver
 
 	public long PartOne()
 	{
-		long totalRating = 0L;
+		var totalRating = 0L;
 		foreach (var partRating in _partRatings)
 		{
 			var workflowName = "in";
-			while (_workflows.TryGetValue(workflowName,out var workflow))
+			while (_workflows.TryGetValue(workflowName, out var workflow))
 			{
 				workflowName = workflow.Process(partRating);
 			}
@@ -53,6 +53,29 @@ public class AplentySolver : ISolver
 
 	public long PartTwo()
 	{
-		throw new NotImplementedException();
+		var totalCombinations = 0L;
+		var valueRange = new ValueRange(1, 4000);
+		var queue = new Queue<(PartRatingRange, string)>();
+		queue.Enqueue((new PartRatingRange(valueRange, valueRange, valueRange, valueRange), "in"));
+		while (queue.TryDequeue(out var currentTuple))
+		{
+			var (partRatingRange, workflowName) = currentTuple;
+			if (!_workflows.TryGetValue(workflowName, out var workflow))
+			{
+				if (workflowName == "A")
+				{
+					totalCombinations += partRatingRange.Total;
+				}
+
+				continue;
+			}
+
+			foreach (var nextTuple in workflow.Process(partRatingRange))
+			{
+				queue.Enqueue(nextTuple);
+			}
+		}
+
+		return totalCombinations;
 	}
 }

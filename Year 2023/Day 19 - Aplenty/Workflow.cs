@@ -38,4 +38,16 @@ internal class Workflow
 
 		throw new InvalidOperationException();
 	}
+
+	public IEnumerable<(PartRatingRange partRatingRange, string workflowName)> Process(PartRatingRange partRatingRange)
+	{
+		foreach (var rule in _rules)
+		{
+			(var splitOffRange, partRatingRange) = rule.Split(partRatingRange);
+			if (splitOffRange.Total > 0)
+			{
+				yield return (splitOffRange, rule.WorkflowName);
+			}
+		}
+	}
 }
