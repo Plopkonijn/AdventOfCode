@@ -1,5 +1,4 @@
-﻿Console.WriteLine("Select a day to run:");
-
+﻿
 int day = PromptDay();
 
 if (!TryGetFilePath(day, out string filePath))
@@ -21,6 +20,7 @@ Console.WriteLine(output);
 static int PromptDay()
 {
     int day;
+    Console.WriteLine("Select a day to run:");
     while (!int.TryParse(Console.ReadLine(), out day))
     {
         Console.WriteLine("Invalid input, please try again.");
@@ -39,6 +39,7 @@ static bool TryGetFilePath(int day, out string filePath)
 static int PromptPart()
 {
     int part;
+    Console.WriteLine("Select a part to run (1 or 2):");
     while (!int.TryParse(Console.ReadLine(), out part) || (part is not 1 && part is not 2))
     {
         Console.WriteLine("Invalid input, please try again.");

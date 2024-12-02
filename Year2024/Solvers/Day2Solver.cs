@@ -23,19 +23,48 @@ public sealed class Day2Solver : AdventOfCodeSolver
         return safeReports;
     }
 
-    private bool IsSafeReport(long[] values)
+    private bool IsSafeReport(long[] values, int omitIndex = -1)
     {
-        bool isIncreasing = values[0] <= values[1];
+        bool isIncreasing = omitIndex switch
+        {
+            -1 => values[0] <= values[1],
+            0 => values[1] <= values[2],
+            1 => values[0] <= values[2],
+            _ => values[0] <= values[1]
+        };
+
         for (int i = 0; i < values.Length - 1; i++)
         {
+            long currentValue = values[i];
+            long nextValue = values[i + 1];
+            if (i == omitIndex)
+            {
+                if (i == 0)
+                {
+                    continue;
+                }
+
+                currentValue = values[i - 1];
+            }
+
+            if (i + 1 == omitIndex)
+            {
+                if (i + 1 >= values.Length - 1)
+                {
+                    continue;
+                }
+
+                nextValue = values[i + 2];
+            }
+
             if (isIncreasing)
             {
-                if (values[i] > values[i + 1])
+                if (currentValue > nextValue)
                 {
                     return false;
                 }
 
-                long difference = values[i + 1] - values[i];
+                long difference = nextValue - currentValue;
                 if (difference is < 1 or > 3)
                 {
                     return false;
@@ -43,12 +72,12 @@ public sealed class Day2Solver : AdventOfCodeSolver
             }
             else
             {
-                if (values[i] < values[i + 1])
+                if (currentValue < nextValue)
                 {
                     return false;
                 }
 
-                long difference = values[i] - values[i + 1];
+                long difference = currentValue - nextValue;
                 if (difference is < 1 or > 3)
                 {
                     return false;
@@ -61,6 +90,22 @@ public sealed class Day2Solver : AdventOfCodeSolver
 
     public override long SolvePart2(string[] input)
     {
-        throw new NotImplementedException();
+        long safeReports = 0;
+        foreach (string line in input)
+        {
+            long[] values = Regex.Matches(line, @"\d+")
+                              .Select(m => long.Parse(m.Value))
+                              .ToArray();
+            for (int omitIndex = -1; omitIndex < values.Length; omitIndex++)
+            {
+                if (IsSafeReport(values, omitIndex))
+                {
+                    safeReports++;
+                    break;
+                }
+            }
+        }
+
+        return safeReports;
     }
 }
