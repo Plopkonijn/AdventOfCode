@@ -1,37 +1,74 @@
 ﻿Console.WriteLine("Select a day to run:");
 
-int day;
-while (!int.TryParse(Console.ReadLine(), out day))
-{
-    Console.WriteLine("Invalid input, please try again.");
-}
+int day = PromptDay();
 
-string currentDirectory = Directory.GetCurrentDirectory();
-string filePath = Path.Combine(currentDirectory, "data", $"InputDay{day:00}.txt");
-if (!File.Exists(filePath))
+if (!TryGetFilePath(day, out string filePath))
 {
     Console.WriteLine($"Input file for day {day} not found.");
     return;
 }
 
-int part;
-while (!int.TryParse(Console.ReadLine(), out part) || (part is not 1 && part is not 2))
-{
-    Console.WriteLine("Invalid input, please try again.");
-}
+int part = PromptPart();
 
-string[] input = File.ReadAllLines(filePath);
-Console.WriteLine("Input:");
-foreach (string line in input)
-{
-    Console.WriteLine(line);
-}
+string[] input = ReadInput(filePath);
 
-Day1Solver solver = day switch
-{
-    1 => new Day1Solver(input),
-    _ => throw new NotImplementedException()
-};
+AdventOfCodeSolver solver = SelectSolver(day, input);
+
 Console.WriteLine("Output:");
-long output = part == 0 ? solver.SolvePart1(input) : solver.SolvePart2(input);
+long output = Solve(part, input, solver);
 Console.WriteLine(output);
+
+static int PromptDay()
+{
+    int day;
+    while (!int.TryParse(Console.ReadLine(), out day))
+    {
+        Console.WriteLine("Invalid input, please try again.");
+    }
+
+    return day;
+}
+
+static bool TryGetFilePath(int day, out string filePath)
+{
+    string currentDirectory = Directory.GetCurrentDirectory();
+    filePath = Path.Combine(currentDirectory, "data", $"InputDay{day:00}.txt");
+    return File.Exists(filePath);
+}
+
+static int PromptPart()
+{
+    int part;
+    while (!int.TryParse(Console.ReadLine(), out part) || (part is not 1 && part is not 2))
+    {
+        Console.WriteLine("Invalid input, please try again.");
+    }
+
+    return part;
+}
+
+static string[] ReadInput(string filePath)
+{
+    string[] input = File.ReadAllLines(filePath);
+    Console.WriteLine("Input:");
+    foreach (string line in input)
+    {
+        Console.WriteLine(line);
+    }
+
+    return input;
+}
+
+static AdventOfCodeSolver SelectSolver(int day, string[] input)
+{
+    return day switch
+    {
+        1 => new Day1Solver(input),
+        _ => throw new NotImplementedException()
+    };
+}
+
+static long Solve(int part, string[] input, AdventOfCodeSolver solver)
+{
+    return part == 0 ? solver.SolvePart1(input) : solver.SolvePart2(input);
+}
