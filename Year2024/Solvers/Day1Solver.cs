@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-public class Day1Solver : AdventOfCodeSolver
+public sealed class Day1Solver : AdventOfCodeSolver
 {
     public Day1Solver(string[] input) : base(input) { }
 

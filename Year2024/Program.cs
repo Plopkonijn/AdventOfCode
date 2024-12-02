@@ -64,11 +64,17 @@ static AdventOfCodeSolver SelectSolver(int day, string[] input)
     return day switch
     {
         1 => new Day1Solver(input),
+        2 => new Day2Solver(input),
         _ => throw new NotImplementedException()
     };
 }
 
 static long Solve(int part, string[] input, AdventOfCodeSolver solver)
 {
-    return part == 0 ? solver.SolvePart1(input) : solver.SolvePart2(input);
+    return part switch
+    {
+        1 => solver.SolvePart1(input),
+        2 => solver.SolvePart2(input),
+        _ => throw new InvalidOperationException()
+    };
 }
