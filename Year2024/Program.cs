@@ -16,6 +16,12 @@ if (!File.Exists(filePath))
     return;
 }
 
+int part;
+while (!int.TryParse(Console.ReadLine(), out part) || (part is not 1 && part is not 2))
+{
+    Console.WriteLine("Invalid input, please try again.");
+}
+
 string[] input = File.ReadAllLines(filePath);
 Console.WriteLine("Input:");
 foreach (string line in input)
@@ -24,7 +30,7 @@ foreach (string line in input)
 }
 
 Console.WriteLine("Output:");
-long output = SolveDay1Part1(input);
+long output = part == 0 ? SolveDay1Part1(input) : SolveDay1Part2(input);
 Console.WriteLine(output);
 
 static long SolveDay1Part1(string[] input)
@@ -43,4 +49,35 @@ static long SolveDay1Part1(string[] input)
     leftList.Sort();
     rightList.Sort();
     return leftList.Zip(rightList, (left, right) => Math.Abs(left - right)).Sum();
+}
+
+static long SolveDay1Part2(string[] input)
+{
+    List<long> unProcessedRightList = [];
+    Dictionary<long, long> leftListOccurences = [];
+    foreach (string line in input)
+    {
+        MatchCollection matches = Regex.Matches(line, @"\d+"); ;
+        long leftValue = long.Parse(matches[0].Value);
+        _ = leftListOccurences.TryAdd(leftValue, 0);
+        long rightValue = long.Parse(matches[1].Value);
+        if (leftListOccurences.TryGetValue(rightValue, out long occurences))
+        {
+            leftListOccurences[rightValue] = occurences + 1;
+        }
+        else
+        {
+            unProcessedRightList.Add(rightValue);
+        }
+    }
+
+    foreach (long rightValue in unProcessedRightList)
+    {
+        if (leftListOccurences.TryGetValue(rightValue, out long occurences))
+        {
+            leftListOccurences[rightValue] = occurences + 1;
+        }
+    }
+
+    return leftListOccurences.Sum(kvp => kvp.Key * kvp.Value);
 }
