@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Data;
+using System.Text.RegularExpressions;
 
 public sealed class Day2Solver : AdventOfCodeSolver
 {
@@ -41,7 +42,6 @@ public sealed class Day2Solver : AdventOfCodeSolver
             }
 
             long nextValue = values[i + 1];
-
 
             if (i + 1 == omitIndex)
             {
@@ -114,5 +114,34 @@ public sealed class Day2Solver : AdventOfCodeSolver
         }
 
         return safeReports;
+    }
+}
+
+public sealed class Day3Solver : AdventOfCodeSolver
+{
+    public Day3Solver(string[] input) : base(input)
+    {
+    }
+
+    public override long SolvePart1(string[] input)
+    {
+        long total = 0;
+        foreach (string line in input)
+        {
+            MatchCollection matches = Regex.Matches(line, @"mul\((?<first>\d{1,3}),(?<second>\d{1,3})\)");
+            foreach (Match match in matches.OfType<Match>())
+            {
+                long firstOperand = long.Parse(match.Groups["first"].Value);
+                long secondOperand = long.Parse(match.Groups["second"].Value);
+                total += firstOperand * secondOperand;
+            }
+        }
+
+        return total;
+    }
+
+    public override long SolvePart2(string[] input)
+    {
+        throw new NotImplementedException();
     }
 }

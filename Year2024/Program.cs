@@ -66,6 +66,7 @@ static AdventOfCodeSolver SelectSolver(int day, string[] input)
     {
         1 => new Day1Solver(input),
         2 => new Day2Solver(input),
+        3 => new Day3Solver(input),
         _ => throw new NotImplementedException()
     };
 }
