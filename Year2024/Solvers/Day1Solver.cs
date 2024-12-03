@@ -24,33 +24,31 @@ public sealed partial class Day1Solver(string[] input) : AdventOfCodeSolver(inpu
 
     public override long SolvePart2()
     {
-        List<long> unProcessedRightList = [];
-        Dictionary<long, long> leftListOccurrences = [];
+        List<long> leftList = [];
+        List<long> rightList = [];
         foreach (string line in _input)
         {
             MatchCollection matches = NumberRegex().Matches(line); ;
             long leftValue = long.Parse(matches[0].Value);
-            _ = leftListOccurrences.TryAdd(leftValue, 0);
             long rightValue = long.Parse(matches[1].Value);
-            if (leftListOccurrences.TryGetValue(rightValue, out long occurrences))
-            {
-                leftListOccurrences[rightValue] = occurrences + 1;
-            }
-            else
-            {
-                unProcessedRightList.Add(rightValue);
-            }
+            leftList.Add(leftValue);
+            rightList.Add(rightValue);
         }
 
-        foreach (long rightValue in unProcessedRightList)
+        long total = 0;
+        Dictionary<long, long> leftOccurrenceValues = [];
+        foreach (long leftValue in leftList)
         {
-            if (leftListOccurrences.TryGetValue(rightValue, out long occurrences))
+            if (!leftOccurrenceValues.TryGetValue(leftValue, out long occurrenceValue))
             {
-                leftListOccurrences[rightValue] = occurrences + 1;
+                occurrenceValue = leftValue * rightList.Count(rightValue => rightValue == leftValue);
+                leftOccurrenceValues[leftValue] = occurrenceValue;
             }
+
+            total += occurrenceValue;
         }
 
-        return leftListOccurrences.Sum(kvp => kvp.Key * kvp.Value);
+        return total;
     }
 
     [GeneratedRegex(@"\d+")]
