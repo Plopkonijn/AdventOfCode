@@ -1,9 +1,10 @@
 ﻿using Year2024.Solvers;
 
 namespace Year2024.Tests;
-
-public sealed class Day2SolverTests
+public sealed class Day2SolverTests : AdventOfCodeSolverTests
 {
+    protected override int Day => 2;
+
     [Fact]
     public void Example1()
     {
@@ -17,7 +18,7 @@ public sealed class Day2SolverTests
             "8 6 4 4 1",
             "1 3 6 7 9"
         ];
-        Day2Solver solver = new(input);
+        AdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart1();
@@ -40,12 +41,17 @@ public sealed class Day2SolverTests
             "8 6 4 4 1",
             "1 3 6 7 9"
         ];
-        Day2Solver solver = new(input);
+        AdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart1();
 
         // Assert
         Assert.Equal(2, result);
+    }
+
+    protected override AdventOfCodeSolver GetSolver(string[] input)
+    {
+        return new Day2Solver(input);
     }
 }
