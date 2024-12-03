@@ -1,5 +1,6 @@
 ﻿
 using System.Diagnostics;
+using Year2024;
 using Year2024.Solvers;
 
 int day = PromptDay();
@@ -17,7 +18,7 @@ string[] input = ReadInput(filePath);
 AdventOfCodeSolver solver = SelectSolver(day, input);
 
 long timeStamp = Stopwatch.GetTimestamp();
-long output = Solve(part, input, solver);
+long output = Solve(part, solver);
 TimeSpan solveTime = Stopwatch.GetElapsedTime(timeStamp);
 
 Console.WriteLine($"Output in {solveTime.TotalMilliseconds}ms:");
@@ -77,12 +78,12 @@ static AdventOfCodeSolver SelectSolver(int day, string[] input)
     };
 }
 
-static long Solve(int part, string[] input, AdventOfCodeSolver solver)
+static long Solve(int part, AdventOfCodeSolver solver)
 {
     return part switch
     {
-        1 => solver.SolvePart1(input),
-        2 => solver.SolvePart2(input),
+        1 => solver.SolvePart1(),
+        2 => solver.SolvePart2(),
         _ => throw new InvalidOperationException()
     };
 }

@@ -4,10 +4,10 @@ namespace Year2024.Solvers;
 
 public sealed partial class Day3Solver(string[] input) : AdventOfCodeSolver(input)
 {
-    public override long SolvePart1(string[] input)
+    public override long SolvePart1()
     {
         long total = 0;
-        foreach (string line in input)
+        foreach (string line in _input)
         {
             MatchCollection matches = MulRegex().Matches(line);
             foreach (Match match in matches.OfType<Match>())
@@ -21,11 +21,11 @@ public sealed partial class Day3Solver(string[] input) : AdventOfCodeSolver(inpu
         return total;
     }
 
-    public override long SolvePart2(string[] input)
+    public override long SolvePart2()
     {
         long total = 0;
         bool mulEnabled = true;
-        foreach (string line in input)
+        foreach (string line in _input)
         {
             MatchCollection matches = MulEnableDisableRegex().Matches(line);
             foreach (Match match in matches.OfType<Match>())

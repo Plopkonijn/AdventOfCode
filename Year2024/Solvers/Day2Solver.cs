@@ -5,10 +5,10 @@ namespace Year2024.Solvers;
 
 public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(input)
 {
-    public override long SolvePart1(string[] input)
+    public override long SolvePart1()
     {
         long safeReports = 0;
-        foreach (string line in input)
+        foreach (string line in _input)
         {
             long[] values = NumberRegex().Matches(line)
                               .Select(m => long.Parse(m.Value))
@@ -93,10 +93,10 @@ public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(inpu
         };
     }
 
-    public override long SolvePart2(string[] input)
+    public override long SolvePart2()
     {
         long safeReports = 0;
-        foreach (string line in input)
+        foreach (string line in _input)
         {
             long[] values = NumberRegex().Matches(line)
                               .Select(m => long.Parse(m.Value))
