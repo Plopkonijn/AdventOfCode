@@ -1,18 +1,16 @@
 ﻿using System.Data;
 using System.Text.RegularExpressions;
 
-public sealed class Day2Solver : AdventOfCodeSolver
-{
-    public Day2Solver(string[] input) : base(input)
-    {
-    }
+namespace Year2024.Solvers;
 
+public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(input)
+{
     public override long SolvePart1(string[] input)
     {
         long safeReports = 0;
         foreach (string line in input)
         {
-            long[] values = Regex.Matches(line, @"\d+")
+            long[] values = NumberRegex().Matches(line)
                               .Select(m => long.Parse(m.Value))
                               .ToArray();
             if (IsSafeReport(values))
@@ -24,7 +22,7 @@ public sealed class Day2Solver : AdventOfCodeSolver
         return safeReports;
     }
 
-    private bool IsSafeReport(long[] values, int omitIndex = -1)
+    private static bool IsSafeReport(long[] values, int omitIndex = -1)
     {
         bool isIncreasing = IsIncreasingReport(values, omitIndex);
 
@@ -100,7 +98,7 @@ public sealed class Day2Solver : AdventOfCodeSolver
         long safeReports = 0;
         foreach (string line in input)
         {
-            long[] values = Regex.Matches(line, @"\d+")
+            long[] values = NumberRegex().Matches(line)
                               .Select(m => long.Parse(m.Value))
                               .ToArray();
             for (int omitIndex = -1; omitIndex < values.Length; omitIndex++)
@@ -115,4 +113,7 @@ public sealed class Day2Solver : AdventOfCodeSolver
 
         return safeReports;
     }
+
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex NumberRegex();
 }

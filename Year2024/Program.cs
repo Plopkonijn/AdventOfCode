@@ -1,4 +1,7 @@
 ﻿
+using System.Diagnostics;
+using Year2024.Solvers;
+
 int day = PromptDay();
 
 if (!TryGetFilePath(day, out string filePath))
@@ -13,8 +16,11 @@ string[] input = ReadInput(filePath);
 
 AdventOfCodeSolver solver = SelectSolver(day, input);
 
-Console.WriteLine("Output:");
+long timeStamp = Stopwatch.GetTimestamp();
 long output = Solve(part, input, solver);
+TimeSpan solveTime = Stopwatch.GetElapsedTime(timeStamp);
+
+Console.WriteLine($"Output in {solveTime.TotalMilliseconds}ms:");
 Console.WriteLine(output);
 
 static int PromptDay()
