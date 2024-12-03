@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Text.RegularExpressions;
 
 namespace Year2024.Solvers;
 
@@ -10,7 +9,7 @@ public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(inpu
         long safeReports = 0;
         foreach (string line in _input)
         {
-            long[] values = NumberRegex().Matches(line)
+            long[] values = AdventOfCodeUtilities.NumberRegex().Matches(line)
                               .Select(m => long.Parse(m.Value))
                               .ToArray();
             if (IsSafeReport(values))
@@ -98,7 +97,7 @@ public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(inpu
         long safeReports = 0;
         foreach (string line in _input)
         {
-            long[] values = NumberRegex().Matches(line)
+            long[] values = AdventOfCodeUtilities.NumberRegex().Matches(line)
                               .Select(m => long.Parse(m.Value))
                               .ToArray();
             for (int omitIndex = -1; omitIndex < values.Length; omitIndex++)
@@ -113,7 +112,4 @@ public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(inpu
 
         return safeReports;
     }
-
-    [GeneratedRegex(@"\d+")]
-    private static partial Regex NumberRegex();
 }

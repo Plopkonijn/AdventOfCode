@@ -10,7 +10,7 @@ public sealed partial class Day1Solver(string[] input) : AdventOfCodeSolver(inpu
         List<long> rightList = [];
         foreach (string line in _input)
         {
-            MatchCollection matches = NumberRegex().Matches(line); ;
+            MatchCollection matches = AdventOfCodeUtilities.NumberRegex().Matches(line); ;
             long leftValue = long.Parse(matches[0].Value);
             long rightValue = long.Parse(matches[1].Value);
             leftList.Add(leftValue);
@@ -28,7 +28,7 @@ public sealed partial class Day1Solver(string[] input) : AdventOfCodeSolver(inpu
         List<long> rightList = [];
         foreach (string line in _input)
         {
-            MatchCollection matches = NumberRegex().Matches(line); ;
+            MatchCollection matches = AdventOfCodeUtilities.NumberRegex().Matches(line); ;
             long leftValue = long.Parse(matches[0].Value);
             long rightValue = long.Parse(matches[1].Value);
             leftList.Add(leftValue);
@@ -50,7 +50,4 @@ public sealed partial class Day1Solver(string[] input) : AdventOfCodeSolver(inpu
 
         return total;
     }
-
-    [GeneratedRegex(@"\d+")]
-    private static partial Regex NumberRegex();
 }
