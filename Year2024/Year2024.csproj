@@ -10,4 +10,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="data\InputDay04.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
