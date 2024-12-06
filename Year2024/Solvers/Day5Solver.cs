@@ -8,7 +8,7 @@ public sealed class Day5Solver(string[] input) : AdventOfCodeSolver(input)
     {
         long total = 0;
         var (orderingRules, updates) = ParseInput();
-        foreach (List<int> update in updates)
+        foreach (List<long> update in updates)
         {
             if (!IsValidUpdate(update, orderingRules))
             {
@@ -21,7 +21,7 @@ public sealed class Day5Solver(string[] input) : AdventOfCodeSolver(input)
         return total;
     }
 
-    private static bool IsValidUpdate(List<int> update, List<(long before, long after)> orderingRules)
+    private static bool IsValidUpdate(List<long> update, List<(long before, long after)> orderingRules)
     {
         HashSet<long> visited = new();
         foreach (int page in update)
@@ -37,7 +37,7 @@ public sealed class Day5Solver(string[] input) : AdventOfCodeSolver(input)
         return true;
     }
 
-    private (List<(long before, long after)>, List<List<int>> updates) ParseInput()
+    private (List<(long before, long after)>, List<List<long>> updates) ParseInput()
     {
         List<(long before, long after)> orderingRules = new();
         int i = 0;
@@ -59,12 +59,12 @@ public sealed class Day5Solver(string[] input) : AdventOfCodeSolver(input)
 
         i++;
 
-        List<List<int>> updates = new();
+        List<List<long>> updates = new();
         while (i < _input.Length)
         {
             string line = _input[i];
             MatchCollection pageMatches = Regex.Matches(line, @"\d+");
-            List<int> update = pageMatches.Select(m => int.Parse(m.Value)).ToList();
+            List<long> update = pageMatches.Select(m => long.Parse(m.Value)).ToList();
             updates.Add(update);
             i++;
         }
@@ -74,6 +74,47 @@ public sealed class Day5Solver(string[] input) : AdventOfCodeSolver(input)
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        long total = 0;
+        var (orderingRules, updates) = ParseInput();
+        foreach (List<long> update in updates)
+        {
+            if (IsValidUpdate(update, orderingRules))
+            {
+                continue;
+            }
+
+            ReorderPages(update, orderingRules);
+            total += update[(update.Count - 1) / 2];
+        }
+
+        return total;
+    }
+
+    private void ReorderPages(List<long> update, List<(long before, long after)> orderingRules)
+    {
+        Dictionary<long, int> pageIndices = update.Select((page, index) => (page, index)).ToDictionary(t => t.page, t => t.index);
+
+        for (int i = 0; i < update.Count; i++)
+        {
+            long page = update[i];
+            List<(long before, long after)> applicableRules = orderingRules.Where(rule => rule.before == page && pageIndices.ContainsKey(rule.after))
+                                                                           .OrderByDescending(rule => pageIndices[rule.after])
+                                                                           .ToList();
+            int j = i;
+            foreach ((long before, long after) in applicableRules)
+            {
+                if (!pageIndices.TryGetValue(after, out int k) || k > j)
+                {
+                    continue;
+                }
+
+                update[k] = before;
+                pageIndices[before] = k;
+
+                update[j] = after;
+                pageIndices[after] = j;
+                j = k;
+            }
+        }
     }
 }
