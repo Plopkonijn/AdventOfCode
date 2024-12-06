@@ -1,4 +1,5 @@
 ﻿namespace Year2024.Solvers;
+
 public sealed class Day4Solver(string[] input) : AdventOfCodeSolver(input)
 {
     public override long SolvePart1()
@@ -39,7 +40,7 @@ public sealed class Day4Solver(string[] input) : AdventOfCodeSolver(input)
 
     private bool InputContainsWord(string word, (int Row, int Column) start, (int Drow, int Dcolumn) direction)
     {
-        (int endRow, int endColumn) = (start.Row + ((word.Length - 1) * direction.Drow), start.Column + ((word.Length - 1) * direction.Dcolumn));
+        (int endRow, int endColumn) = (start.Row + (word.Length - 1) * direction.Drow, start.Column + (word.Length - 1) * direction.Dcolumn);
 
         if (endRow < 0 || endRow >= _input.Length ||
             endColumn < 0 || endColumn >= _input[start.Row].Length)
@@ -85,7 +86,7 @@ public sealed class Day4Solver(string[] input) : AdventOfCodeSolver(input)
         {
             for (int dColumn = -1; dColumn <= 1; dColumn++)
             {
-                if ((dRow == 0 && dColumn == 0) || (dRow != 0 && dColumn != 0))
+                if (dRow == 0 && dColumn == 0 || dRow != 0 && dColumn != 0)
                 {
                     continue;
                 }
@@ -127,7 +128,7 @@ public sealed class Day4Solver(string[] input) : AdventOfCodeSolver(input)
             return false;
         }
 
-        (int row, int column) = (start.Row - (crossLength * direction.dRow), start.Column - (crossLength * direction.dColumn));
+        (int row, int column) = (start.Row - crossLength * direction.dRow, start.Column - crossLength * direction.dColumn);
         for (int i = 0; i < word.Length; i++)
         {
             int rowOffset = (i - crossLength) * direction.dColumn;
