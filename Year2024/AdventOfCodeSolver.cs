@@ -6,4 +6,5 @@ public abstract class AdventOfCodeSolver(string[] input)
 
     public abstract long SolvePart1();
     public abstract long SolvePart2();
+
 }

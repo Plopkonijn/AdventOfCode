@@ -1,7 +1,6 @@
 using Year2024.Solvers;
 
 namespace Year2024.Tests;
-
 public sealed class Day5SolverTests : AdventOfCodeSolverTests
 {
     protected override int Day => 5;
