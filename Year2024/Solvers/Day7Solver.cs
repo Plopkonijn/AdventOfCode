@@ -6,16 +6,26 @@ public sealed class Day7Solver(string[] input) : AdventOfCodeSolver(input)
 {
     public override long SolvePart1()
     {
+        return CalculateTotalPossibleEquations(AddOperation, MultiplyOperation);
+    }
+
+    public override long SolvePart2()
+    {
+        return CalculateTotalPossibleEquations(AddOperation, MultiplyOperation, ConcatOperation);
+    }
+
+    private long CalculateTotalPossibleEquations(params Operation[] operations)
+    {
         long total = 0;
-        foreach (string line in _input)
+        foreach (var line in _input)
         {
             Match resultMatch = Regex.Match(line, @"\d+(?=:)");
-            long result = long.Parse(resultMatch.Value);
+            var result = long.Parse(resultMatch.Value);
 
             MatchCollection operandsMatch = Regex.Matches(line, @"\d+(?![\d:])");
             List<long> operands = operandsMatch.Select(m => long.Parse(m.Value))
                                                .ToList();
-            if (!IsPossibleEquation(result, operands[0], operands, 1))
+            if (!IsPossibleEquation(result, operands[0], operands, 1, operations))
             {
                 continue;
             }
@@ -26,30 +36,40 @@ public sealed class Day7Solver(string[] input) : AdventOfCodeSolver(input)
         return total;
     }
 
-    private bool IsPossibleEquation(long expectedResult, long actualResult, List<long> operands, int index)
+    private bool IsPossibleEquation(long expectedResult, long actualResult, List<long> operands, int index, Operation[] operations)
     {
         if (index == operands.Count)
         {
             return expectedResult == actualResult;
         }
 
-        long operand = operands[index];
-
-        if (actualResult + operand <= expectedResult && IsPossibleEquation(expectedResult, actualResult + operand, operands, index + 1))
+        var operand = operands[index];
+        foreach (Operation operation in operations)
         {
-            return true;
-        }
-
-        if (actualResult * operand <= expectedResult && IsPossibleEquation(expectedResult, actualResult * operand, operands, index + 1))
-        {
-            return true;
+            var newResult = operation(actualResult, operand);
+            if (newResult <= expectedResult && IsPossibleEquation(expectedResult, newResult, operands, index + 1, operations))
+            {
+                return true;
+            }
         }
 
         return false;
     }
 
-    public override long SolvePart2()
+    private delegate long Operation(long left, long right);
+
+    private long AddOperation(long left, long right)
     {
-        throw new NotImplementedException();
+        return left + right;
+    }
+
+    private long MultiplyOperation(long left, long right)
+    {
+        return left * right;
+    }
+
+    private long ConcatOperation(long left, long right)
+    {
+        return long.Parse($"{left}{right}");
     }
 }
