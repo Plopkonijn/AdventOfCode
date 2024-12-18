@@ -1,7 +1,7 @@
 ﻿
 namespace Year2024.Solvers;
 
-internal record struct Direction(int DX, int DY)
+public record struct Direction(int DX, int DY)
 {
     internal Direction TurnClockWise()
     {
@@ -11,5 +11,16 @@ internal record struct Direction(int DX, int DY)
     public static implicit operator Direction((int DX, int DY) direction)
     {
         return new Direction(direction.DX, direction.DY);
+    }
+
+    public static IEnumerable<Direction> All
+    {
+        get
+        {
+            yield return (0, -1);
+            yield return (1, 0);
+            yield return (0, 1);
+            yield return (-1, 0);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Year2024.Solvers;
 
-internal record struct Position(int X, int Y)
+public record struct Position(int X, int Y)
 {
     public static Position operator +(Position a, Direction b)
     {
