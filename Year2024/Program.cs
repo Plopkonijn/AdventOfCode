@@ -15,7 +15,7 @@ int part = PromptPart();
 
 string[] input = ReadInput(filePath);
 
-AdventOfCodeSolver solver = SelectSolver(day, input);
+DefaultAdventOfCodeSolver solver = SelectSolver(day, input);
 
 long timeStamp = Stopwatch.GetTimestamp();
 long output = Solve(part, solver);
@@ -67,7 +67,7 @@ static string[] ReadInput(string filePath)
     return input;
 }
 
-static AdventOfCodeSolver SelectSolver(int day, string[] input)
+static DefaultAdventOfCodeSolver SelectSolver(int day, string[] input)
 {
     return day switch
     {
@@ -78,7 +78,7 @@ static AdventOfCodeSolver SelectSolver(int day, string[] input)
     };
 }
 
-static long Solve(int part, AdventOfCodeSolver solver)
+static long Solve(int part, DefaultAdventOfCodeSolver solver)
 {
     return part switch
     {

@@ -1,30 +1,41 @@
 ﻿namespace Year2024.Tests;
 
-public abstract class AdventOfCodeSolverTests
+public abstract class AdventOfCodeSolverTests<TPart1, TPart2>
+    where TPart1 : IParsable<TPart1>
+        where TPart2 : IParsable<TPart2>
 {
     protected abstract int Day { get; }
+    protected abstract AdventOfCodeSolver<TPart1, TPart2> GetSolver(string[] input);
 
-    protected abstract AdventOfCodeSolver GetSolver(string[] input);
-
-    [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    public void Puzzle(int part)
+    [Fact]
+    public void PuzzlePart1()
     {
         // Arrange
         string[] input = TestUtilities.GetPuzzleInput(Day);
-        long expectedOutput = TestUtilities.GetPuzzleOutput(Day, part);
-        AdventOfCodeSolver solver = GetSolver(input);
+        TPart1 expectedOutput = TestUtilities.GetPuzzleOutput<TPart1>(Day, 1);
+        AdventOfCodeSolver<TPart1, TPart2> solver = GetSolver(input);
+        // Act
+        TPart1 actualOutput = solver.SolvePart1();
+        // Assert
+        Assert.Equal(expectedOutput, actualOutput);
+    }
+
+    [Fact]
+    public void PuzzlePart2()
+    {
+        // Arrange
+        string[] input = TestUtilities.GetPuzzleInput(Day);
+        TPart2 expectedOutput = TestUtilities.GetPuzzleOutput<TPart2>(Day, 2);
+        AdventOfCodeSolver<TPart1, TPart2> solver = GetSolver(input);
 
         // Act
-        long actualOutput = part switch
-        {
-            1 => solver.SolvePart1(),
-            2 => solver.SolvePart2(),
-            _ => throw new NotImplementedException()
-        };
+        TPart2 actualOutput = solver.SolvePart2();
 
         // Assert
         Assert.Equal(expectedOutput, actualOutput);
     }
+}
+
+public abstract class DefaultAdventOfCodeSolverTests : AdventOfCodeSolverTests<long, long>
+{
 }

@@ -10,12 +10,13 @@ internal static class TestUtilities
         return File.ReadAllLines(filePath);
     }
 
-    public static long GetPuzzleOutput(int day, int part)
+    public static TValue GetPuzzleOutput<TValue>(int day, int part)
+        where TValue : IParsable<TValue>
     {
         string currentDirectory = Directory.GetCurrentDirectory();
         string directory = Path.Combine(currentDirectory, "data");
         string filePath = Path.Combine(directory, $"OutputDay{day:D2}Part{part}.txt");
         string outputText = File.ReadAllText(filePath);
-        return long.Parse(outputText);
+        return TValue.Parse(outputText, null);
     }
 }

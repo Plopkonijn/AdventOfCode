@@ -1,26 +1,16 @@
 ﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
 
 namespace Year2024.Solvers;
-public sealed class Day18Solver : AdventOfCodeSolver
+public sealed class Day18Solver(string[] input, int stepsToTake, Position endPosition) : AdventOfCodeSolver<long, Position>(input)
 {
-    public Day18Solver(string[] input, int stepsToTake, Position endPosition) : base(input)
-    {
-        StepsToTake = stepsToTake;
-        EndPosition = endPosition;
-    }
-
-    public int StepsToTake { get; set; }
-    public Position EndPosition { get; set; }
+    public int StepsToTake { get; set; } = stepsToTake;
+    public Position EndPosition { get; set; } = endPosition;
     public override long SolvePart1()
     {
         HashSet<Position> corruptedPositions = [];
         foreach (string line in _input.Take(StepsToTake))
         {
-            Match match = Regex.Match(line, @"(\d+),(\d+)");
-            int x = int.Parse(match.Groups[1].Value);
-            int y = int.Parse(match.Groups[2].Value);
-            Position corruptedPosition = new(x, y);
+            Position corruptedPosition = Position.Parse(line, null);
             _ = corruptedPositions.Add(corruptedPosition);
         }
 
@@ -68,7 +58,7 @@ public sealed class Day18Solver : AdventOfCodeSolver
         return 0;
     }
 
-    private void WritePositions(Dictionary<Position, (int distance, Position previousPosition)> searchLookup, HashSet<Position> corruptedPositions)
+    private static void WritePositions(Dictionary<Position, (int distance, Position previousPosition)> searchLookup, HashSet<Position> corruptedPositions)
     {
         int width = searchLookup.Keys.Max(p => p.X);
         int height = searchLookup.Keys.Max(p => p.Y);
@@ -95,7 +85,7 @@ public sealed class Day18Solver : AdventOfCodeSolver
         }
     }
 
-    public override long SolvePart2()
+    public override Position SolvePart2()
     {
         throw new NotImplementedException();
     }

@@ -2,7 +2,7 @@
 
 namespace Year2024.Tests;
 
-public sealed class Day1SolverTests : AdventOfCodeSolverTests
+public sealed class Day1SolverTests : DefaultAdventOfCodeSolverTests
 {
     protected override int Day => 1;
 
@@ -19,7 +19,7 @@ public sealed class Day1SolverTests : AdventOfCodeSolverTests
             "3    9",
             "3    3",
         ];
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart1();
@@ -41,7 +41,7 @@ public sealed class Day1SolverTests : AdventOfCodeSolverTests
             "3    9",
             "3    3",
         ];
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart2();
@@ -50,7 +50,7 @@ public sealed class Day1SolverTests : AdventOfCodeSolverTests
         Assert.Equal(31, result);
     }
 
-    protected override AdventOfCodeSolver GetSolver(string[] input)
+    protected override DefaultAdventOfCodeSolver GetSolver(string[] input)
     {
         return new Day1Solver(input);
     }

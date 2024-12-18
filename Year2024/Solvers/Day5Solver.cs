@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Year2024.Solvers;
 
-public sealed class Day5Solver(string[] input) : AdventOfCodeSolver(input)
+public sealed class Day5Solver(string[] input) : DefaultAdventOfCodeSolver(input)
 {
     public override long SolvePart1()
     {

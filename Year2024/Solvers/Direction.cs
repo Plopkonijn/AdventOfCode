@@ -3,7 +3,7 @@ namespace Year2024.Solvers;
 
 public record struct Direction(int DX, int DY)
 {
-    internal Direction TurnClockWise()
+    internal readonly Direction TurnClockWise()
     {
         return new Direction(-DY, DX);
     }

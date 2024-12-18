@@ -1,6 +1,6 @@
 ﻿namespace Year2024.Solvers;
 
-public sealed class Day4Solver(string[] input) : AdventOfCodeSolver(input)
+public sealed class Day4Solver(string[] input) : DefaultAdventOfCodeSolver(input)
 {
     public override long SolvePart1()
     {

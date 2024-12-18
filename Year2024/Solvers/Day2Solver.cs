@@ -2,7 +2,7 @@
 
 namespace Year2024.Solvers;
 
-public sealed partial class Day2Solver(string[] input) : AdventOfCodeSolver(input)
+public sealed partial class Day2Solver(string[] input) : DefaultAdventOfCodeSolver(input)
 {
     public override long SolvePart1()
     {

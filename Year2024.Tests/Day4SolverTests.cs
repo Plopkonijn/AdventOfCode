@@ -2,10 +2,10 @@
 
 namespace Year2024.Tests;
 
-public sealed class Day4SolverTests : AdventOfCodeSolverTests
+public sealed class Day4SolverTests : DefaultAdventOfCodeSolverTests
 {
     protected override int Day => 4;
-    protected override AdventOfCodeSolver GetSolver(string[] input)
+    protected override DefaultAdventOfCodeSolver GetSolver(string[] input)
     {
         return new Day4Solver(input);
     }
@@ -27,7 +27,7 @@ public sealed class Day4SolverTests : AdventOfCodeSolverTests
             "MAMMMXMMMM",
             "MXMXAXMASX"
          ];
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart1();
@@ -53,7 +53,7 @@ public sealed class Day4SolverTests : AdventOfCodeSolverTests
             "MAMMMXMMMM",
             "MXMXAXMASX"
          ];
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart2();

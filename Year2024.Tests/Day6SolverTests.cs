@@ -2,11 +2,11 @@
 
 namespace Year2024.Tests;
 
-public sealed class Day6SolverTests : AdventOfCodeSolverTests
+public sealed class Day6SolverTests : DefaultAdventOfCodeSolverTests
 {
     protected override int Day => 6;
 
-    protected override AdventOfCodeSolver GetSolver(string[] input)
+    protected override DefaultAdventOfCodeSolver GetSolver(string[] input)
     {
         return new Day6Solver(input);
     }
@@ -29,7 +29,7 @@ public sealed class Day6SolverTests : AdventOfCodeSolverTests
             "......#...",
         ];
 
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart1();

@@ -3,11 +3,11 @@ using Year2024.Solvers;
 
 namespace Year2024.Tests;
 
-public class Day18SolverTests : AdventOfCodeSolverTests
+public class Day18SolverTests : AdventOfCodeSolverTests<long, Position>
 {
     protected override int Day => 18;
 
-    protected override Day18Solver GetSolver(string[] input)
+    protected override AdventOfCodeSolver<long, Position> GetSolver(string[] input)
     {
         return new Day18Solver(input, 1024, new Position(70, 70));
     }
@@ -44,7 +44,7 @@ public class Day18SolverTests : AdventOfCodeSolverTests
             "1,6",
             "2,0",
         ];
-        Day18Solver solver = GetSolver(input);
+        Day18Solver solver = (Day18Solver)GetSolver(input);
         solver.StepsToTake = 12;
         solver.EndPosition = new Position(6, 6);
 

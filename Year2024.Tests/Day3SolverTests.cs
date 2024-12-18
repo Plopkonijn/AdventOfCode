@@ -2,11 +2,11 @@
 
 namespace Year2024.Tests;
 
-public sealed class Day3SolverTests : AdventOfCodeSolverTests
+public sealed class Day3SolverTests : DefaultAdventOfCodeSolverTests
 {
     protected override int Day => 3;
 
-    protected override AdventOfCodeSolver GetSolver(string[] input)
+    protected override DefaultAdventOfCodeSolver GetSolver(string[] input)
     {
         return new Day3Solver(input);
     }
@@ -16,7 +16,7 @@ public sealed class Day3SolverTests : AdventOfCodeSolverTests
     {
         // Arrange
         string[] input = ["xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"];
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart1();
@@ -30,7 +30,7 @@ public sealed class Day3SolverTests : AdventOfCodeSolverTests
     {
         // Arrange
         string[] input = ["xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"];
-        AdventOfCodeSolver solver = GetSolver(input);
+        DefaultAdventOfCodeSolver solver = GetSolver(input);
 
         // Act
         long result = solver.SolvePart2();

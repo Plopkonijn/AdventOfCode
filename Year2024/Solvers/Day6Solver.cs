@@ -1,5 +1,5 @@
 ﻿namespace Year2024.Solvers;
-public class Day6Solver : AdventOfCodeSolver
+public class Day6Solver : DefaultAdventOfCodeSolver
 {
     public Day6Solver(string[] input) : base(input)
     {

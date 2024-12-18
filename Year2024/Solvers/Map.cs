@@ -1,14 +1,9 @@
 ﻿
 namespace Year2024.Solvers;
 
-internal class Map
+internal class Map(string[] input)
 {
-    private readonly string[] _input;
-
-    public Map(string[] input)
-    {
-        _input = input;
-    }
+    private readonly string[] _input = input;
 
     public char this[Position position] => _input[position.Y][position.X];
 
