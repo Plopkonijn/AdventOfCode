@@ -2,15 +2,14 @@ using Year2024.Solvers;
 
 namespace Year2024.Tests;
 
-public sealed class Day7SolverTests : AdventOfCodeSolverTests
+public sealed class Day7SolverTests : DefaultAdventOfCodeSolverTests
 {
     protected override int Day => 7;
 
-    protected override AdventOfCodeSolver GetSolver(string[] input)
+    protected override AdventOfCodeSolver<long, long> GetSolver(string[] input)
     {
         return new Day7Solver(input);
     }
-
     [Fact]
     public void Example1()
     {
@@ -27,10 +26,10 @@ public sealed class Day7SolverTests : AdventOfCodeSolverTests
             "21037: 9 7 18 13",
             "292: 11 6 16 20"
         ];
-        AdventOfCodeSolver solver = GetSolver(input);
+        AdventOfCodeSolver<long, long> solver = GetSolver(input);
 
         //Act
-        long result = solver.SolvePart1();
+        var result = solver.SolvePart1();
 
         //Assert
         Assert.Equal(3749, result);
@@ -52,7 +51,7 @@ public sealed class Day7SolverTests : AdventOfCodeSolverTests
             "21037: 9 7 18 13",
             "292: 11 6 16 20"
         ];
-        AdventOfCodeSolver solver = GetSolver(input);
+        AdventOfCodeSolver<long, long> solver = GetSolver(input);
 
         //Act
         var result = solver.SolvePart2();

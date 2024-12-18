@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Year2024.Solvers;
 
-public sealed class Day7Solver(string[] input) : AdventOfCodeSolver(input)
+public sealed class Day7Solver(string[] input) : DefaultAdventOfCodeSolver(input)
 {
     public override long SolvePart1()
     {
@@ -17,10 +17,10 @@ public sealed class Day7Solver(string[] input) : AdventOfCodeSolver(input)
     private long CalculateTotalPossibleEquations(params Operation[] operations)
     {
         long total = 0;
-        foreach (var line in _input)
+        foreach (string line in _input)
         {
             Match resultMatch = Regex.Match(line, @"\d+(?=:)");
-            var result = long.Parse(resultMatch.Value);
+            long result = long.Parse(resultMatch.Value);
 
             MatchCollection operandsMatch = Regex.Matches(line, @"\d+(?![\d:])");
             List<long> operands = operandsMatch.Select(m => long.Parse(m.Value))
@@ -43,10 +43,10 @@ public sealed class Day7Solver(string[] input) : AdventOfCodeSolver(input)
             return expectedResult == actualResult;
         }
 
-        var operand = operands[index];
+        long operand = operands[index];
         foreach (Operation operation in operations)
         {
-            var newResult = operation(actualResult, operand);
+            long newResult = operation(actualResult, operand);
             if (newResult <= expectedResult && IsPossibleEquation(expectedResult, newResult, operands, index + 1, operations))
             {
                 return true;
