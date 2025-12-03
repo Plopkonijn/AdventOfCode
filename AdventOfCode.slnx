@@ -5,5 +5,6 @@
     <File Path="src/Directory.Build.targets" />
     <File Path="src/Directory.Packages.props" />
   </Folder>
+  <Project Path="AdventOfCode.Solvers.Tests/AdventOfCode.Solvers.Tests.csproj" Id="6a550514-8aba-49c8-b074-43f6af037b9f" />
   <Project Path="src/AdvenOfCode.Solvers/AdvenOfCode.Solvers.csproj" />
 </Solution>

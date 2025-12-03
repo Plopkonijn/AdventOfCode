@@ -10,14 +10,6 @@
 		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="SonarAnalyzer.CSharp">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
 	
 	<ItemGroup Condition="$(MSBuildProjectName.EndsWith('UnitTests'))">
 		<PackageReference Include="coverlet.collector" />

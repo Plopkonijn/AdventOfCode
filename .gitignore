@@ -396,4 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/src/AdvenOfCode.Solvers/year */day */input.txt
+/src/AdvenOfCode.Solvers.Tests/Year*/Day*/input.txt
+/AdventOfCode.Solvers.Tests/Year*/Day*/input.txt
+/AdventOfCode.Solvers.Tests/Year2025/Day1/example.txt
