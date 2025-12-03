@@ -2,58 +2,39 @@
 
 namespace AdventOfCode.Solvers.Tests.Year2025.Day1
 {
-    public class SecretEntranceSolverTests
+    public class SecretEntranceSolverTests : AdventOfCodeTestsBase
     {
-        [Fact]
-        public void Example_Part1()
+        public override string PuzzleInputPath => @"Year2025\Day1";
+
+        [Theory]
+        [InlineData("example.txt", 3)]
+        [InlineData("input.txt", 995)]
+        public void Part1(string inputFilePath, int expectedSolution)
         {
             //Arrange
-            string[] input = File.ReadAllLines(@"Year2025\Day1\example.txt");
+            string[] input = ReadPuzzleInput(inputFilePath);
 
             //Act
-            int result = SecretEntranceSolver.SolvePart1(input);
+            int actualSolution = SecretEntranceSolver.SolvePart1(input);
 
             //Assert
-            Assert.Equal(3, result);
+            Assert.Equal(expectedSolution, actualSolution);
         }
 
-        [Fact]
-        public void Day1_Part1()
+
+        [Theory]
+        [InlineData("example.txt", 6)]
+        [InlineData("input.txt", 5847)]
+        public void Part2(string inputFilePath, int expectedSolution)
         {
             //Arrange
-            string[] input = File.ReadAllLines(@"Year2025\Day1\input.txt");
+            string[] input = ReadPuzzleInput(inputFilePath);
 
             //Act
-            int result = SecretEntranceSolver.SolvePart1(input);
+            int actualSolution = SecretEntranceSolver.SolvePart2(input);
 
             //Assert
-            Assert.Equal(995, result);
-        }
-
-        [Fact]
-        public void Example_Part2()
-        {
-            //Arrange
-            string[] input = File.ReadAllLines(@"Year2025\Day1\example.txt");
-
-            //Act
-            int result = SecretEntranceSolver.SolvePart2(input);
-
-            //Assert
-            Assert.Equal(6, result);
-        }
-
-        [Fact]
-        public void Day1_Part2()
-        {
-            //Arrange
-            string[] input = File.ReadAllLines(@"Year2025\Day1\input.txt");
-
-            //Act
-            int result = SecretEntranceSolver.SolvePart2(input);
-
-            //Assert
-            Assert.Equal(5847, result);
+            Assert.Equal(expectedSolution, actualSolution);
         }
     }
 }
