@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="src/.editorconfig" />
+    <File Path="src/Directory.Build.props" />
+    <File Path="src/Directory.Build.targets" />
+    <File Path="src/Directory.Packages.props" />
+  </Folder>
+  <Project Path="src/AdvenOfCode.Solvers/AdvenOfCode.Solvers.csproj" />
+</Solution>
