@@ -1,40 +1,47 @@
-﻿using AdvenOfCode.Solvers.Year2025.Day1;
+﻿using AdvenOfCode.Solvers.Year2025;
+using AdvenOfCode.Solvers.Year2025.Day1;
 
-namespace AdventOfCode.Solvers.Tests.Year2025.Day1
+namespace AdventOfCode.Solvers.Tests.Year2025.Day1;
+
+public sealed class SecretEntranceSolverTests : AdventOfCodeTestsBase<SecretEntranceSolver>
 {
-    public class SecretEntranceSolverTests : AdventOfCodeTestsBase
+    public override string PuzzleInputPath => @"Year2025\Day1";
+
+    protected override SecretEntranceSolver CreateSolver(string[] puzzleInput)
     {
-        public override string PuzzleInputPath => @"Year2025\Day1";
+        return new SecretEntranceSolver(puzzleInput);
+    }
 
-        [Theory]
-        [InlineData("example.txt", 3)]
-        [InlineData("input.txt", 995)]
-        public void Part1(string inputFilePath, int expectedSolution)
-        {
-            //Arrange
-            string[] input = ReadPuzzleInput(inputFilePath);
+    [Theory]
+    [InlineData("example.txt", 3)]
+    [InlineData("input.txt", 995)]
+    public void Part1(string inputFilePath, long expectedSolution)
+    {
+        //Arrange
+        string[] input = ReadPuzzleInput(inputFilePath);
+        Solver solver = CreateSolver(input);
 
-            //Act
-            int actualSolution = SecretEntranceSolver.SolvePart1(input);
+        //Act
+        long actualSolution = solver.SolvePart1();
 
-            //Assert
-            Assert.Equal(expectedSolution, actualSolution);
-        }
+        //Assert
+        Assert.Equal(expectedSolution, actualSolution);
+    }
 
 
-        [Theory]
-        [InlineData("example.txt", 6)]
-        [InlineData("input.txt", 5847)]
-        public void Part2(string inputFilePath, int expectedSolution)
-        {
-            //Arrange
-            string[] input = ReadPuzzleInput(inputFilePath);
+    [Theory]
+    [InlineData("example.txt", 6)]
+    [InlineData("input.txt", 5847)]
+    public void Part2(string inputFilePath, long expectedSolution)
+    {
+        //Arrange
+        string[] input = ReadPuzzleInput(inputFilePath);
+        Solver solver = CreateSolver(input);
 
-            //Act
-            int actualSolution = SecretEntranceSolver.SolvePart2(input);
+        //Act
+        long actualSolution = solver.SolvePart2();
 
-            //Assert
-            Assert.Equal(expectedSolution, actualSolution);
-        }
+        //Assert
+        Assert.Equal(expectedSolution, actualSolution);
     }
 }

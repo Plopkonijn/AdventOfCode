@@ -4,25 +4,23 @@ using System.Globalization;
 
 namespace AdvenOfCode.Solvers.Year2025.Day1;
 
-public static class SecretEntranceSolver
+public sealed class SecretEntranceSolver(string[] input) : Solver(input)
 {
     private const int dialStartValue = 50;
     private const int dialMaxValue = 100;
 
-
-    public static int SolvePart1(string[] input)
+    public override long SolvePart1()
     {
-        return input.Select(ParseLine)
-                    .Aggregate(seed: (dialValue: dialStartValue, result: 0), TurnPart1)
-                    .result;
+        return Input.Select(ParseLine)
+                     .Aggregate(seed: (dialValue: dialStartValue, result: 0), TurnPart1)
+                     .result;
     }
 
-    public static int SolvePart2(string[] input)
+    public override long SolvePart2()
     {
-        return input.Select(ParseLine)
-                    .Aggregate(seed: (dialValue: dialStartValue, result: 0), TurnPart2)
-                    .result;
-
+        return Input.Select(ParseLine)
+                     .Aggregate(seed: (dialValue: dialStartValue, result: 0), TurnPart2)
+                     .result;
     }
     private static (int dialValue, int result) TurnPart2((int dialValue, int result) t, int distance)
     {
