@@ -31,4 +31,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Year2025\Day3\example.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

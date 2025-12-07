@@ -14,5 +14,8 @@ namespace AdventOfCode.Solvers.Tests.Year2025
             string path = Path.Combine(PuzzleInputPath, inputFileName);
             return File.ReadAllLines(path);
         }
+
+        public abstract void Part1(string inputFilePath, long expectedSolution);
+        public abstract void Part2(string inputFilePath, long expectedSolution);
     }
 }

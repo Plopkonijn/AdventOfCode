@@ -13,7 +13,7 @@ public class GiftShopSolverTests : AdventOfCodeTestsBase<GiftShopSolver>
     [Theory]
     [InlineData("example.txt", 1227775554)]
     [InlineData("input.txt", 24157613387)]
-    public void Part1(string inputFilePath, long expectedSolution)
+    public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
@@ -30,7 +30,7 @@ public class GiftShopSolverTests : AdventOfCodeTestsBase<GiftShopSolver>
     [Theory]
     [InlineData("example.txt", 4174379265)]
     [InlineData("input.txt", 33832678380)]
-    public void Part2(string inputFilePath, long expectedSolution)
+    public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);

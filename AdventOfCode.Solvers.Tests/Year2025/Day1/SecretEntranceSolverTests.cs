@@ -15,7 +15,7 @@ public sealed class SecretEntranceSolverTests : AdventOfCodeTestsBase<SecretEntr
     [Theory]
     [InlineData("example.txt", 3)]
     [InlineData("input.txt", 995)]
-    public void Part1(string inputFilePath, long expectedSolution)
+    public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
@@ -32,7 +32,7 @@ public sealed class SecretEntranceSolverTests : AdventOfCodeTestsBase<SecretEntr
     [Theory]
     [InlineData("example.txt", 6)]
     [InlineData("input.txt", 5847)]
-    public void Part2(string inputFilePath, long expectedSolution)
+    public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
