@@ -9,7 +9,7 @@ public sealed class CafeteriaSolver(string[] input) : Solver(input)
         long result = 0;
         int i = 0;
         List<(long min, long max)> idRanges = [];
-        while (i < Input.Count && Input[i] is string line && !string.IsNullOrEmpty(line))
+        while (i < Input.Length && Input[i] is string line && !string.IsNullOrEmpty(line))
         {
             string[] idRange = line.Split('-');
             long idMin = long.Parse(idRange[0], CultureInfo.InvariantCulture);
@@ -18,7 +18,7 @@ public sealed class CafeteriaSolver(string[] input) : Solver(input)
             i++;
         }
         i++;
-        while (i < Input.Count && Input[i] is string line && !string.IsNullOrEmpty(line))
+        while (i < Input.Length && Input[i] is string line && !string.IsNullOrEmpty(line))
         {
             long id = long.Parse(line, CultureInfo.InvariantCulture);
             bool isInRange = idRanges.Any(range => range.min <= id && id <= range.max);
@@ -37,7 +37,7 @@ public sealed class CafeteriaSolver(string[] input) : Solver(input)
         int i = 0;
 
         List<Range> idRanges = [];
-        while (i < Input.Count && Input[i] is string line && !string.IsNullOrEmpty(line))
+        while (i < Input.Length && Input[i] is string line && !string.IsNullOrEmpty(line))
         {
             string[] rangeSplit = line.Split('-');
             long idMin = long.Parse(rangeSplit[0], CultureInfo.InvariantCulture);

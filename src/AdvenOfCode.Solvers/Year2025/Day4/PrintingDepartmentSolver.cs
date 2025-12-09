@@ -5,7 +5,7 @@ public sealed class PrintingDepartmentSolver(string[] input) : Solver(input)
     public override long SolvePart1()
     {
         long result = 0;
-        for (int y = 0; y < Input.Count; y++)
+        for (int y = 0; y < Input.Length; y++)
         {
             string line = Input[y];
             for (int x = 0; x < line.Length; x++)
@@ -33,7 +33,7 @@ public sealed class PrintingDepartmentSolver(string[] input) : Solver(input)
             for (int dy = -1; dy <= 1; dy++)
             {
                 int y = yPosition + dy;
-                if (y < 0 || y >= Input.Count)
+                if (y < 0 || y >= Input.Length)
                 {
                     continue;
                 }
