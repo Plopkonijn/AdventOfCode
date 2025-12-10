@@ -35,8 +35,43 @@ public sealed class LaboratoriesSolver(string[] input) : Solver(input)
         return result;
     }
 
+    private sealed record Beam(int Index, long Amount)
+    {
+        public int Index { get; set; } = Index;
+        public long Amount { get; set; } = Amount;
+    }
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        long result = 0;
+        LinkedList<Beam> beams = new([new Beam(Input[0].IndexOf('S', StringComparison.InvariantCulture), 1)]);
+        foreach (string line in Input[1..])
+        {
+            for (LinkedListNode<Beam>? n = beams.First; n != null; n = n.Next)
+            {
+                Beam beam = n.Value;
+                if (line[beam.Index] is '^')
+                {
+                    result += beam.Amount;
+                    if (n.Previous is { Value: { } previousBeam } && previousBeam.Index == beam.Index - 1)
+                    {
+                        previousBeam.Amount += beam.Amount;
+                        beam.Index++;
+                    }
+                    else
+                    {
+                        n = beams.AddAfter(n, new Beam(beam.Index + 1, beam.Amount));
+                        beam.Index--;
+                    }
+                }
+                else if (n.Previous is { Value: { } previousBeam } && previousBeam == n.Value)
+                {
+                    previousBeam.Amount += beam.Amount;
+                    LinkedListNode<Beam> t = n.Previous;
+                    beams.Remove(n);
+                    n = t;
+                }
+            }
+        }
+        return beams.Sum(b => b.Amount);
     }
 }

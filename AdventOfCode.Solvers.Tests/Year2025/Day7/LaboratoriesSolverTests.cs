@@ -25,8 +25,8 @@ public sealed class LaboratoriesSolverTests : AdventOfCodeTestsBase<Laboratories
 
 
     [Theory]
-    [InlineData("example.txt", 0)]
-    [InlineData("input.txt", 0)]
+    [InlineData("example.txt", 40)]
+    [InlineData("input.txt", 13883459503480)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
