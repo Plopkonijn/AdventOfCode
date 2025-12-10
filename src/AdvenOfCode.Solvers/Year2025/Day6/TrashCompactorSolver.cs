@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace AdvenOfCode.Solvers.Year2025;
+namespace AdvenOfCode.Solvers.Year2025.Day6;
 
 public sealed class TrashCompactorSolver(string[] input) : Solver(input)
 {

@@ -1,15 +1,15 @@
 ﻿using AdvenOfCode.Solvers.Year2025;
-using AdvenOfCode.Solvers.Year2025.Day6;
+using AdvenOfCode.Solvers.Year2025.Day7;
 
-namespace AdventOfCode.Solvers.Tests.Year2025.Day6;
+namespace AdventOfCode.Solvers.Tests.Year2025.Day7;
 
-public class TrashCompactorSolverTests : AdventOfCodeTestsBase<TrashCompactorSolver>
+public sealed class LaboratoriesSolverTests : AdventOfCodeTestsBase<LaboratoriesSolver>
 {
-    public override string PuzzleInputPath => @"Year2025\Day6";
+    public override string PuzzleInputPath => @"Year2025\Day7";
 
     [Theory]
-    [InlineData("example.txt", 4277556)]
-    [InlineData("input.txt", 4076006202939)]
+    [InlineData("example.txt", 21)]
+    [InlineData("input.txt", 1546)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -25,8 +25,8 @@ public class TrashCompactorSolverTests : AdventOfCodeTestsBase<TrashCompactorSol
 
 
     [Theory]
-    [InlineData("example.txt", 3263827)]
-    [InlineData("input.txt", 7903168391557)]
+    [InlineData("example.txt", 0)]
+    [InlineData("input.txt", 0)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -40,8 +40,8 @@ public class TrashCompactorSolverTests : AdventOfCodeTestsBase<TrashCompactorSol
         Assert.Equal(expectedSolution, actualSolution);
     }
 
-    protected override TrashCompactorSolver CreateSolver(string[] puzzleInput)
+    protected override LaboratoriesSolver CreateSolver(string[] puzzleInput)
     {
-        return new TrashCompactorSolver(puzzleInput);
+        return new LaboratoriesSolver(puzzleInput);
     }
 }
