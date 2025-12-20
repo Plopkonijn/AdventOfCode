@@ -26,4 +26,3 @@ internal sealed record Range(long Min, long Max)
 
 
 }
-

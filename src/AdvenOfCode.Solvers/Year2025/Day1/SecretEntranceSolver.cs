@@ -84,7 +84,3 @@ public sealed class SecretEntranceSolver(string[] input) : Solver(input)
 
 
 }
-
-
-
-

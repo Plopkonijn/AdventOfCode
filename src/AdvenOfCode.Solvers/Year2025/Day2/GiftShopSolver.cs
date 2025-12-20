@@ -59,4 +59,3 @@ public sealed partial class GiftShopSolver(string[] input) : Solver(input)
 
 
 }
-

@@ -80,4 +80,3 @@ public sealed class CafeteriaSolver(string[] input) : Solver(input)
         }
     }
 }
-

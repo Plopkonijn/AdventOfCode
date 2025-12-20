@@ -37,4 +37,3 @@ internal sealed class DisjointSet
         x.Size += y.Size;
     }
 }
-

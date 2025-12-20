@@ -8,7 +8,7 @@ public sealed class MovieTheaterSolverTests : AdventOfCodeTestsBase<MovieTheater
 
     [Theory]
     [InlineData("example.txt", 50)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 4777816465)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
