@@ -8,12 +8,12 @@ public sealed class FactorySolver(string[] input) : Solver(input)
         long result = 0;
         foreach (string line in Input)
         {
-            result += CalculatePresses(line);
+            result += CalculatePresses1(line);
         }
         return result;
     }
 
-    private static long CalculatePresses(string line)
+    private static long CalculatePresses1(string line)
     {
         MachineConfiguration config = MachineConfiguration.Parse(line);
         Dictionary<int, long> dist = new() { { 0, 0 } };
@@ -42,6 +42,36 @@ public sealed class FactorySolver(string[] input) : Solver(input)
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        long result = 0;
+        foreach (string line in Input)
+        {
+            MachineConfiguration config = MachineConfiguration.Parse(line);
+            result += CalculatePresses2(config.Joltage, config.Wirings);
+        }
+        return result;
+    }
+
+    private static long CalculatePresses2(Joltage joltage, ReadOnlySpan<int> wirings)
+    {
+        if (joltage.IsZero)
+        {
+            return 0;
+        }
+        if (wirings.Length == 0)
+        {
+            return int.MaxValue;
+        }
+
+        long bestResult = CalculatePresses2(joltage, wirings[1..]);
+        joltage = joltage.Press(wirings[0]);
+        for (long i = 1; joltage.IsValid; i++, joltage = joltage.Press(wirings[0]))
+        {
+            long result = i + CalculatePresses2(joltage, wirings[1..]);
+            if (result < bestResult)
+            {
+                bestResult = result;
+            }
+        }
+        return bestResult;
     }
 }
