@@ -24,8 +24,8 @@ public sealed class MovieTheaterSolverTests : AdventOfCodeTestsBase<MovieTheater
 
 
     [Theory]
-    [InlineData("example.txt", 0)]
-    [InlineData("input.txt", 0)]
+    [InlineData("example.txt", 24)]
+    [InlineData("input.txt", 1410501884)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange

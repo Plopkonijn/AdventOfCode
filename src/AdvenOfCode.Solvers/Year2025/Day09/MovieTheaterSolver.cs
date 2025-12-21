@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using Tile = (long X, long Y);
 
 namespace AdvenOfCode.Solvers.Year2025.Day09;
 
@@ -9,15 +8,13 @@ public sealed class MovieTheaterSolver(string[] input) : Solver(input)
     public override long SolvePart1()
     {
         long result = 0;
-        Tile[] tiles = Input.Select(line => line.Split(',').Select(s => long.Parse(s, CultureInfo.InvariantCulture)).ToArray())
-            .Select(s => new Tile(s[0], s[1]))
-            .ToArray();
+        Tile[] tiles = ReadTiles();
         for (int i = 0; i < tiles.Length; i++)
         {
-            (long X, long Y) tileI = tiles[i];
+            Tile tileI = tiles[i];
             for (int j = i + 1; j < tiles.Length; j++)
             {
-                (long X, long Y) tileJ = tiles[j];
+                Tile tileJ = tiles[j];
                 long area = CalculateArea(tileI, tileJ);
                 if (area > result)
                 {
@@ -28,6 +25,13 @@ public sealed class MovieTheaterSolver(string[] input) : Solver(input)
 
 
         return result;
+    }
+
+    private Tile[] ReadTiles()
+    {
+        return Input.Select(line => line.Split(',').Select(s => long.Parse(s, CultureInfo.InvariantCulture)).ToArray())
+                    .Select(s => new Tile(s[0], s[1]))
+                    .ToArray();
     }
 
     private static long CalculateArea(Tile a, Tile b)
@@ -44,6 +48,36 @@ public sealed class MovieTheaterSolver(string[] input) : Solver(input)
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        long result = 0;
+        Tile[] redTiles = ReadTiles();
+        Edge[] edges = redTiles.Zip(redTiles[1..].Append(redTiles[0]))
+            .Select(t => new Edge(t.First, t.Second))
+            .ToArray();
+
+        for (int i = 0; i < redTiles.Length; i++)
+        {
+            Tile tileI = redTiles[i];
+            for (int j = i + 1; j < redTiles.Length; j++)
+            {
+                Tile tileJ = redTiles[j];
+                Rectangle rectangle = new(tileI, tileJ);
+                long area = rectangle.CalculateArea();
+                if (area <= result || edges.Any(e => Intersects(rectangle, e)))
+                {
+                    continue;
+                }
+                result = area;
+            }
+        }
+
+        return result;
+    }
+
+    private static bool Intersects(Rectangle rectangle, Edge edge)
+    {
+        return rectangle.MinX < edge.MaxX &&
+               rectangle.MaxX > edge.MinX &&
+               rectangle.MinY < edge.MaxY &&
+               rectangle.MaxY > edge.MinY;
     }
 }
