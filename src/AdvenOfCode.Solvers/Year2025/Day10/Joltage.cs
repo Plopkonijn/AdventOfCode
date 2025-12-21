@@ -2,17 +2,17 @@
 
 internal sealed class Joltage : IEquatable<Joltage>
 {
-    public int Length => _values.Length;
-    private readonly int[] _values;
+    public int Length => Values.Length;
+    public int[] Values { get; private set; }
     public Joltage(int[] values)
     {
-        _values = values;
+        Values = values;
     }
 
     public bool Equals(Joltage? other)
     {
         return other is not null &&
-               other._values.SequenceEqual(_values);
+               other.Values.SequenceEqual(Values);
     }
 
     public override bool Equals(object? obj)
@@ -23,12 +23,12 @@ internal sealed class Joltage : IEquatable<Joltage>
 
     public override int GetHashCode()
     {
-        return _values.Aggregate(HashCode.Combine);
+        return Values.Aggregate(HashCode.Combine);
     }
 
     internal Joltage Press(int wiring)
     {
-        int[] values = _values.ToArray();
+        int[] values = Values.ToArray();
         int i = 0;
         while (wiring > 0)
         {
@@ -42,6 +42,6 @@ internal sealed class Joltage : IEquatable<Joltage>
         return new Joltage(values);
     }
 
-    internal bool IsValid => _values.All(i => i >= 0);
-    internal bool IsZero => _values.All(i => i == 0);
+    internal bool IsValid => Values.All(i => i >= 0);
+    internal bool IsZero => Values.All(i => i == 0);
 }

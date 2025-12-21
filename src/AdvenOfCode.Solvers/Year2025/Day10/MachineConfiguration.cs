@@ -8,7 +8,7 @@ internal sealed class MachineConfiguration
     public int Diagram { get; init; }
     public int[] Wirings { get; init; }
     public Joltage Joltage { get; init; }
-    private MachineConfiguration(int diagram, int[] wirings, int[] joltage)
+    internal MachineConfiguration(int diagram, int[] wirings, int[] joltage)
     {
         Diagram = diagram;
         Wirings = wirings;
