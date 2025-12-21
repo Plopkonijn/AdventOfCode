@@ -8,7 +8,7 @@ public sealed class ReactorSolverTests : AdventOfCodeTestsBase<ReactorSolver>
 
     [Theory]
     [InlineData("example.txt", 5)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 431)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -24,8 +24,8 @@ public sealed class ReactorSolverTests : AdventOfCodeTestsBase<ReactorSolver>
 
 
     [Theory]
-    [InlineData("example.txt", 0)]
-    [InlineData("input.txt", 0)]
+    [InlineData("example2.txt", 2)]
+    [InlineData("input.txt", 358458157650450)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
