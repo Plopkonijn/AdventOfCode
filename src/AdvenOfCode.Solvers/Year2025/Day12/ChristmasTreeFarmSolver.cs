@@ -50,6 +50,6 @@ public sealed class ChristmasTreeFarmSolver(string[] input) : Solver(input)
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("There was no part 2");
     }
 }
