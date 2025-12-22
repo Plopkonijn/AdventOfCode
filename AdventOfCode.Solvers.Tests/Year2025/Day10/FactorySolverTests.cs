@@ -25,7 +25,7 @@ public sealed class FactorySolverTests : AdventOfCodeTestsBase<FactorySolver>
 
     [Theory]
     [InlineData("example.txt", 33)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 18011)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
