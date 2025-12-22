@@ -1,17 +1,18 @@
-﻿using System.Globalization;
+﻿using System.Collections.Specialized;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace AdvenOfCode.Solvers.Year2025.Day10;
 
 internal sealed class MachineConfiguration
 {
-    public int Diagram { get; init; }
-    public int[] Wirings { get; init; }
+    public BitVector32 Diagram { get; init; }
+    public List<Button> Buttons { get; init; }
     public Joltage Joltage { get; init; }
-    internal MachineConfiguration(int diagram, int[] wirings, int[] joltage)
+    internal MachineConfiguration(BitVector32 diagram, List<Button> buttons, int[] joltage)
     {
         Diagram = diagram;
-        Wirings = wirings;
+        Buttons = buttons;
         Joltage = new(joltage);
     }
 
@@ -33,17 +34,18 @@ internal sealed class MachineConfiguration
             };
         }
 
-        MatchCollection wiringsMatches = Regex.Matches(input, @"\((\d+,)*\d+\)");
-        if (wiringsMatches.Count == 0)
+        MatchCollection buttonsMatch = Regex.Matches(input, @"\((\d+,)*\d+\)");
+        if (buttonsMatch.Count == 0)
         {
             throw new ArgumentException("Could not parse wirings");
         }
-        int[] wirings = wiringsMatches.Select(m => m.Value[1..^1])
+        List<Button> buttons = buttonsMatch.Select(m => m.Value[1..^1])
             .Select(s => s.Split(',')
                           .Select(c => int.Parse(c, CultureInfo.InvariantCulture))
                           .Aggregate(0, (wiring, button) => wiring |= 1 << button)
                           )
-            .ToArray();
+            .Select(i => new Button(new(i)))
+            .ToList();
 
         Match joltageMatch = Regex.Match(input, @"\{(\d+,)*\d+\}");
         int[] joltage = joltageMatch.Value[1..^1]
@@ -51,6 +53,6 @@ internal sealed class MachineConfiguration
             .Select(c => int.Parse(c, CultureInfo.InvariantCulture))
             .ToArray();
 
-        return new MachineConfiguration(diagram, wirings, joltage);
+        return new MachineConfiguration(new(diagram), buttons, joltage);
     }
 }

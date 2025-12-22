@@ -44,4 +44,9 @@ internal sealed class Joltage : IEquatable<Joltage>
 
     internal bool IsValid => Values.All(i => i >= 0);
     internal bool IsZero => Values.All(i => i == 0);
+
+    public override string ToString()
+    {
+        return string.Join(',', Values);
+    }
 }
