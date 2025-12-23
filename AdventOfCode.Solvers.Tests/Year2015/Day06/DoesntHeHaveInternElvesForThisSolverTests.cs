@@ -30,8 +30,8 @@ public sealed class DoesntHeHaveInternElvesForThisSolverTests : AdventOfCodeTest
 
 
     [Theory]
-    [InlineData("example01.txt", 0)]
-    [InlineData("input.txt", 0)]
+    [InlineData("example02.txt", 2000001)]
+    [InlineData("input.txt", 17836115)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange

@@ -7,7 +7,7 @@ public sealed class ProbablyAFireHazardSolver(string[] input) : Solver(input)
 {
     public override long SolvePart1()
     {
-        LightGrid lightGrid = new();
+        BinaryLightGrid lightGrid = new();
         foreach (string line in Input)
         {
             (Instruction instruction, IntLocation start, IntLocation end) = ParseInstruction(line);
@@ -55,6 +55,25 @@ public sealed class ProbablyAFireHazardSolver(string[] input) : Solver(input)
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        BrightnessLightGrid lightGrid = new();
+        foreach (string line in Input)
+        {
+            (Instruction instruction, IntLocation start, IntLocation end) = ParseInstruction(line);
+            switch (instruction)
+            {
+                case Instruction.TurnOn:
+                    lightGrid.TurnOn(start, end);
+                    break;
+                case Instruction.Toggle:
+                    lightGrid.Toggle(start, end);
+                    break;
+                case Instruction.TurnOff:
+                    lightGrid.TurnOff(start, end);
+                    break;
+            }
+
+        }
+
+        return lightGrid.GetTotalBrightness();
     }
 }
