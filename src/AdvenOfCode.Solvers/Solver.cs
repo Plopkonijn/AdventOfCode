@@ -1,4 +1,4 @@
-﻿namespace AdvenOfCode.Solvers.Year2025;
+﻿namespace AdvenOfCode.Solvers;
 
 public abstract class Solver(string[] input)
 {

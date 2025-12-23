@@ -1,6 +1,6 @@
-﻿using AdvenOfCode.Solvers.Year2025;
+﻿using AdvenOfCode.Solvers;
 
-namespace AdventOfCode.Solvers.Tests.Year2025
+namespace AdventOfCode.Solvers.Tests
 {
     public abstract class AdventOfCodeTestsBase
     {

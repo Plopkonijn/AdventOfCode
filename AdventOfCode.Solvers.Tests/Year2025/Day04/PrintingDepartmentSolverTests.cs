@@ -1,4 +1,4 @@
-﻿using AdvenOfCode.Solvers.Year2025;
+﻿using AdvenOfCode.Solvers;
 using AdvenOfCode.Solvers.Year2025.Day4;
 
 namespace AdventOfCode.Solvers.Tests.Year2025.Day04;

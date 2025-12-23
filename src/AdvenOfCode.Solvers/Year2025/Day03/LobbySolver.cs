@@ -1,5 +1,4 @@
-﻿
-namespace AdvenOfCode.Solvers.Year2025.Day3;
+﻿namespace AdvenOfCode.Solvers.Year2025.Day3;
 
 public sealed class LobbySolver(string[] input) : Solver(input)
 {
