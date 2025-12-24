@@ -58,6 +58,8 @@ public sealed class SomeAssemblyRequiredSolver(string[] input) : Solver(input)
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        Circuit circuit = ParseCircuit();
+        short aValue = circuit.GetWireValue("a", []);
+        return circuit.GetWireValue("a", new() { { "b", aValue } });
     }
 }

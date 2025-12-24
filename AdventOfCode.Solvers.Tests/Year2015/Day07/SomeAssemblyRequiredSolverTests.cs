@@ -29,7 +29,7 @@ public sealed class SomeAssemblyRequiredSolverTests : AdventOfCodeTestsBase<Some
 
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 2797)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
