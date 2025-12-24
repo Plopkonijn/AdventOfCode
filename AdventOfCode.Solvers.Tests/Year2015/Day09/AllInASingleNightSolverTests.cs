@@ -1,20 +1,20 @@
 ﻿using AdvenOfCode.Solvers;
-using AdvenOfCode.Solvers.Year2015.Day08;
+using AdvenOfCode.Solvers.Year2015.Day09;
 
-namespace AdventOfCode.Solvers.Tests.Year2015.Day08;
+namespace AdventOfCode.Solvers.Tests.Year2015.Day09;
 
-public sealed class MatchsticksSolverTests : AdventOfCodeTestsBase<MatchsticksSolver>
+public sealed class AllInASingleNightSolverTests : AdventOfCodeTestsBase<AllInASingleNightSolver>
 {
-    public override string PuzzleInputPath => @"Year2015\Day08";
+    public override string PuzzleInputPath => @"Year2015\Day09";
 
-    protected override MatchsticksSolver CreateSolver(string[] puzzleInput)
+    protected override AllInASingleNightSolver CreateSolver(string[] puzzleInput)
     {
-        return new MatchsticksSolver(puzzleInput);
+        return new AllInASingleNightSolver(puzzleInput);
     }
 
     [Theory]
     [InlineData("example01.txt", 605)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 141)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
