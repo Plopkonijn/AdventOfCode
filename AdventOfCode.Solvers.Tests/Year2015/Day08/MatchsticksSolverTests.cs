@@ -30,6 +30,7 @@ public sealed class MatchsticksSolverTests : AdventOfCodeTestsBase<MatchsticksSo
 
 
     [Theory]
+    [InlineData("example01.txt", 19)]
     [InlineData("input.txt", 0)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
