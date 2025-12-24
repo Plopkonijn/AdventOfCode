@@ -4,7 +4,7 @@ namespace AdvenOfCode.Solvers.Year2015.Day10;
 
 public sealed class ElvesLookElvesSaySolver(string[] Input)
 {
-    public long SolvePart1(int iterations)
+    public long Solve(int iterations)
     {
         LinkedList<char> list = new(Input[0]);
         for (int i = 0; i < iterations; i++)
@@ -37,10 +37,5 @@ public sealed class ElvesLookElvesSaySolver(string[] Input)
             }
             current = next;
         }
-    }
-
-    public long SolvePart2()
-    {
-        throw new NotImplementedException();
     }
 }

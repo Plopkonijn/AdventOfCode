@@ -17,7 +17,7 @@ public sealed class ElvesLookElvesSaySolverTests : AdventOfCodeTestsBase
     [InlineData("example03.txt", 1, 4)]
     [InlineData("example04.txt", 1, 6)]
     [InlineData("example05.txt", 1, 6)]
-    [InlineData("input.txt", 40, 0)]
+    [InlineData("input.txt", 40, 329356)]
     public void Part1(string inputFilePath, int iterations, long expectedSolution)
     {
         //Arrange
@@ -25,7 +25,7 @@ public sealed class ElvesLookElvesSaySolverTests : AdventOfCodeTestsBase
         ElvesLookElvesSaySolver solver = CreateSolver(input);
 
         //Act
-        long actualSolution = solver.SolvePart1(iterations);
+        long actualSolution = solver.Solve(iterations);
 
         //Assert
         Assert.Equal(expectedSolution, actualSolution);
@@ -33,15 +33,15 @@ public sealed class ElvesLookElvesSaySolverTests : AdventOfCodeTestsBase
 
 
     [Theory]
-    [InlineData("input.txt", 0)]
-    public void Part2(string inputFilePath, long expectedSolution)
+    [InlineData("input.txt", 50, 0)]
+    public void Part2(string inputFilePath, int iterations, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
         ElvesLookElvesSaySolver solver = CreateSolver(input);
 
         //Act
-        long actualSolution = solver.SolvePart2();
+        long actualSolution = solver.Solve(iterations);
 
         //Assert
         Assert.Equal(expectedSolution, actualSolution);
