@@ -13,6 +13,7 @@ public sealed class SAbacusFrameworkIOSolverTests : AdventOfCodeTestsBase<SAbacu
     }
 
     [Theory]
+    [InlineData("example01.txt", 18)]
     [InlineData("input.txt", 156366)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
@@ -29,7 +30,8 @@ public sealed class SAbacusFrameworkIOSolverTests : AdventOfCodeTestsBase<SAbacu
 
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("example02.txt", 16)]
+    [InlineData("input.txt", 96852)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
