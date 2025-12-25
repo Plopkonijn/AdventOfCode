@@ -33,7 +33,7 @@ public sealed class ElvesLookElvesSaySolverTests : AdventOfCodeTestsBase
 
 
     [Theory]
-    [InlineData("input.txt", 50, 0)]
+    [InlineData("input.txt", 50, 4666278)]
     public void Part2(string inputFilePath, int iterations, long expectedSolution)
     {
         //Arrange
