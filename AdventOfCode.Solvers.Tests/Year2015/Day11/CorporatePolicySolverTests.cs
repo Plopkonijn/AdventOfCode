@@ -14,7 +14,7 @@ public sealed class CorporatePolicySolverTests : AdventOfCodeTestsBase
     [Theory]
     [InlineData("example01.txt", "abcdffaa")]
     [InlineData("example02.txt", "ghjaabcc")]
-    [InlineData("input.txt", "0")]
+    [InlineData("input01.txt", "vzbxxyzz")]
     public void Part1(string inputFilePath, string expectedSolution)
     {
         //Arrange
@@ -30,7 +30,7 @@ public sealed class CorporatePolicySolverTests : AdventOfCodeTestsBase
 
 
     [Theory]
-    [InlineData("input.txt", "")]
+    [InlineData("input02.txt", "")]
     public void Part2(string inputFilePath, string expectedSolution)
     {
         //Arrange

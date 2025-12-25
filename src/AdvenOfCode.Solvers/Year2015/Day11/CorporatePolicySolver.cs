@@ -5,24 +5,32 @@ public sealed class CorporatePolicySolver(string[] Input)
     public string SolvePart1()
     {
         char[] password = Input[0].ToArray();
+        FindNextPassword(password);
+        return new string(password);
+    }
+
+    private static void FindNextPassword(char[] password)
+    {
         while (!IsValid(password))
         {
-            for (int i = password.Length - 1; i >= 0; i--)
+            IncrementPassword(password);
+        }
+    }
+
+    private static void IncrementPassword(char[] password)
+    {
+        for (int i = password.Length - 1; i >= 0; i--)
+        {
+            if (password[i] == 'z')
             {
-                if (password[i] == 'z')
-                {
-                    password[i] = 'a';
-                }
-                else
-                {
-                    password[i]++;
-                    break;
-                }
+                password[i] = 'a';
+            }
+            else
+            {
+                password[i]++;
+                break;
             }
         }
-
-
-        return new string(password);
     }
 
     private static bool IsValid(char[] password)
@@ -81,6 +89,9 @@ public sealed class CorporatePolicySolver(string[] Input)
 
     public string SolvePart2()
     {
-        throw new NotImplementedException();
+        char[] password = Input[0].ToArray();
+        IncrementPassword(password);
+        FindNextPassword(password);
+        return new string(password);
     }
 }
