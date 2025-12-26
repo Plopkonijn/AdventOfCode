@@ -6,7 +6,7 @@ public sealed class ElvesLookElvesSaySolverTests : AdventOfCodeTestsBase
 {
     public override string PuzzleInputPath => @"Year2015\Day10";
 
-    protected ElvesLookElvesSaySolver CreateSolver(string[] puzzleInput)
+    private ElvesLookElvesSaySolver CreateSolver(string[] puzzleInput)
     {
         return new ElvesLookElvesSaySolver(puzzleInput);
     }

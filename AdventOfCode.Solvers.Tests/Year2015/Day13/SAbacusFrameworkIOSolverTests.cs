@@ -14,7 +14,7 @@ public sealed class SAbacusFrameworkIOSolverTests : AdventOfCodeTestsBase<Knight
 
     [Theory]
     [InlineData("example01.txt", 330)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 733)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange

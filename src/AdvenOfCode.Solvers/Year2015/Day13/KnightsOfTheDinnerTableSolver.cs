@@ -7,29 +7,12 @@ public sealed class KnightsOfTheDinnerTableSolver(string[] input) : Solver(input
 {
     public override long SolvePart1()
     {
-        HashSet<string> people = [];
-        Dictionary<(string, string), long> happinessDictionary = [];
-        foreach (string line in Input)
-        {
-            Match match = Regex.Match(line, @"(\w+) would (gain|lose) (\d+) happiness units by sitting next to (\w+).");
-            if (!match.Success)
-            {
-                throw new InvalidOperationException();
-            }
-            string source = match.Groups[1].Value;
-            long hapiness = long.Parse(match.Groups[3].Value, CultureInfo.InvariantCulture);
-            hapiness = match.Groups[2].Value switch
-            {
-                "gain" => hapiness,
-                "lose" => -hapiness,
-                _ => throw new InvalidOperationException()
-            };
-            string target = match.Groups[4].Value;
-            happinessDictionary.Add((source, target), hapiness);
-            _ = people.Add(source);
-            _ = people.Add(target);
-        }
+        InitializeSearch(out HashSet<string> people, out Dictionary<(string, string), long> happinessDictionary);
+        return FindOptimalSeatingHappiness(people, happinessDictionary);
+    }
 
+    private static long FindOptimalSeatingHappiness(HashSet<string> people, Dictionary<(string, string), long> happinessDictionary)
+    {
         Stack<Node> stack = new();
         foreach (string person in people)
         {
@@ -62,9 +45,43 @@ public sealed class KnightsOfTheDinnerTableSolver(string[] input) : Solver(input
         return bestHappiness;
     }
 
+    private void InitializeSearch(out HashSet<string> people, out Dictionary<(string, string), long> happinessDictionary)
+    {
+        people = [];
+        happinessDictionary = [];
+        foreach (string line in Input)
+        {
+            Match match = Regex.Match(line, @"(\w+) would (gain|lose) (\d+) happiness units by sitting next to (\w+).");
+            if (!match.Success)
+            {
+                throw new InvalidOperationException();
+            }
+            string source = match.Groups[1].Value;
+            long hapiness = long.Parse(match.Groups[3].Value, CultureInfo.InvariantCulture);
+            hapiness = match.Groups[2].Value switch
+            {
+                "gain" => hapiness,
+                "lose" => -hapiness,
+                _ => throw new InvalidOperationException()
+            };
+            string target = match.Groups[4].Value;
+            happinessDictionary.Add((source, target), hapiness);
+            _ = people.Add(source);
+            _ = people.Add(target);
+        }
+    }
+
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        InitializeSearch(out HashSet<string> people, out Dictionary<(string, string), long> happinessDictionary);
+        string me = "me";
+        foreach (string person in people)
+        {
+            happinessDictionary.Add((me, person), 0);
+            happinessDictionary.Add((person, me), 0);
+        }
+        _ = people.Add(me);
+        return FindOptimalSeatingHappiness(people, happinessDictionary);
     }
 }
 

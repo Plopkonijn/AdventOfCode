@@ -39,7 +39,7 @@ public sealed class PlaygroundSolverTests : AdventOfCodeTestsBase
         Assert.Equal(expectedSolution, actualSolution);
     }
 
-    protected PlaygroundSolver CreateSolver(string[] puzzleInput)
+    private PlaygroundSolver CreateSolver(string[] puzzleInput)
     {
         return new PlaygroundSolver(puzzleInput);
     }

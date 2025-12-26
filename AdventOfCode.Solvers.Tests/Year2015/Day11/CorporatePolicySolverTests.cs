@@ -6,7 +6,7 @@ public sealed class CorporatePolicySolverTests : AdventOfCodeTestsBase
 {
     public override string PuzzleInputPath => @"Year2015\Day11";
 
-    protected CorporatePolicySolver CreateSolver(string[] puzzleInput)
+    private CorporatePolicySolver CreateSolver(string[] puzzleInput)
     {
         return new CorporatePolicySolver(puzzleInput);
     }
