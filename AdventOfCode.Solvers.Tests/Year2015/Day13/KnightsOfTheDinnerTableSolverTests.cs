@@ -3,7 +3,7 @@ using AdvenOfCode.Solvers.Year2015.Day13;
 
 namespace AdventOfCode.Solvers.Tests.Year2015.Day13;
 
-public sealed class SAbacusFrameworkIOSolverTests : AdventOfCodeTestsBase<KnightsOfTheDinnerTableSolver>
+public sealed class KnightsOfTheDinnerTableSolverTests : AdventOfCodeTestsBase<KnightsOfTheDinnerTableSolver>
 {
     public override string PuzzleInputPath => @"Year2015\Day13";
 
