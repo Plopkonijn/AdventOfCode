@@ -49,10 +49,52 @@ public sealed class ReindeerOlympicsSolver(string[] Input)
         return reindeers;
     }
 
-    public long SolvePart2()
+    public long SolvePart2(long totalTime)
     {
-        throw new NotImplementedException();
+        Dictionary<Reindeer, State> reindeerStates = ParseReindeers().ToDictionary(r => r, r =>
+        new State { Position = 0, Score = 0, IsFlying = true, RemainingTime = r.FlyTime });
+        for (int i = 0; i < totalTime; i++)
+        {
+            IncrementTime(reindeerStates);
+            IncrementScore(reindeerStates);
+        }
+        return reindeerStates.Values.Max(s => s.Score);
     }
+
+    private static void IncrementScore(Dictionary<Reindeer, State> reindeerStates)
+    {
+        long maxPosition = reindeerStates.Values.Max(s => s.Position);
+        IEnumerable<State> maxStates = reindeerStates.Values.Where(s => s.Position == maxPosition);
+        foreach (State? state in maxStates)
+        {
+            state.Score++;
+        }
+    }
+
+    private static void IncrementTime(Dictionary<Reindeer, State> reindeerStates)
+    {
+        foreach ((Reindeer reindeer, State? state) in reindeerStates)
+        {
+            if (state.IsFlying)
+            {
+                state.Position += reindeer.FlyDistance;
+            }
+            state.RemainingTime--;
+            if (state.RemainingTime == 0)
+            {
+                state.IsFlying = !state.IsFlying;
+                state.RemainingTime = state.IsFlying ? reindeer.FlyTime : reindeer.RestTime;
+            }
+        }
+    }
+}
+
+internal sealed class State
+{
+    public long Position { get; set; }
+    public long Score { get; set; }
+    public bool IsFlying { get; set; }
+    public long RemainingTime { get; set; }
 }
 
 internal sealed record Reindeer(string Name, long FlyDistance, long FlyTime, long RestTime)

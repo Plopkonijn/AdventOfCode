@@ -28,16 +28,17 @@ public sealed class ReindeerOlympicsSolverTests : AdventOfCodeTestsBase
     }
 
 
+    [InlineData("example01.txt", 1000, 689)]
+    [InlineData("input.txt", 2503, 1102)]
     [Theory]
-    [InlineData("input.txt", 0)]
-    public void Part2(string inputFilePath, long expectedSolution)
+    public void Part2(string inputFilePath, long totalTime, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
         ReindeerOlympicsSolver solver = CreateSolver(input);
 
         //Act
-        long actualSolution = solver.SolvePart2();
+        long actualSolution = solver.SolvePart2(totalTime);
 
         //Assert
         Assert.Equal(expectedSolution, actualSolution);
