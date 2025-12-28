@@ -8,7 +8,7 @@ public sealed class ScienceForHungryPeopleSolverTests : AdventOfCodeTestsBase
 
     [Theory]
     [InlineData("example01.txt", 25, 4)]
-    [InlineData("input.txt", 150, 0)]
+    [InlineData("input.txt", 150, 4372)]
     public void Part1(string inputFilePath, long totalVolume, long expectedSolution)
     {
         //Arrange
@@ -24,16 +24,16 @@ public sealed class ScienceForHungryPeopleSolverTests : AdventOfCodeTestsBase
 
 
     [Theory]
-    [InlineData("example01.txt", 0)]
-    [InlineData("input.txt", 0)]
-    public void Part2(string inputFilePath, long expectedSolution)
+    [InlineData("example01.txt", 25, 3)]
+    [InlineData("input.txt", 150, 4)]
+    public void Part2(string inputFilePath, long totalVolume, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
         ScienceForHungryPeopleSolver solver = CreateSolver(input);
 
         //Act
-        long actualSolution = solver.SolvePart2();
+        long actualSolution = solver.SolvePart2(totalVolume);
 
         //Assert
         Assert.Equal(expectedSolution, actualSolution);
