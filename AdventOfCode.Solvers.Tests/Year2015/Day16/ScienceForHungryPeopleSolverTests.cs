@@ -7,7 +7,7 @@ public sealed class ScienceForHungryPeopleSolverTests : AdventOfCodeTestsBase<Sc
     public override string PuzzleInputPath => @"Year2015\Day16";
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 103)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
