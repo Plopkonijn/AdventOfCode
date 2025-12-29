@@ -8,7 +8,7 @@ public sealed class LikeAGifForYourYardSolverTests : AdventOfCodeTestsBase
 
     [Theory]
     [InlineData("example01.txt", 4, 4)]
-    [InlineData("input.txt", 100, 0)]
+    [InlineData("input.txt", 100, 814)]
     public void Part1(string inputFilePath, int steps, long expectedSolution)
     {
         //Arrange
@@ -24,16 +24,16 @@ public sealed class LikeAGifForYourYardSolverTests : AdventOfCodeTestsBase
 
 
     [Theory]
-    [InlineData("example01.txt", 0)]
-    [InlineData("input.txt", 0)]
-    public void Part2(string inputFilePath, long expectedSolution)
+    [InlineData("example01.txt", 5, 17)]
+    [InlineData("input.txt", 100, 0)]
+    public void Part2(string inputFilePath, int steps, long expectedSolution)
     {
         //Arrange
         string[] input = ReadPuzzleInput(inputFilePath);
         LikeAGifForYourYardSolver solver = CreateSolver(input);
 
         //Act
-        long actualSolution = solver.SolvePart2();
+        long actualSolution = solver.SolvePart2(steps);
 
         //Assert
         Assert.Equal(expectedSolution, actualSolution);

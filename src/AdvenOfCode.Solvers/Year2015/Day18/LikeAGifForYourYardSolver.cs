@@ -12,7 +12,7 @@ public sealed class LikeAGifForYourYardSolver(string[] Input)
             {
                 for (int y = 0; y < gridCurrent.Height; y++)
                 {
-                    var turnedOnNeighbours = gridCurrent.TurnedOnNeighbours(x, y);
+                    int turnedOnNeighbours = gridCurrent.TurnedOnNeighbours(x, y);
                     if (gridCurrent.IsOn(x, y))
                     {
                         if (turnedOnNeighbours is 2 or 3)
@@ -66,8 +66,53 @@ public sealed class LikeAGifForYourYardSolver(string[] Input)
         return grid;
     }
 
-    public long SolvePart2()
+    public long SolvePart2(int steps)
     {
-        throw new NotImplementedException();
+        LightGrid gridCurrent = ParseInput();
+        LightGrid gridNext = new(gridCurrent.Width, gridCurrent.Height);
+        gridNext[0, 0] = gridCurrent[0, 0] = true;
+        gridNext[0, gridNext.Height - 1] = gridCurrent[0, gridCurrent.Height - 1] = true;
+        gridNext[gridNext.Width - 1, 0] = gridCurrent[gridCurrent.Width - 1, 0] = true;
+        gridNext[gridNext.Width - 1, gridNext.Height - 1] = gridCurrent[gridCurrent.Width - 1, gridCurrent.Height - 1] = true;
+
+        for (int step = 0; step < steps; step++)
+        {
+            for (int x = 0; x < gridCurrent.Width; x++)
+            {
+                for (int y = 0; y < gridCurrent.Height; y++)
+                {
+                    if ((x == 0 || x == gridCurrent.Width - 1) && (y == 0 || y == gridCurrent.Height - 1))
+                    {
+                        continue;
+                    }
+                    int turnedOnNeighbours = gridCurrent.TurnedOnNeighbours(x, y);
+                    if (gridCurrent.IsOn(x, y))
+                    {
+                        if (turnedOnNeighbours is 2 or 3)
+                        {
+                            gridNext.TurnOn(x, y);
+                        }
+                        else
+                        {
+                            gridNext.TurnOff(x, y);
+                        }
+                    }
+                    else
+                    {
+                        if (turnedOnNeighbours is 3)
+                        {
+                            gridNext.TurnOn(x, y);
+                        }
+                        else
+                        {
+                            gridNext.TurnOff(x, y);
+                        }
+                    }
+                }
+            }
+            (gridCurrent, gridNext) = (gridNext, gridCurrent);
+        }
+
+        return gridCurrent.LitLightCount();
     }
 }
