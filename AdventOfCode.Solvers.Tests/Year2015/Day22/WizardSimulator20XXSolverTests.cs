@@ -1,19 +1,19 @@
 ﻿using AdvenOfCode.Solvers;
-using AdvenOfCode.Solvers.Year2015.Day21;
+using AdvenOfCode.Solvers.Year2015.Day22;
 
-namespace AdventOfCode.Solvers.Tests.Year2015.Day21;
+namespace AdventOfCode.Solvers.Tests.Year2015.Day22;
 
-public sealed class RpgSimulator20XXSolverTests : AdventOfCodeTestsBase<RpgSimulator20XXSolver>
+public sealed class WizardSimulator20XXSolverTests : AdventOfCodeTestsBase<WizardSimulator20XXSolver>
 {
-    public override string PuzzleInputPath => @"Year2015\Day21";
+    public override string PuzzleInputPath => @"Year2015\Day22";
 
-    protected override RpgSimulator20XXSolver CreateSolver(string[] puzzleInput)
+    protected override WizardSimulator20XXSolver CreateSolver(string[] puzzleInput)
     {
-        return new RpgSimulator20XXSolver(puzzleInput);
+        return new WizardSimulator20XXSolver(puzzleInput);
     }
 
     [Theory]
-    [InlineData("input.txt", 111)]
+    [InlineData("input.txt", 0)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -29,7 +29,7 @@ public sealed class RpgSimulator20XXSolverTests : AdventOfCodeTestsBase<RpgSimul
 
 
     [Theory]
-    [InlineData("input.txt", 188)]
+    [InlineData("input.txt", 0)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
