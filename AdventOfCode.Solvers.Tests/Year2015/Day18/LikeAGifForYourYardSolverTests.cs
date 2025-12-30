@@ -25,7 +25,7 @@ public sealed class LikeAGifForYourYardSolverTests : AdventOfCodeTestsBase
 
     [Theory]
     [InlineData("example01.txt", 5, 17)]
-    [InlineData("input.txt", 100, 0)]
+    [InlineData("input.txt", 100, 924)]
     public void Part2(string inputFilePath, int steps, long expectedSolution)
     {
         //Arrange
