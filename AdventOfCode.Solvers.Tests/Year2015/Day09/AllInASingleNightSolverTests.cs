@@ -31,7 +31,7 @@ public sealed class AllInASingleNightSolverTests : AdventOfCodeTestsBase<AllInAS
 
     [Theory]
     [InlineData("example01.txt", 982)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 736)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
