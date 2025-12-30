@@ -13,7 +13,7 @@ public sealed class OpeningTheTuringLockSolverTests : AdventOfCodeTestsBase<Open
     }
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 170)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -29,7 +29,7 @@ public sealed class OpeningTheTuringLockSolverTests : AdventOfCodeTestsBase<Open
 
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 247)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange

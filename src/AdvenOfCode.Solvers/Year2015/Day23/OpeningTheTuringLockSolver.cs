@@ -8,6 +8,12 @@ public sealed partial class OpeningTheTuringLockSolver(string[] input) : Solver(
     {
         Register registerA = new("a");
         Register registerB = new("b");
+        RunProgram(registerA, registerB);
+        return (long)registerB.Value;
+    }
+
+    private void RunProgram(Register registerA, Register registerB)
+    {
         int instructionIndex = 0;
         while (instructionIndex < Input.Length)
         {
@@ -64,7 +70,6 @@ public sealed partial class OpeningTheTuringLockSolver(string[] input) : Solver(
                     throw new InvalidOperationException();
             }
         }
-        return (long)registerB.Value;
     }
 
     private static Register PickRegister(Register registerA, Register registerB, ReadOnlySpan<char> instruction)
@@ -79,7 +84,11 @@ public sealed partial class OpeningTheTuringLockSolver(string[] input) : Solver(
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        Register registerA = new("a");
+        registerA.Increment();
+        Register registerB = new("b");
+        RunProgram(registerA, registerB);
+        return (long)registerB.Value;
     }
 }
 
