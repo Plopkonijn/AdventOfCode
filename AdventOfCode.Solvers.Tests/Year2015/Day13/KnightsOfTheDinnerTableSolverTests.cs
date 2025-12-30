@@ -30,7 +30,7 @@ public sealed class KnightsOfTheDinnerTableSolverTests : AdventOfCodeTestsBase<K
 
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 725)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
