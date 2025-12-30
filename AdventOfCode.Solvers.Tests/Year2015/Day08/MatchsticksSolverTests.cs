@@ -13,8 +13,8 @@ public sealed class MatchsticksSolverTests : AdventOfCodeTestsBase<MatchsticksSo
     }
 
     [Theory]
-    [InlineData("example01.txt", 605)]
-    [InlineData("input.txt", 0)]
+    [InlineData("example01.txt", 12)]
+    [InlineData("input.txt", 1342)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -30,8 +30,8 @@ public sealed class MatchsticksSolverTests : AdventOfCodeTestsBase<MatchsticksSo
 
 
     [Theory]
-    [InlineData("example01.txt", 0)]
-    [InlineData("input.txt", 0)]
+    [InlineData("example01.txt", 19)]
+    [InlineData("input.txt", 2074)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
