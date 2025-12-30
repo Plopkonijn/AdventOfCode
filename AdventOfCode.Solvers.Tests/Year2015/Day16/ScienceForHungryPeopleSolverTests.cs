@@ -22,7 +22,7 @@ public sealed class ScienceForHungryPeopleSolverTests : AdventOfCodeTestsBase<Sc
     }
 
 
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 405)]
     [Theory]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
