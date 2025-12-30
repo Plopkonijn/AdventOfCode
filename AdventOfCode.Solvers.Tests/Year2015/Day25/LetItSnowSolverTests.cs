@@ -13,7 +13,7 @@ public sealed class LetItSnowSolverTests : AdventOfCodeTestsBase<LetItSnowSolver
     }
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 2650453)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
