@@ -30,7 +30,7 @@ public sealed class CorporatePolicySolverTests : AdventOfCodeTestsBase
 
 
     [Theory]
-    [InlineData("input02.txt", "")]
+    [InlineData("input02.txt", "vzcaabcc")]
     public void Part2(string inputFilePath, string expectedSolution)
     {
         //Arrange
