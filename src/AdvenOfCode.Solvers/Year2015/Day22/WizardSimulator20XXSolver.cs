@@ -11,7 +11,7 @@ public sealed partial class WizardSimulator20XXSolver(string[] input) : Solver(i
         new Spell("Drain",73,Damage:2,Healing:2),
         new Spell("Shield",113,Armor:7,Turns:6),
         new Spell("Poison", 173,Damage:3,Turns:6),
-        new Spell("Recharge",229,Recharge:4,Turns:5)
+        new Spell("Recharge",229,Recharge:101,Turns:5)
     ];
 
     public override long SolvePart1()
@@ -21,72 +21,58 @@ public sealed partial class WizardSimulator20XXSolver(string[] input) : Solver(i
         long bossHP = long.Parse(DigitRegex().Match(Input[0]).Value, CultureInfo.InvariantCulture);
         long bossDamage = long.Parse(DigitRegex().Match(Input[1]).Value, CultureInfo.InvariantCulture);
 
-        return Calculate(playerHP, playerMana, bossHP, bossDamage, []) ?? throw new InvalidOperationException();
+        GameState startState = new(playerHP, playerMana, bossHP, bossDamage, []);
+        return FindMinimumManaUsage(startState);
+
+        //GameState state = new(10, 250, 13, 8);
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Poison"));
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Magic Missile"));
+
+        //GameState state = new(10, 250, 14, 8);
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Recharge"));
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Shield"));
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Drain"));
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Poison"));
+        //_ = state.CastSpell(_spells.First(s => s.Name == "Magic Missile"));
+
+        //return state.PlayerMana;
     }
 
-    private long? Calculate(long playerHP, long playerMana, long bossHP, long bossDamage, List<Spell> effects)
+    private long FindMinimumManaUsage(GameState startState)
     {
-        // Activate effects before players turn
-        bossHP -= effects.Sum(e => e.Damage);
-        if (bossHP <= 0)
-        {
-            return 0;
-        }
-        playerHP += effects.Sum(e => e.Healing);
-        playerMana += effects.Sum(e => e.Recharge);
-        effects.ForEach(e => e.Turns--);
-        _ = effects.RemoveAll(e => e.Turns == 0);
+        PriorityQueue<GameState, long> queue = new();
+        Dictionary<GameState, long> manaDictionary = new() { { startState, 0 } };
+        queue.Enqueue(startState, 0);
 
-        long? leastMana = null;
-        foreach (Spell spell in _spells)
+        while (queue.TryDequeue(out GameState? current, out long usedMana))
         {
-            // players turn
-            if (effects.Any(e => e.Name == spell.Name))
+            if (current.HasPlayerWon)
+            {
+                return usedMana;
+            }
+            if (current.HasBossWon || current.IsFinised)
             {
                 continue;
             }
-            else if (spell.Cost > playerMana)
-            {
-                continue;
-            }
-            long newPlayerMana = playerMana - spell.Cost;
-            List<Spell> newEffects = effects.Select(e => e with { }).ToList();
-            newEffects.Add(spell);
 
-
-            // Activate effects before boss turn
-            long newBossHP = bossHP - effects.Sum(e => e.Damage);
-            if (newBossHP <= 0)
+            foreach (Spell spell in _spells)
             {
-                if (spell.Cost < leastMana)
+                if (spell.Cost > current.PlayerMana || current.Effects.Any(s => s.Turns > 1 && s.Name == spell.Name))
                 {
-                    leastMana = spell.Cost;
                     continue;
                 }
-            }
-            long newPlayerHP = playerHP + effects.Sum(e => e.Healing);
-            newPlayerMana += effects.Sum(e => e.Recharge);
-            newEffects.ForEach(e => e.Turns--);
-            _ = newEffects.RemoveAll(e => e.Turns == 0);
 
-            //boss turn
-            newPlayerHP -= Math.Max(1, bossDamage - effects.Sum(e => e.Armor));
-            if (newPlayerHP <= 0)
-            {
-                continue;
-            }
-            if (Calculate(newPlayerHP, newPlayerMana, newBossHP, bossDamage, newEffects) is not { } mana)
-            {
-                continue;
-            }
-            mana += spell.Cost;
-            if (!leastMana.HasValue || mana < leastMana.Value)
-            {
-                leastMana = mana;
+                GameState next = current with { };
+                long newUsedMana = usedMana + spell.Cost;
+                _ = next.CastSpell(spell);
+                if (!manaDictionary.TryGetValue(next, out long existingUsedMana) || newUsedMana < existingUsedMana)
+                {
+                    manaDictionary.Add(next, newUsedMana);
+                    queue.Enqueue(next, newUsedMana);
+                }
             }
         }
-
-        return leastMana;
+        throw new InvalidOperationException();
     }
 
     public override long SolvePart2()
@@ -96,9 +82,4 @@ public sealed partial class WizardSimulator20XXSolver(string[] input) : Solver(i
 
     [GeneratedRegex(@"\d+")]
     private static partial Regex DigitRegex();
-}
-
-internal sealed record Spell(string Name, long Cost, long Damage = 0, long Healing = 0, long Armor = 0, long Recharge = 0, long Turns = 1)
-{
-    public long Turns { get; set; } = Turns;
 }
