@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace AdvenOfCode.Solvers.Year2015.Day24;
 
@@ -16,63 +15,53 @@ public sealed partial class ItHangsInTheBalanceSolver(string[] input) : Solver(i
             throw new InvalidOperationException();
         }
         long groupWeight = totalWeight / 3;
-        return GetMinimumEntanglement(groupWeight, new Distribution(), weights, []) ?? throw new InvalidOperationException();
+        long bestQuantumEntanglement = long.MaxValue;
+        long bestSize = long.MaxValue;
+        foreach (IEnumerable<long> firstGroup in GenerateGroups(groupWeight, weights))
+        {
+            long[] firstGroupArray = firstGroup.ToArray();
+            if (firstGroupArray.Length > bestSize)
+            {
+                continue;
+            }
+            long[] remainingWeights = weights.Except(firstGroupArray).ToArray();
+            bool hasSecondGroup = GenerateGroups(groupWeight, remainingWeights).Any();
+            if (!hasSecondGroup)
+            {
+                continue;
+            }
+            long quantumEntanglement = firstGroupArray.Aggregate((a, b) => a * b);
+            if (firstGroupArray.Length < bestSize)
+            {
+                bestSize = firstGroupArray.Length;
+                bestQuantumEntanglement = quantumEntanglement;
+            }
+            else if (quantumEntanglement < bestQuantumEntanglement)
+            {
+                bestQuantumEntanglement = quantumEntanglement;
+            }
+        }
+        return bestQuantumEntanglement;
     }
 
-    private static long? GetMinimumEntanglement(long maxWeight, Distribution distribution, ReadOnlySpan<long> weights, Dictionary<Distribution, long?> cache)
+    private static IEnumerable<IEnumerable<long>> GenerateGroups(long totalWeight, ReadOnlySpan<long> weights)
     {
-        if (cache.TryGetValue(distribution, out long? result))
+        if (totalWeight == 0)
         {
-            return result;
+            return Enumerable.Repeat(Enumerable.Empty<long>(), 1);
         }
-        if (weights.Length == 0)
+        if (totalWeight < 0 || weights.Length == 0)
         {
-            if (distribution.IsValid())
-            {
-                return 1;
-            }
-            else
-            {
-                return null;
-            }
+            return Enumerable.Empty<IEnumerable<long>>();
         }
-        if (distribution.FirstWeight > maxWeight || distribution.SecondWeight > maxWeight || distribution.ThirdWeight > maxWeight)
-        {
-            return null;
-        }
-
-        int mask = 1 << (weights.Length - 1);
-        result = null;
-        Distribution first = distribution with
-        {
-            FirstWeight = distribution.FirstWeight + weights[0],
-            FirstIndices = new BitVector32(distribution.FirstIndices.Data | mask)
-        };
-        if (GetMinimumEntanglement(maxWeight, first, weights[1..], cache) is { } firstEntanglement && firstEntanglement * weights[0] < result)
-        {
-            result = firstEntanglement * weights[0];
-        }
-        Distribution second = distribution with
-        {
-            SecondWeight = distribution.SecondWeight + weights[0],
-            SecondIndices = new BitVector32(distribution.SecondIndices.Data | mask)
-        };
-        if (GetMinimumEntanglement(maxWeight, second, weights[1..], cache) is { } secondEntanglement && secondEntanglement < result)
-        {
-            result = secondEntanglement;
-        }
-        Distribution third = distribution with
-        {
-            ThirdWeight = distribution.ThirdWeight + weights[0],
-            ThirdIndices = new BitVector32(distribution.ThirdIndices.Data | mask)
-        };
-        if (GetMinimumEntanglement(maxWeight, third, weights[1..], cache) is { } thirdEntanglement && thirdEntanglement < result)
-        {
-            result = thirdEntanglement;
-        }
-        cache.Add(distribution, result);
-        return result;
+        long weight = weights[0];
+        IEnumerable<IEnumerable<long>> including = GenerateGroups(totalWeight - weight, weights[1..]).Select(g => g.Prepend(weight));
+        IEnumerable<IEnumerable<long>> excluding = GenerateGroups(totalWeight, weights[1..]);
+        return including.Concat(excluding);
     }
+
+
+
 
     public override long SolvePart2()
     {
