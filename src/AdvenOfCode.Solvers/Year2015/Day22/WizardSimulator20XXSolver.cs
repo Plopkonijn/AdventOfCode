@@ -22,23 +22,10 @@ public sealed partial class WizardSimulator20XXSolver(string[] input) : Solver(i
         long bossDamage = long.Parse(DigitRegex().Match(Input[1]).Value, CultureInfo.InvariantCulture);
 
         GameState startState = new(playerHP, playerMana, bossHP, bossDamage, []);
-        return FindMinimumManaUsage(startState);
-
-        //GameState state = new(10, 250, 13, 8);
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Poison"));
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Magic Missile"));
-
-        //GameState state = new(10, 250, 14, 8);
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Recharge"));
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Shield"));
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Drain"));
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Poison"));
-        //_ = state.CastSpell(_spells.First(s => s.Name == "Magic Missile"));
-
-        //return state.PlayerMana;
+        return FindMinimumManaUsage(startState, (state, spell) => state.CastSpellEasy(spell));
     }
 
-    private long FindMinimumManaUsage(GameState startState)
+    private long FindMinimumManaUsage(GameState startState, Action<GameState, Spell> castSpell)
     {
         PriorityQueue<GameState, long> queue = new();
         Dictionary<GameState, long> manaDictionary = new() { { startState, 0 } };
@@ -64,7 +51,7 @@ public sealed partial class WizardSimulator20XXSolver(string[] input) : Solver(i
 
                 GameState next = current with { };
                 long newUsedMana = usedMana + spell.Cost;
-                _ = next.CastSpell(spell);
+                castSpell(next, spell);
                 if (!manaDictionary.TryGetValue(next, out long existingUsedMana) || newUsedMana < existingUsedMana)
                 {
                     manaDictionary.Add(next, newUsedMana);
@@ -77,7 +64,13 @@ public sealed partial class WizardSimulator20XXSolver(string[] input) : Solver(i
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        long playerHP = 50;
+        long playerMana = 500;
+        long bossHP = long.Parse(DigitRegex().Match(Input[0]).Value, CultureInfo.InvariantCulture);
+        long bossDamage = long.Parse(DigitRegex().Match(Input[1]).Value, CultureInfo.InvariantCulture);
+
+        GameState startState = new(playerHP, playerMana, bossHP, bossDamage, []);
+        return FindMinimumManaUsage(startState, (state, spell) => state.CastSpellHard(spell));
     }
 
     [GeneratedRegex(@"\d+")]

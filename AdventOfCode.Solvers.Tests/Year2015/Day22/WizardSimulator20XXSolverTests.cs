@@ -29,7 +29,7 @@ public sealed class WizardSimulator20XXSolverTests : AdventOfCodeTestsBase<Wizar
 
 
     [Theory]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 1309)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange

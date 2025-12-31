@@ -36,9 +36,24 @@ internal sealed record GameState(long PlayerHP, long PlayerMana, long BossHP, lo
         return Effects.Aggregate(hashCode, HashCode.Combine);
     }
 
-    internal bool CastSpell(Spell spell)
+    internal bool CastSpellEasy(Spell spell)
     {
         return ExecutePlayersTurn(spell) || ExecuteBossTurn();
+    }
+
+    internal bool CastSpellHard(Spell spell)
+    {
+        PlayerHP--;
+        if (HasBossWon || ExecutePlayersTurn(spell))
+        {
+            return true;
+        }
+        PlayerHP--;
+        if (HasBossWon || ExecuteBossTurn())
+        {
+            return true;
+        }
+        return false;
     }
 
     private bool ExecuteEffects(out long armor)
