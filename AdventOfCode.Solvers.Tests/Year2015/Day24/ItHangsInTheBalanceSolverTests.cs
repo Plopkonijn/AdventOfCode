@@ -14,7 +14,7 @@ public sealed class ItHangsInTheBalanceSolverTests : AdventOfCodeTestsBase<ItHan
 
     [Theory]
     [InlineData("example01.txt", 99)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 11846773891)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -30,6 +30,7 @@ public sealed class ItHangsInTheBalanceSolverTests : AdventOfCodeTestsBase<ItHan
 
 
     [Theory]
+    [InlineData("example01.txt", 44)]
     [InlineData("input.txt", 11846773891)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {

@@ -15,34 +15,33 @@ public sealed partial class ItHangsInTheBalanceSolver(string[] input) : Solver(i
             throw new InvalidOperationException();
         }
         long groupWeight = totalWeight / 3;
-        long bestQuantumEntanglement = long.MaxValue;
-        long bestSize = long.MaxValue;
-        foreach (IEnumerable<long> firstGroup in GenerateGroups(groupWeight, weights))
+        return Calculate(groupWeight, weights, new GroupTriplet())?.Value ?? throw new InvalidOperationException();
+    }
+    internal static QuantumEntanglement? Calculate<TTuple>(long groupWeight, ReadOnlySpan<long> weights, TTuple groups)
+        where TTuple : IGroupTuple<TTuple>
+    {
+        Group firstGroup = groups[0];
+        if (groups.Any(g => g.Weight > groupWeight || g.Size < firstGroup.Size))
         {
-            long[] firstGroupArray = firstGroup.ToArray();
-            if (firstGroupArray.Length > bestSize)
+            return null;
+        }
+        TTuple groupsFirst = groups.AddWeight(0, weights[0]);
+        QuantumEntanglement? bestResult = Calculate(groupWeight, weights[1..], groupsFirst)?.AddWeight(weights[0]);
+        for (int i = 1; i < TTuple.Length; i++)
+        {
+            TTuple newGroup = groups.AddWeight(i, weights[0]);
+            if (Calculate(groupWeight, weights[1..], newGroup) is not { } result)
             {
                 continue;
             }
-            long[] remainingWeights = weights.Except(firstGroupArray).ToArray();
-            bool hasSecondGroup = GenerateGroups(groupWeight, remainingWeights).Any();
-            if (!hasSecondGroup)
+            if (!bestResult.HasValue || bestResult.Value.Size > result.Size || bestResult.Value.Value > result.Value)
             {
-                continue;
-            }
-            long quantumEntanglement = firstGroupArray.Aggregate((a, b) => a * b);
-            if (firstGroupArray.Length < bestSize)
-            {
-                bestSize = firstGroupArray.Length;
-                bestQuantumEntanglement = quantumEntanglement;
-            }
-            else if (quantumEntanglement < bestQuantumEntanglement)
-            {
-                bestQuantumEntanglement = quantumEntanglement;
+                bestResult = result;
             }
         }
-        return bestQuantumEntanglement;
+        return bestResult;
     }
+
 
     private static IEnumerable<IEnumerable<long>> GenerateGroups(long totalWeight, ReadOnlySpan<long> weights)
     {
@@ -65,6 +64,48 @@ public sealed partial class ItHangsInTheBalanceSolver(string[] input) : Solver(i
 
     public override long SolvePart2()
     {
-        throw new NotImplementedException();
+        long[] weights = Input.Select(line => long.Parse(line, CultureInfo.InvariantCulture))
+           .OrderDescending()
+           .ToArray();
+        long totalWeight = weights.Sum();
+        if (totalWeight % 3 != 0)
+        {
+            throw new InvalidOperationException();
+        }
+        long groupWeight = totalWeight / 4;
+        long bestQuantumEntanglement = long.MaxValue;
+        long bestSize = long.MaxValue;
+        foreach (IEnumerable<long> firstGroup in GenerateGroups(groupWeight, weights))
+        {
+            long[] firstGroupArray = firstGroup.ToArray();
+            if (firstGroupArray.Length > bestSize)
+            {
+                continue;
+            }
+            long[] remainingWeightsSecondGroup = weights.Except(firstGroupArray).ToArray();
+            foreach (IEnumerable<long> secondGroup in GenerateGroups(groupWeight, remainingWeightsSecondGroup))
+            {
+                long[] secondGroupArray = secondGroup.ToArray();
+                long[] remainingWeights = remainingWeightsSecondGroup.Except(secondGroup).ToArray();
+                bool hasThirdGroup = GenerateGroups(groupWeight, remainingWeights).Any();
+                if (!hasThirdGroup)
+                {
+                    continue;
+                }
+
+
+                long quantumEntanglement = firstGroupArray.Aggregate((a, b) => a * b);
+                if (firstGroupArray.Length < bestSize)
+                {
+                    bestSize = firstGroupArray.Length;
+                    bestQuantumEntanglement = quantumEntanglement;
+                }
+                else if (quantumEntanglement < bestQuantumEntanglement)
+                {
+                    bestQuantumEntanglement = quantumEntanglement;
+                }
+            }
+        }
+        return bestQuantumEntanglement;
     }
 }
