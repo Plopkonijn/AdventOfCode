@@ -1,20 +1,20 @@
 ﻿using AdvenOfCode.Solvers;
-using AdvenOfCode.Solvers.Year2016.Day03;
+using AdvenOfCode.Solvers.Year2016.Day04;
 
-namespace AdventOfCode.Solvers.Tests.Year2016.Day03;
+namespace AdventOfCode.Solvers.Tests.Year2016.Day04;
 
-public sealed class SquaresWithThreeSidesSolverTests : AdventOfCodeTestsBase<SquaresWithThreeSidesSolver>
+public sealed class SecurityThroughObscuritySolverTests : AdventOfCodeTestsBase<SecurityThroughObscuritySolver>
 {
-    public override string PuzzleInputPath => @"Year2016\Day03";
+    public override string PuzzleInputPath => @"Year2016\Day04";
 
-    protected override SquaresWithThreeSidesSolver CreateSolver(string[] puzzleInput)
+    protected override SecurityThroughObscuritySolver CreateSolver(string[] puzzleInput)
     {
-        return new SquaresWithThreeSidesSolver(puzzleInput);
+        return new SecurityThroughObscuritySolver(puzzleInput);
     }
 
     [Theory]
-    [InlineData("example01.txt", 0)]
-    [InlineData("input.txt", 983)]
+    [InlineData("example01.txt", 1514)]
+    [InlineData("input.txt", 173787)]
     public override void Part1(string inputFilePath, long expectedSolution)
     {
         //Arrange
@@ -30,8 +30,8 @@ public sealed class SquaresWithThreeSidesSolverTests : AdventOfCodeTestsBase<Squ
 
 
     [Theory]
-    [InlineData("example02.txt", 6)]
-    [InlineData("input.txt", 1836)]
+    [InlineData("example01.txt", 0)]
+    [InlineData("input.txt", 0)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
