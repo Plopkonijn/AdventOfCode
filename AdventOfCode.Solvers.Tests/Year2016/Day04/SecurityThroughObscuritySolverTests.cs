@@ -30,8 +30,7 @@ public sealed class SecurityThroughObscuritySolverTests : AdventOfCodeTestsBase<
 
 
     [Theory]
-    [InlineData("example01.txt", 0)]
-    [InlineData("input.txt", 0)]
+    [InlineData("input.txt", 548)]
     public override void Part2(string inputFilePath, long expectedSolution)
     {
         //Arrange
